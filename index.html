@@ -41,6 +41,19 @@
       line-height: 1.55;
     }
 
+    .date-group {
+      margin-top: 36px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     .reports {
       display: grid;
       gap: 12px;
@@ -80,32 +93,41 @@
     <h1>My Reports</h1>
     <p>Published HTML situation reports.</p>
 
-    <div class="reports">
-      <a class="report" href="./20260508_coreweave_latest/">
-        <span class="title">CoreWeave Situation Report</span>
-        <span class="path">20260508_coreweave_latest/</span>
-      </a>
-      <a class="report" href="./20260508_uber_latest/">
-        <span class="title">Uber Technologies Situation Report</span>
-        <span class="path">20260508_uber_latest/</span>
-      </a>
-      <a class="report" href="./20260509_aaoi_latest/">
-        <span class="title">Applied Optoelectronics Situation Report</span>
-        <span class="path">20260509_aaoi_latest/</span>
-      </a>
-      <a class="report" href="./20260509_astera_labs/">
-        <span class="title">Astera Labs Situation Report</span>
-        <span class="path">20260509_astera_labs/</span>
+    <section class="date-group">
+      <h2>2026-05-09</h2>
+      <div class="reports">
+      <a class="report" href="./20260509_nbis/">
+        <span class="title">Nebius Group Situation Report</span>
+        <span class="path">20260509_nbis/</span>
       </a>
       <a class="report" href="./20260509_intel_latest/">
         <span class="title">Intel Situation Report</span>
         <span class="path">20260509_intel_latest/</span>
       </a>
-      <a class="report" href="./20260509_nbis/">
-        <span class="title">Nebius Group Situation Report</span>
-        <span class="path">20260509_nbis/</span>
+      <a class="report" href="./20260509_astera_labs/">
+        <span class="title">Astera Labs Situation Report</span>
+        <span class="path">20260509_astera_labs/</span>
       </a>
-    </div>
+      <a class="report" href="./20260509_aaio_latest/">
+        <span class="title">Applied Optoelectronics Situation Report</span>
+        <span class="path">20260509_aaio_latest/</span>
+      </a>
+      </div>
+    </section>
+
+    <section class="date-group">
+      <h2>2026-05-08</h2>
+      <div class="reports">
+      <a class="report" href="./20260508_uber_latest/">
+        <span class="title">Uber Technologies Situation Report</span>
+        <span class="path">20260508_uber_latest/</span>
+      </a>
+      <a class="report" href="./20260508_coreweave_latest/">
+        <span class="title">CoreWeave Situation Report</span>
+        <span class="path">20260508_coreweave_latest/</span>
+      </a>
+      </div>
+    </section>
   </main>
 </body>
 </html>
