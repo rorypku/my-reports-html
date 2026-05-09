@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebius Group NBIS SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table {
+            table-layout: auto;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="frontmatter">
+      <p><strong>Ticker:</strong> NBIS</p>
+      <p><strong>Date:</strong> 2026-05-09</p>
+      <p><strong>Classification:</strong> Advance to next-stage research, event-gated</p>
+    </div>
+
+    <h1>Nebius Group Situation Report</h1>
+
+    <h2>1. Executive View</h2>
+    <p><strong>结论：NBIS 值得进入下一阶段研究，但现在更像“事件驱动的深研候选”，不是低门槛做多。</strong> 市场已经认识到 Nebius 是 AI neocloud 的稀缺公开标的：股价、卖方目标价和 2027E EV/Sales 7.0x 的高盛估值尺子都说明“收入规模快速放大”已被显著定价。真正可能的错配在于：市场把它当高增长 GPU 租赁商，而公司若能证明自己具备可融资的长约现金流、强预付、稳定 $/MW/年、较高利用率和电力上线能力，它的经济形态会更接近“AI factory 平台资产”，而不是短周期硬件房东。</p>
+    <p>截至 2026-05-08，NBIS 收于 177.05 美元，市值约 449.5 亿美元，企业价值约 465.5 亿美元。按 2026 年收入指引中点 32 亿美元，约为 14.5x 2026E EV/Sales；若按高盛 2027E EV/Sales 7.0x 的尺子倒推，当前 EV 已隐含约 66 亿美元 2027 年收入规模。换言之，PM 继续研究的目的不是发现“市场不知道增长快”，而是验证市场是否低估了 2027 以后单位经济和融资能力的可持续性。</p>
+
+    <h2>2. Current Snapshot</h2>
+    <table class="snapshot-table">
+      <thead>
+        <tr><th>Item</th><th>Latest Situation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>市场数据与定位</td>
+          <td>2026-05-08 收盘价 177.05 美元；52 周区间 31.13-197.89 美元；市值 449.5 亿美元；EV 465.5 亿美元。股票离年内高点不远，且已反映 Microsoft、NVIDIA、Meta 三个重大验证事件。</td>
+        </tr>
+        <tr>
+          <td>最新经营指标</td>
+          <td>2025 年收入 5.298 亿美元，AI cloud 收入 4.803 亿美元；Q4 收入 2.28 亿美元，核心 ARR 12 亿美元；公司指引 2026 年收入 30-34 亿美元，年底 ARR 70-90 亿美元，调整后 EBITDA margin 约 40%。</td>
+        </tr>
+        <tr>
+          <td>价格与技术面</td>
+          <td>30 日内从 100.82 美元升至 177.05 美元；RSI 62.4，MACD 仍在 signal 线上方；价格高于 50 日均线 129.6 和 200 日均线 102.1。动量强，但 5 月初冲高后已有回撤，Q1 前波动风险高。</td>
+        </tr>
+        <tr>
+          <td>持仓与挤压风险</td>
+          <td>yfinance/OpenBB 显示空头占流通股约 19.9%，机构持股约 48.9%。高空头使正面订单/融资新闻可放大上行，也会在融资或项目延期新闻下放大下行。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="metric-table">
+      <thead>
+        <tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026 CapEx plan</td>
+          <td align="center">160-200 亿美元</td>
+          <td>公司正把资产负债表押向大规模 AI factory 扩产；融资成本和预付现金流是核心风险变量。</td>
+        </tr>
+        <tr>
+          <td>Power / capacity</td>
+          <td align="center">&gt;2GW contracted power；2026 目标 &gt;3GW；可用容量 800MW-1GW</td>
+          <td>电力和上线速度决定收入天花板，比 GPU 数量本身更接近 CEO NSM。</td>
+        </tr>
+        <tr>
+          <td>Backlog validation</td>
+          <td align="center">Microsoft $17.4B；Meta 最高 $27B；NVIDIA $2B 投资</td>
+          <td>需求真实性已获验证，但也带来客户集中、交付和杠杆扩张风险。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+    <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前市场和卖方更像用 EV/Sales 给 NBIS 定价。高盛 2026-04-13 把目标价从 160 美元上调至 205 美元，维持 <strong>2027E EV/Sales 7.0x</strong>，上调来自 sales scale 预期，而不是倍数扩张。以当前 EV 465.5 亿美元和 2026 收入指引中点 32 亿美元计算，NBIS 约 14.5x 2026E EV/Sales；如果按 7.0x 2027E EV/Sales 倒推，市场已要求公司在 2027 年达到约 66 亿美元收入级别。</p>
+    <p><strong>Peer Benchmarking:</strong> NBIS 的 TTM EV/Sales 因 2025 收入基数极低而失真，真正可比应看 2026/2027 revenue scale、CapEx 转收入速度、合约现金流和杠杆。CRWV 更成熟但杠杆显著更高；IREN 是电力/数据中心期权但业务混合；NVDA 是生态上游，不是商业模式同类。</p>
+
+    <table class="peer-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th align="right">Market Cap</th>
+          <th align="right">EV/Sales</th>
+          <th align="right">Revenue Growth</th>
+          <th align="right">EBITDA Margin</th>
+          <th align="right">Debt / Equity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>NBIS</td><td align="right">$45.0B</td><td align="right">87.9x TTM / 14.5x 2026E</td><td align="right">+547%</td><td align="right">-36.6% TTM; 2026E adj. ~40%</td><td align="right">108%</td></tr>
+        <tr><td>CRWV</td><td align="right">$60.3B</td><td align="right">18.4x TTM</td><td align="right">+110%</td><td align="right">47.5%</td><td align="right">894%</td></tr>
+        <tr><td>IREN</td><td align="right">$20.3B</td><td align="right">25.7x TTM</td><td align="right">+59%</td><td align="right">25.7%</td><td align="right">153%</td></tr>
+        <tr><td>NVDA</td><td align="right">$5.23T</td><td align="right">24.0x TTM</td><td align="right">+73%</td><td align="right">61.7%</td><td align="right">7%</td></tr>
+      </tbody>
+    </table>
+
+    <img src="../collected_resources/nbis_price_action_narrative_eras.png" alt="NBIS price action and narrative eras chart">
+    <img src="../collected_resources/nbis_historical_valuation_bands.png" alt="NBIS historical valuation bands chart">
+    <img src="../collected_resources/nbis_nsm_mismatch_jaws_chart.png" alt="NBIS NSM mismatch jaws chart">
+
+    <p><strong>NSM Framework:</strong></p>
+    <table class="nsm-table">
+      <thead>
+        <tr><th>Lens</th><th>Assessment</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CEO NSM</td>
+          <td>可用 AI factory 容量上线速度与质量：MW/GW、GPU fleet、可靠性、Token Factory / inference / agentic stack 的可用性。最接近公开代理是年底 ARR、可用 MW、客户 sold-out 率。</td>
+        </tr>
+        <tr>
+          <td>Long-term investor NSM</td>
+          <td><strong>单位功率现金回报：</strong>$/MW/年、合同期限、预付比例、利用率、续约价格、硬件残值和融资成本。这个指标决定它是高 ROIC 平台还是高 beta 硬件租赁资产。</td>
+        </tr>
+        <tr>
+          <td>Market-consensus NSM</td>
+          <td>收入规模 / ARR / EV-Sales。高盛 2027E EV/Sales 7.0x 和 CNBC/Citi 对 CapEx funding、EBITDA 拐点的讨论都说明市场目前先奖励“sales scale”。</td>
+        </tr>
+        <tr>
+          <td>Mismatch category</td>
+          <td><strong>Healthy lag 与 narrative trap 并存。</strong> 若长约预付和单位功率经济成立，市场仍可能低估 2027 后现金流质量；若客户/合同只是供给紧张期的临时外包，当前 EV/Sales 就是叙事陷阱。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="value-chain">AI builders need scarce reliable compute → they reserve larger clusters for training/inference → workloads move from experiments to production → organizations depend on Nebius capacity, uptime and orchestration → long contracts, prepayments, higher utilization and lower financing cost convert into margin and cash flow.</p>
+
+    <p><strong>Upside/Downside Asymmetry:</strong> 卖方公开片段的 205 美元目标价仅比 177.05 美元高约 16%，而 yfinance 平均目标价约 170 美元，说明公开共识层面的上行并不便宜。继续研究的吸引力来自“非共识更长期重估”：若 NBIS 能证明 2026 年底 70-90 亿美元 ARR 指引可信、2027 收入接近或超过当前隐含的 66 亿美元、且 $/MW 与预付现金流支持低稀释融资，则 7x 2027E sales 可能不是天花板。反过来，任何电力/并网延期、客户集中、GPU 租赁价格下降或债务融资成本上升，都能让 EV/Sales 框架快速失效。</p>
+
+    <h2>4. SitRep Judgment</h2>
+    <p><strong>Classification: Advance to next-stage research, event-gated.</strong></p>
+    <p><strong>Wrong anchor:</strong> 条件基本满足。市场显性锚是 sales scale / EV-Sales，但真正决定价值的是合同质量、单位功率经济、上线速度和融资结构。若这些指标优于市场假设，NBIS 不是普通 GPU landlord；若低于假设，收入增长本身也无法保护股价。</p>
+    <p><strong>Material upside:</strong> 条件部分满足。当前股价已高，公开卖方目标价并不提供很大安全边际；但 2-3 年维度，如果 2026 年底 ARR 70-90 亿美元落地且 2027 年收入/EBITDA 可见度继续上修，重估空间仍可进入组合讨论。这个上行不是“便宜”，而是“验证后可继续扩张的工业资产”。</p>
+    <p><strong>Clear validation path:</strong> 条件满足。最近的硬催化是 2026-05-13 盘前 Q1 2026 业绩；随后几季要看 Microsoft 交付、Meta 2027 capacity 准备、NVIDIA Rubin/Rubin-adjacent 平台进度、CapEx 融资结构、New Jersey 等电力/监管节点，以及核心 AI cloud 是否维持高利用和正 EBITDA。</p>
+
+    <h2>5. What Would Confirm Or Break The Thesis</h2>
+    <p><strong>Confirming datapoints</strong></p>
+    <ul>
+      <li>Q1 2026 和 Q2 2026 继续证明 capacity sold out，且收入/ARR 上修来自可用容量上线，而非一次性预付确认或口径变化。</li>
+      <li>管理层披露或渠道验证合同期限拉长、预付比例高、客户除 Microsoft/Meta 外继续扩散，尤其是企业和 AI-native 客户贡献提升。</li>
+      <li>$/MW/年或 $/GPU/年稳定提升，核心 AI cloud EBITDA margin 维持或高于 Q4 2025 的 24%，同时融资不依赖大幅股权稀释。</li>
+      <li>电力/数据中心节点按期推进，2026 年可用容量 800MW-1GW 和 &gt;3GW contracted power 目标不下修。</li>
+    </ul>
+    <p><strong>Breaking datapoints</strong></p>
+    <ul>
+      <li>2026 年收入 30-34 亿美元或年底 ARR 70-90 亿美元指引下修，或交付节奏从“capacity constrained”变成“demand/financing constrained”。</li>
+      <li>GPU 租赁价格快速下行、合同期限缩短、预付减少，导致市场必须把 NBIS 当短周期硬件资产而非平台资产。</li>
+      <li>New Jersey/PJM 等电力监管、并网或政治阻力造成延期和成本超支，压低项目 IRR。</li>
+      <li>大厂自建/TPU/自有云供给释放，使 hyperscaler 长约不再续约，Nebius 无法用第三方企业和 AI-native 客户填补。</li>
+    </ul>
+
+    <h2>6. Recommended Next Diligence</h2>
+    <ol>
+      <li>建立 MW 到收入模型：逐站点拆分可用 MW、GPU 代际、上线月份、$/MW/年、利用率、折旧年限、维护 capex 和融资成本。</li>
+      <li>做合同质量表：Microsoft、Meta、TD SYNNEX、AI-native/enterprise 客户的期限、预付、最低用量、取消条款、客户集中度和收入确认方式。</li>
+      <li>做电力/监管地图：Vineland NJ、PJM、欧洲站点、bridge power、并网排队、容量市场费用和地方政治风险。</li>
+      <li>用 Q1 2026 业绩电话验证三件事：2026 guidance 是否变动、CapEx 资金缺口如何解决、管理层是否披露 ARR 到 revenue 的转换质量。</li>
+    </ol>
+
+    <h2>Sources Used</h2>
+    <ul>
+      <li>Nebius Q4/FY2025 results and shareholder letter: <code>../collected_resources/q4_2025_results_page_14_nebius_reports_fourth_quarter_and_full_year_2025_financial_results.pdf</code>, <code>../collected_resources/q4_2025_results_page_15_nebius_group_letter_to_shareholders_q4_2025.pdf</code></li>
+      <li>SEC / EdgarTools 20-F and filing list: <code>../collected_resources/sec_2026-04-30_20f_0001104659-26-052948.html</code>, <code>../collected_resources/nbis_research_data_pack.json</code></li>
+      <li>Management transcripts: <code>../collected_resources/stockanalysis_q4_2025_transcript.html</code>, <code>../collected_resources/stockanalysis_q3_2025_transcript.html</code>, <code>../collected_resources/stockanalysis_ms_2026_transcript.html</code></li>
+      <li>Microsoft, NVIDIA, Meta and TD SYNNEX announcements: <code>../collected_resources/microsoft_2025_agreement.pdf</code>, <code>../collected_resources/nvidia_2026_partnership_page_20_nvidia_and_nebius_partner_to_scale_full_stack_ai_cloud.pdf</code>, <code>../collected_resources/meta_2026_agreement_page_14_nebius_signs_new_ai_infrastructure_agreement_with_meta.pdf</code>, <code>../collected_resources/td_synnex_2026_nebius.html</code></li>
+      <li>Sell-side input: <code>../collected_resources/sell_side/20260509_NBIS_sell_side_consensus_memo.md</code>, <code>../collected_resources/sell_side/20260413_GoldmanSachs_Nebius_NBIS_extracted.md</code></li>
+      <li>Buy-side / practitioner input: <code>../collected_resources/p_the_great_gpu_shortage_rental_capacity.md</code>, <code>../collected_resources/p_are_ai_datacenters_increasing_electric.md</code>, <code>../collected_resources/p_clouded_judgement_32626_per_token.md</code>, <code>../collected_resources/2026_an_interview_with_jeremie_eliahou_ontiveros_and_ajey_pandey_about_building_.md</code></li>
+      <li>News and podcast discussion: <code>../collected_resources/freshrss_entry_1777123856346566.md</code>, <code>../collected_resources/nbis_podwise_ai_cloud_discussion.txt</code></li>
+      <li>Market, technical and chart data: <code>../collected_resources/openbb_market_snapshot_20260509.json</code>, <code>../collected_resources/nbis_market_peer_data_yfinance.json</code>, <code>../collected_resources/nbis_technical_30d.csv</code>, <code>../collected_resources/nbis_nsm_chart_data.csv</code></li>
+    </ul>
+  </div>
+</body>
+</html>
