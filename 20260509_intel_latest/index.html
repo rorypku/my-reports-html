@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intel SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--paper); }
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 88px 32px 144px; }
+        .frontmatter {
+            display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 0 0 80px;
+            padding: 14px 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule);
+        }
+        .frontmatter p { margin: 0; font-size: 11.5px; line-height: 1.4; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); font-feature-settings: var(--numeric-font-features); }
+        .frontmatter p strong { color: var(--ink); font-weight: 600; margin-right: 8px; letter-spacing: 0.09em; }
+        h1 {
+            font-family: var(--serif); font-weight: 600; font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04; letter-spacing: -0.018em; color: var(--ink); margin: 0 0 88px; text-wrap: balance;
+        }
+        h2 { font-weight: 600; font-size: 17px; line-height: 1.35; letter-spacing: -0.003em; color: var(--ink); margin: 80px 0 28px; padding: 22px 0 0; border-top: 1px solid var(--rule); }
+        h2 + p, h2 + table, h2 + ul, h2 + ol { margin-top: 0; }
+        p { margin: 0 0 18px; font-size: 16.5px; line-height: 1.72; color: var(--ink-soft); font-feature-settings: var(--paragraph-font-features); }
+        strong { color: var(--ink); font-weight: 600; }
+        table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 28px 0 36px; font-size: 14.5px; line-height: 1.5; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: var(--numeric-font-features); }
+        thead th { background: transparent; color: var(--muted); font-weight: 600; font-size: 11px; line-height: 1.3; letter-spacing: 0.1em; text-transform: uppercase; text-align: left; vertical-align: bottom; padding: 14px 18px 12px 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] { text-align: right; padding: 14px 0 12px 18px; }
+        thead th[align="center"] { text-align: center; padding: 14px 12px 12px; }
+        tbody td { padding: 14px 18px 14px 0; border-bottom: 1px solid var(--rule-soft); text-align: left; vertical-align: top; color: var(--ink); }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] { text-align: right; padding: 14px 0 14px 18px; white-space: nowrap; }
+        tbody td[align="center"] { text-align: center; padding: 14px 12px; }
+        tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+        .snapshot-table thead th:first-child, .snapshot-table tbody td:first-child, .nsm-table thead th:first-child, .nsm-table tbody td:first-child { width: 28%; min-width: 124px; padding-right: 28px; }
+        .metric-table { font-size: 14.5px; line-height: 1.48; }
+        .peer-table { table-layout: fixed; font-size: 13px; line-height: 1.35; }
+        .peer-table thead th { font-size: 10px; letter-spacing: 0.06em; }
+        ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
+        ol { counter-reset: olist; }
+        li { position: relative; padding-left: 30px; margin: 0 0 12px; font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); }
+        ul li::before { content: ""; position: absolute; left: 6px; top: 0.78em; width: 8px; height: 1px; background: var(--ink); }
+        ol li { counter-increment: olist; }
+        ol li::before { content: counter(olist) "."; position: absolute; left: 0; top: 0; width: 22px; font-size: 14px; font-weight: 600; line-height: 1.7; color: var(--muted); font-variant-numeric: tabular-nums; }
+        code { font-family: var(--mono); font-size: 0.85em; color: var(--ink); background: rgba(21,21,26,0.06); padding: 1px 6px; border-radius: 3px; font-feature-settings: var(--mono-font-features); white-space: nowrap; }
+        img { display: block; width: 100%; max-width: 100%; height: auto; margin: 24px 0; background: var(--paper-edge); }
+        .value-chain { font-size: 15px; line-height: 1.55; color: var(--ink); letter-spacing: 0.015em; background: linear-gradient(90deg, rgba(21,21,26,0.07), rgba(21,21,26,0.025)); padding: 12px 14px; border-left: 2px solid var(--rule-strong); border-radius: 3px; overflow-wrap: anywhere; }
+        .snapshot-table tbody td:last-child, .nsm-table tbody td:last-child, .peer-table tbody td { overflow-wrap: anywhere; }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table { display: block; width: 100%; overflow-x: auto; font-size: 13.5px; -webkit-overflow-scrolling: touch; }
+            .peer-table thead th, .peer-table tbody td { min-width: 92px; }
+            .peer-table thead th:first-child, .peer-table tbody td:first-child { min-width: 112px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> INTC</p>
+            <p><strong>Date:</strong> 2026-05-09</p>
+            <p><strong>Classification:</strong> Watchlist / Not next-stage yet</p>
+        </div>
+
+        <h1>Intel Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：Intel 已经从“濒临失控的 IDM 衰退故事”切换成“CPU 供给紧张、18A 良率改善、14A 外部客户期权、美国本土先进制造溢价”的复合叙事，但当前价格已经提前兑现了相当多的成功。</strong>截至 2026-05-08，INTC 报 124.92 美元，过去一年涨约 495%，已经高于多数近期公开目标价区间。若只问“是否值得进一步研究”，答案是：需要持续跟踪，但不建议现在作为优先深研标的推进，除非 PM 的研究目标是验证一个明确的反身性泡沫或做空窗口。</p>
+        <p>真正的错锚假设是：市场过去用“PC/服务器份额流失 + foundry 烧钱”给 Intel 定价，而现在可能需要用“CPU 在 agentic/inference AI 栈中重新成为控制平面 + 先进封装/美国制造稀缺资产”定价。问题在于，这个错锚可能已经被市场快速修正，甚至转向另一个叙事陷阱：市场在奖励 14A 客户传闻和供给紧张，而长期投资者真正需要的是外部客户承诺、foundry 毛利修复和正自由现金流。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr><th>Item</th><th>Latest Situation</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>INTC 最新价 124.92 美元，52 周区间 18.97-130.57 美元；按约 50.26 亿股估算市值约 6,280 亿美元。股价显著高于 50 日均线 62.11 美元和 200 日均线 42.34 美元，交易已经进入强动量而非便宜资产状态。</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>2026Q1 收入 135.77 亿美元，同比增长 7%；GAAP 毛利率 39.4%，non-GAAP 毛利率 41.0%；GAAP EPS -0.73 美元，non-GAAP EPS 0.29 美元。Q2 指引收入 138-148 亿美元，non-GAAP EPS 0.20 美元。</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>30 日技术层极端强势：RSI 约 85，MACD 柱继续扩大，收盘价远高于 EMA50。信号含义不是“低风险买点”，而是市场已经在强烈重估 Intel 的 AI CPU/18A/14A 叙事。</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>公司员工数从 2025Q1 的 102.6k 降至 2026Q1 的 83.2k，重组仍在推进。Q1 现金及短投 327.9 亿美元，总债务 450.3 亿美元；完成爱尔兰 Fab 34 JV 49% 权益回购后资本结构更集中但债务负担仍高。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>DCAI revenue</td>
+                    <td align="center">$5.1B, +22% YoY</td>
+                    <td>最强的基本面信号：AI 推理、agentic workload 和 CPU/GPU 配比变化正在重新拉动 Xeon 需求。</td>
+                </tr>
+                <tr>
+                    <td>Intel Foundry</td>
+                    <td align="center">$5.4B revenue, -$2.4B op loss</td>
+                    <td>收入受内部 EUV/18A 拉动，但外部 foundry 收入仅 1.74 亿美元；商业化仍远未证明。</td>
+                </tr>
+                <tr>
+                    <td>Adjusted FCF</td>
+                    <td align="center">Q1 -$2.0B</td>
+                    <td>管理层仍称全年可正，但资本开支和 14A 投资意味着“价值捕获”尚未兑现。</td>
+                </tr>
+                <tr>
+                    <td>Employee count</td>
+                    <td align="center">83.2k vs 102.6k YoY</td>
+                    <td>文化/成本重置是真实的，但短期 GAAP 仍被重组费用压制。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong>市场现在不再用传统半导体低倍数框架看 Intel，而是在用“供给紧张下的 P/S 重估 + 远期 foundry/14A call option”定价。FMP TTM 指标显示 INTC P/S 已到 11.7x、P/B 5.7x、EV/EBITDA 57.5x，而 TTM 净利率仍为负。最近 FMP 价格目标 feed 中，4 月底至 5 月初多家机构上调目标价，但大多在 60-118 美元，低于 124.92 美元现价。</p>
+        <p><strong>Peer Benchmarking:</strong>Intel 估值已靠近高增长半导体同行，但利润质量仍明显落后于 TSM、NVDA 和 MU。市场不是在付当期盈利倍数，而是在预付 2027-2030 年经营杠杆、14A 外部客户和美国本土先进制造稀缺性。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">P/S</th>
+                    <th align="right">EV/EBITDA</th>
+                    <th align="right">Revenue Growth</th>
+                    <th align="right">Margin / FCF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>INTC</td><td align="right">~$628B</td><td align="right">11.7x</td><td align="right">57.5x</td><td align="right">Q1 +7% YoY</td><td align="right">TTM net margin -5.9%</td></tr>
+                <tr><td>AMD</td><td align="right">~$742B</td><td align="right">19.8x</td><td align="right">103.2x</td><td align="right">AI/server optionality</td><td align="right">TTM net margin 13.3%</td></tr>
+                <tr><td>NVDA</td><td align="right">~$5.23T</td><td align="right">24.2x</td><td align="right">36.2x</td><td align="right">AI accelerator leader</td><td align="right">TTM net margin 55.6%</td></tr>
+                <tr><td>TSM</td><td align="right">~$2.14T</td><td align="right">14.5x</td><td align="right">19.6x</td><td align="right">Leading-edge foundry</td><td align="right">TTM net margin 47.0%</td></tr>
+                <tr><td>MU</td><td align="right">~$842B</td><td align="right">14.5x</td><td align="right">22.6x</td><td align="right">Memory upcycle</td><td align="right">TTM net margin 41.5%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong>以下三张图用 3 年价格、P/S 代理估值和毛利率/P/S 双轴展示叙事迁移。注意：P/S 使用公开价格和季度收入年化/TTM 代理，目的是识别重估方向，不应替代完整模型。</p>
+        <img src="./assets/intc_price_action_narrative_eras.png" alt="Intel price action and narrative eras chart">
+        <img src="./assets/intc_historical_valuation_bands.png" alt="Intel historical valuation bands chart">
+        <img src="./assets/intc_nsm_mismatch_jaws_chart.png" alt="Intel NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong>Intel 的机会不在于某个单季度 beat，而在于 NSM 是否从“被动出货与成本吸收”转成“客户愿意承诺多年产能的制造平台”。当前证据显示过渡已经开始，但价格移动快于可验证的经济捕获。</p>
+
+        <table class="nsm-table">
+            <thead>
+                <tr><th>Lens</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>18A/14A 良率、wafer outs、cycle time、DCAI/ASIC 客户长期协议，以及 CPU 在 AI inference/agentic 架构中的部署强度。</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor NSM</td>
+                    <td>可持续毛利率、foundry 外部收入和 backlog、正 FCF、14A hero customer 承诺、以及 CPU/ASIC 份额是否能抵消 AMD/ARM 与 TSMC 生态优势。</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus NSM</td>
+                    <td>股价目前主要奖励 Q1 beat、服务器 CPU 供不应求、18A 良率改善、14A 客户传闻、美国制造/政府支持以及 NVIDIA/Google/SpaceX/xAI/Tesla 等关系叙事。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td><strong>Narrative trap risk.</strong> CEO NSM 与 investor NSM 方向一致，但 market NSM 已从过度悲观快速转向过度抢跑；外部 foundry 收入和 FCF 尚未证明。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">AI workload 分布化和 agentic inference → CPU 从附属件变成控制平面/编排层 → Xeon 与 ASIC/IPU 长约提升客户依赖 → 18A/14A 与先进封装提高供给稀缺性 → 若外部客户承诺落地，才转化为 foundry pricing power、毛利修复和自由现金流</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong>若 14A 在 2026H2-2027H1 拿到顶级外部客户承诺，并且 18A 毛利从 headwind 转为 neutral/positive，市场可能继续把 Intel 看成美国本土先进制造平台。但现价已经高于公开卖方目标价 feed 的大部分区间，且 P/S 已接近 TSM 的量级而盈利能力远低于 TSM。下行风险是任何客户承诺延迟、18A 成本改善慢于预期、PC 需求下修或服务器 CPU 竞争重新恶化，都可能把估值锚拉回“高资本强度、低 FCF 的 turnaround”。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Watchlist / Not next-stage yet.</strong></p>
+        <p>按照推进标准，Intel 现在不满足“优先进入下一阶段深研”的三项条件。第一，<strong>wrong anchor</strong> 曾经存在：市场过去过度锚定 PC 衰退和 foundry 烧钱，低估了 CPU 在 AI inference/agentic 架构中的回摆。但这个锚已经被快速修正，股价一年接近 5 倍，已经不再是明显被忽视资产。第二，<strong>material upside</strong> 不够清晰：若 2030 EPS 共识 4.71 美元实现，现价仍相当于约 26.5x 2030 EPS，除非市场给美国制造/foundry 平台更高溢价，否则组合层面的安全边际不足。第三，<strong>clear validation path</strong> 是清楚的，但还没发生：14A 外部设计/产能承诺、18A 良率转化为毛利、foundry 外部收入规模化、全年 adjusted FCF 转正。</p>
+        <p>因此，Intel 是一个需要密切跟踪的结构性转折候选，而不是当前价格下的优先 mispricing long。PM 若继续研究，应把问题定义为“市场是否已经把 2027-2030 的成功贴现过头”，而不是“Intel 是否终于变好”。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>2026H2 至 2027H1 出现可验证的 14A 外部客户设计承诺或多年 wafer/packaging 容量协议，而不是仅有传闻或 test chip。</li>
+            <li>18A Panther Lake / Core Ultra Series 3 ramp 中，gross margin headwind 在 2026 年底前明显减弱，且 CCG/DCAI 产品毛利没有靠一次性库存释放支撑。</li>
+            <li>DCAI 单位增长与 ASP/core mix 同时改善，证明 agentic/inference workload 对 CPU 的需求不是单季度补库存。</li>
+            <li>Intel Foundry operating loss 按季度收窄，外部 foundry/advanced packaging backlog 开始转收入，2027 可见数十亿美元级别收入路径。</li>
+            <li>全年 adjusted FCF 转正，同时 capex 没有再次失控上修。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>14A 客户承诺推迟到 2027H2 之后，或管理层重新弱化 14A/后续节点投资。</li>
+            <li>18A 良率改善不能转化为 corporate gross margin，Q2 之后毛利重新被 ramp cost、memory/substrate 成本和外包晶圆侵蚀。</li>
+            <li>PC TAM 下修幅度扩大，client 供给改善后出现价格压力，证明 Q1/Q2 需求更多是供需错配而非结构增长。</li>
+            <li>AMD/ARM 在数据中心 CPU 份额继续上行，或 NVIDIA/云厂商自研 CPU 削弱 Xeon 的长期控制平面地位。</li>
+            <li>foundry 外部收入长期停留在每季数亿美元以下，说明 Intel 仍只是内部制造部门而非真正服务外部客户的平台。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 2026-2030 情景模型：把 DCAI 单位增长、ASP/core、CCG TAM、foundry 外部收入、18A/14A 良率和 capex 分开建模，反推现价隐含成功率。</li>
+            <li>做客户验证：重点追踪 Google LTA、NVIDIA DGX Rubin host CPU、SambaNova、AWS/Microsoft、苹果/SpaceX/xAI/Tesla/Terafab 传闻中哪些是真正多年产能承诺。</li>
+            <li>拆分 foundry economics：区分内部 EUV wafer、外部 wafer、advanced packaging backlog 与政府项目收入，避免把内部转移收入误读为外部客户 traction。</li>
+            <li>跟踪竞争路线图：Diamond Rapids、Coral Rapids 多线程恢复、AMD Zen 6/EPYC、云厂商 ARM CPU 与 NVIDIA Vera/Grace 体系。</li>
+            <li>修复卖方研报下载链路，补齐多银行 valuation anchor、评级分布和目标价方法，尤其是 2026 年 4 月 Q1 beat 后的报告。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>Intel Q1 2026 earnings release: <code>../collected_resources/intel_q1_2026_earnings_release.html</code></li>
+            <li>Intel Q1 2026 prepared remarks PDF: <code>../collected_resources/intel_q1_2026_earnings_call_prepared_remarks.pdf</code></li>
+            <li>Latest earnings call transcripts: <code>../collected_resources/earnings_calls/</code></li>
+            <li>SEC 10-K/10-Q extracts and filing metadata: <code>../collected_resources/sec/</code></li>
+            <li>OpenBB/FMP market, valuation and price-target snapshot: <code>../collected_resources/openbb_market_valuation_snapshot.md</code></li>
+            <li>30-day technical indicator history: <code>../collected_resources/intc_technical_30d.csv</code></li>
+            <li>Price and valuation chart data: <code>../collected_resources/peer_price_history_3y.csv</code>, <code>../collected_resources/intc_yfinance_quarterly_financials.csv</code></li>
+            <li>News source materials from FreshRSS: <code>../collected_resources/20260423_CNBC_INTC_results_top_estimates_1776978030042765.md</code>, <code>../collected_resources/20260424_CNBC_INTC_soaring_two_firms_buy_1777042844240525.md</code>, <code>../collected_resources/20260509_半导体行业观察_完成救赎_1778297415839085.md</code></li>
+            <li>Buy-side and practitioner materials: <code>../collected_resources/20260429_stratechery_intel_earnings_differentiation_terafab.md</code>, <code>../collected_resources/20260209_semianalysis_cpus_are_back_datacenter_cpu_landscape_2026.md</code>, <code>../collected_resources/20250729_stratechery_customer_service_intel_us_semi_supply_chain.md</code></li>
+            <li>Podwise in-depth discussion and episode artifacts: <code>../collected_resources/podwise_intel_turnaround_20260509.md</code>, <code>../collected_resources/podwise_episode_artifacts/</code></li>
+            <li>Sell-side snippets and failure log: <code>../collected_resources/intel_sellside_snippets.md</code>, <code>../error.md</code></li>
+        </ul>
+    </div>
+</body>
+</html>

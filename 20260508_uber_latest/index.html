@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreWeave SitRep</title>
+    <title>Uber Technologies SitRep</title>
     <style>
         :root {
             --paper: #f6f4ed;
@@ -518,181 +518,153 @@
 <body>
     <div class="container">
         <div class="frontmatter">
-            <p><strong>Ticker:</strong> CRWV</p>
+            <p><strong>Ticker:</strong> UBER</p>
             <p><strong>Date:</strong> 2026-05-08</p>
-            <p><strong>Classification:</strong> Watchlist - wait for validation or valuation reset</p>
+            <p><strong>Classification:</strong> Advance to next-stage research</p>
         </div>
 
-        <h1>CoreWeave Situation Report</h1>
+        <h1>Uber Technologies Situation Report</h1>
 
 <h2>1. Executive View</h2>
-<p>CoreWeave 最新情况是典型的“基本面加速、财务风险也加速”。2026Q1 收入 20.78 亿美元，同比增长 112%；收入 backlog 升至 994 亿美元，环比接近 +50%；active power 超过 1GW，contracted power 超过 3.5GW。经营端最强的信号不是单季收入 beat，而是需求从训练扩展到推理、agentic workloads、金融服务、physical AI，并且 10 个客户承诺支出超过 10 亿美元。</p>
-<p>市场争论的核心不是“有没有需求”，而是“这是不是一个可持续赚取超额回报的 AI cloud 平台，还是一辆用高杠杆滚动融资的 GPU/电力资产负债表”。Q1 后股价承压，直接原因是 Q2 收入指引 24.5-26.0 亿美元低于市场预期、全年 capex 指引下限上调至 310 亿美元、Q2 利息费用指引升至 6.5-7.3 亿美元。多头看 backlog、active power 和成本资本下降；空头看债务、客户/供应商集中、GPU 租赁商品化和供应链/电力交付风险。</p>
-<p>本 SitRep 结论：<strong>列入重点观察，但暂不建议直接推进完整深度研究</strong>。有可信的 wrong-anchor 候选：市场可能过度锚定近季收入指引和 GAAP/利息亏损，而低估“可融资电力 + GPU 集群交付能力”这种稀缺资产。但当前价格约 129 美元、EV 约 900-950 亿美元，已经接近公开 analyst 平均目标价，且 FY26E EV/Sales 约 7-8x，安全边际不足。更好的动作是等待 1-2 个季度验证 backlog 向收入、融资成本下降和 margin ramp。</p>
+<p>UBER 当前值得进入下一阶段研究，但研究焦点不应是“出行/外卖高质量复利”这种已经被市场理解的宽泛叙事，而应是一个更窄的错锚假设：市场仍把 Uber 定价为受 AV/Robotaxi 去中介化威胁的交易型平台，而实际业务正在向“多场景需求入口 + 高频会员 + 商户广告/企业客户 + AV 供给聚合器”迁移。</p>
+<p>最新 Q1 2026 结果强化了这个错锚可能性：Gross Bookings 同比增长 25%，按固定汇率增长 21%；Trips 同比增长 20%；Non-GAAP operating income 同比增长 42%至 19.18 亿美元；FCF 为 23 亿美元。更关键的是，Uber One 会员超过 5,000 万，并贡献 Mobility 与 Delivery 约一半 Gross Bookings；U4B 年化 Gross Bookings 已超过 50 亿美元，增长 45%。这些指标说明 Uber 的 CEO NSM 正从“完成更多交易”升级为“占据更多本地/出行意图并提高跨平台频次”。</p>
+<p>主要风险也明确：如果 Waymo/Tesla 或 AI Agent 成为用户默认入口，Uber 的需求层价值会被削弱；如果 AV 供给方议价权过强，Uber 只能成为低抽成分销渠道。下一阶段研究应验证“Uber 是否能维持默认入口与 take rate”，而不是只建一个常规 EBITDA/FCF 增长模型。</p>
 <h2>2. Current Snapshot</h2>
-<p><strong>Market Data &amp; Positioning</strong></p>
 <table>
 <thead>
 <tr>
-<th>Item</th>
-<th align="right">Latest</th>
+<th>项目</th>
+<th align="right">最新情况</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Price</td>
-<td align="right">$128.84</td>
+<td>股价</td>
+<td align="right">76.73 美元，2026-05-07 收盘/报价口径</td>
 </tr>
 <tr>
-<td>52-week range</td>
-<td align="right">$50.18 - $187.00</td>
+<td>52 周区间</td>
+<td align="right">68.46-101.99 美元</td>
 </tr>
 <tr>
-<td>Market cap</td>
-<td align="right">~$68B</td>
+<td>市值 / EV</td>
+<td align="right">1,562 亿美元 / 1,649 亿美元</td>
 </tr>
 <tr>
-<td>Enterprise value</td>
-<td align="right">~$90-95B</td>
+<td>估值快照</td>
+<td align="right">Forward P/E 17.7x；P/S TTM 2.94x；EV/EBITDA 23.5x（yfinance 口径）</td>
 </tr>
 <tr>
-<td>50D / 200D MA</td>
-<td align="right">$95.47 / $100.42</td>
-</tr>
-<tr>
-<td>Short interest</td>
-<td align="right">high: ~15-22% of float, depending on source/date</td>
-</tr>
-<tr>
-<td>Institutional ownership</td>
-<td align="right">~52% by yfinance snapshot; StockAnalysis shows lower 13F-based figure</td>
+<td>仓位/情绪</td>
+<td align="right">机构持股约 86.4%；空头占流通股约 2.85%</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Key Financial Metrics</strong></p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th align="right">2026Q1</th>
+<th>Q1 2026 核心指标</th>
+<th align="right">数值</th>
+<th>含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Revenue</td>
-<td align="right">$2.078B, +112% YoY, +32% QoQ</td>
+<td>MAPCs</td>
+<td align="right">1.99 亿，+17% YoY</td>
+<td>用户底盘仍扩张</td>
 </tr>
 <tr>
-<td>Revenue backlog</td>
-<td align="right">$99.4B</td>
+<td>Trips</td>
+<td align="right">36.43 亿，+20% YoY</td>
+<td>增长不是单纯价格驱动</td>
+</tr>
+<tr>
+<td>Gross Bookings</td>
+<td align="right">537.2 亿美元，+21% 固定汇率</td>
+<td>市场最关注的短期 NSM 仍强</td>
 </tr>
 <tr>
 <td>Adjusted EBITDA</td>
-<td align="right">$1.157B, 56% margin</td>
+<td align="right">24.81 亿美元，+33% YoY</td>
+<td>盈利增速高于交易额增速</td>
 </tr>
 <tr>
-<td>Adjusted operating income</td>
-<td align="right">$21M, 1% margin</td>
-</tr>
-<tr>
-<td>Net loss</td>
-<td align="right">$(740)M</td>
-</tr>
-<tr>
-<td>Interest expense</td>
-<td align="right">$(536)M</td>
-</tr>
-<tr>
-<td>Capex</td>
-<td align="right">$6.8B</td>
-</tr>
-<tr>
-<td>Cash/restricted cash/securities</td>
-<td align="right">~$3.3B</td>
-</tr>
-<tr>
-<td>Debt</td>
-<td align="right">~$24.9B</td>
+<td>FCF</td>
+<td align="right">23 亿美元</td>
+<td>可支撑回购和每股价值累积</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Market Structure &amp; Sentiment</strong></p>
-<ul>
-<li><strong>Price action / technicals:</strong> 30-day trend remains positive. The stock is still above 50D and 200D moving averages, but RSI fell from ~72 on May 6 to ~63 on May 7 after earnings, showing post-print profit taking rather than a broken trend.</li>
-<li><strong>Positioning:</strong> Short interest is elevated, which can amplify both squeezes and earnings disappointments. Recent Form 4 activity shows multiple filings around May 5-7; third-party summaries also flag insider/large-holder selling, including planned sales. Treat this as supply overhang, not necessarily thesis-breaking information.</li>
-<li><strong>News sentiment:</strong> Q1 demand/backlog data were strong, but CNBC/FreshRSS summaries indicate the market focused on Q2 guidance below consensus, higher capex and rising debt.</li>
-</ul>
+<p><strong>Price Action &amp; Technicals:</strong> 过去 30 个交易日从 3 月底 69 美元附近反弹，Q1 业绩日跳升后回落至 76.73 美元；RSI 约 55，MACD 已转正，但股价仍低于 200 日均线约 84.9 美元。技术层面更像业绩催化后的修复，而非趋势完全反转。</p>
+<p><strong>Positioning:</strong> 空头比例不高，说明这不是“拥挤空头挤压”型机会；机构持股高，表明多头基础已成熟。OpenBB 机构持仓接口因 FMP 权限受限未能返回，已在 <code>error.md</code> 记录。</p>
 <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
-<p><strong>Pricing Anchor &amp; Embedded Expectations</strong></p>
-<p>The market is currently anchoring CRWV on a blend of <strong>EV / forward revenue</strong>, backlog conversion, and the cost of financing that backlog. Traditional earnings anchors are not useful yet because GAAP net income is deeply negative and interest expense is scaling with capacity deployment.</p>
-<p>At ~$90-95B EV and FY26 revenue guide of $12-13B, CRWV trades around <strong>7-8x FY26E revenue</strong>. Against management’s 2027 exit ARR target of &gt;$30B, the market is implicitly asking whether that revenue base deserves a cloud/platform multiple or an infrastructure/financing multiple. Public analyst consensus is not obviously mispriced: StockAnalysis shows 32 analysts with average target ~$127 and median ~$130, essentially near the current price.</p>
-<p><strong>Valuation Anchor</strong></p>
-<ul>
-<li><strong>Sell-side / consensus ruler:</strong> forward EV/Sales and increasingly EV/EBITDA once 2026/2027 EBITDA visibility improves.</li>
-<li><strong>Why this multiple:</strong> the peer frame is split. Bulls compare CoreWeave to high-growth cloud/AI infrastructure scarcity assets; bears compare it to levered data-center/GPU leasing businesses with commodity risk.</li>
-<li><strong>Current wrong-anchor hypothesis:</strong> market may be over-penalizing reported losses and near-term capex while underweighting cost-of-capital compression and contracted power conversion. But this is only attractive if active power ramp converts into revenue at mid-20s contribution margin without credit stress.</li>
-</ul>
-<p><strong>Peer Benchmarking</strong></p>
+<p><strong>市场定价锚:</strong> 当前市场主要用 Gross Bookings 增速、Adjusted EBITDA/Non-GAAP EPS、FCF yield 定价，同时对 AV 去中介化施加折价。卖方材料中，Bernstein 的“ruler”最清楚：UBER 目标价采用 50/50 的 NTM P/FCF 18x 与 DCF；另一个 SOTP 反推显示美国 Mobility 约 10-12x 2026E EV/Adjusted EBITDA，低于它作为高规模平台应有的质量。</p>
+<p><strong>嵌入预期:</strong> 按 76.73 美元和本次数据包估算，UBER 约 2.9x P/TTM sales、约 16.7x P/TTM adjusted EBITDA proxy。Bernstein 4 月 Go-Get 后仍给 Outperform、目标价 110 美元；2 月 AV 压力测试中，目标价 115 美元，并认为即使美国 Mobility 在 15 年内被严重扰动，DCF 下限仍约 65-70 美元/股。这形成了一个可讨论的上行/下行结构：短期下行更多来自 AV 叙事和市场倍数，核心业务现金流仍在抬高底部。</p>
 <table>
 <thead>
 <tr>
-<th>Company</th>
-<th>Role</th>
-<th align="right">EV/Revenue TTM</th>
-<th align="right">Revenue growth</th>
-<th align="right">EBITDA margin</th>
-<th align="right">Short % float</th>
+<th>公司</th>
+<th align="right">市值</th>
+<th align="right">P/S TTM</th>
+<th align="right">Forward P/E</th>
+<th align="right">EV/EBITDA</th>
+<th align="right">收入增速</th>
+<th align="right">FCF</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>CRWV</td>
-<td>Pure-play AI cloud / neocloud</td>
-<td align="right">~18.4x TTM; ~7-8x FY26E</td>
-<td align="right">110%+</td>
-<td align="right">~47% TTM / 56% Q1 adj. EBITDA</td>
-<td align="right">~22%</td>
+<td>UBER</td>
+<td align="right">1,562 亿美元</td>
+<td align="right">2.94x</td>
+<td align="right">17.7x</td>
+<td align="right">23.5x</td>
+<td align="right">14.5%</td>
+<td align="right">65 亿美元</td>
 </tr>
 <tr>
-<td>ORCL</td>
-<td>Hyperscaler-adjacent cloud + database</td>
-<td align="right">~10.7x</td>
-<td align="right">~22%</td>
-<td align="right">~43%</td>
-<td align="right">~2%</td>
+<td>DASH</td>
+<td align="right">747 亿美元</td>
+<td align="right">5.44x</td>
+<td align="right">22.6x</td>
+<td align="right">58.1x</td>
+<td align="right">37.7%</td>
+<td align="right">24 亿美元</td>
 </tr>
 <tr>
-<td>NBIS</td>
-<td>AI cloud / neocloud</td>
-<td align="right">~91.6x</td>
-<td align="right">~547%</td>
-<td align="right">negative</td>
-<td align="right">~20%</td>
+<td>LYFT</td>
+<td align="right">54 亿美元</td>
+<td align="right">0.86x</td>
+<td align="right">7.6x</td>
+<td align="right">n.m.</td>
+<td align="right">2.7%</td>
+<td align="right">12 亿美元</td>
 </tr>
 <tr>
-<td>IREN</td>
-<td>AI infra + power/data-center angle</td>
-<td align="right">~25.7x</td>
-<td align="right">~59%</td>
-<td align="right">~26%</td>
-<td align="right">~18%</td>
+<td>ABNB</td>
+<td align="right">835 亿美元</td>
+<td align="right">6.82x</td>
+<td align="right">24.4x</td>
+<td align="right">29.3x</td>
+<td align="right">12.0%</td>
+<td align="right">35 亿美元</td>
 </tr>
 <tr>
-<td>NVDA</td>
-<td>AI silicon supplier</td>
-<td align="right">~23.6x</td>
-<td align="right">~73%</td>
-<td align="right">~62%</td>
-<td align="right">~1%</td>
+<td>BKNG</td>
+<td align="right">1,327 亿美元</td>
+<td align="right">4.79x</td>
+<td align="right">13.9x</td>
+<td align="right">13.1x</td>
+<td align="right">16.2%</td>
+<td align="right">71 亿美元</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Historical Context &amp; Charts</strong></p>
 <p><strong>3-chart package</strong></p>
-<img src="../collected_resources/chart1_price_action_narrative_eras.png" alt="CoreWeave price action and narrative eras chart">
-<img src="../collected_resources/chart2_historical_valuation_bands.png" alt="CoreWeave historical valuation bands chart">
-<img src="../collected_resources/chart3_nsm_mismatch_jaws.png" alt="CoreWeave NSM mismatch jaws chart">
-<p>Note: CRWV only became public in March 2025, so the chart package uses available public history rather than a full 3-year stock record. For valuation bands, the report uses FY26 revenue guide midpoint and Q1 net debt as a consistent proxy.</p>
+<img alt="Price Action &amp; Narrative Eras" src="./assets/uber_price_vs_spy_narrative.png">
+<img alt="Historical Valuation Bands" src="./assets/uber_valuation_bands_psales.png">
+<img alt="NSM Mismatch Jaws Chart" src="./assets/uber_nsm_mismatch_jaws.png">
 <p><strong>NSM Framework:</strong></p>
 <table>
     <thead>
@@ -704,76 +676,65 @@
     <tbody>
         <tr>
             <td>CEO NSM</td>
-            <td>Active power and revenue backlog converted into live AI cloud capacity.</td>
+            <td>更多日常意图被 Uber 捕获：Trips、MAPCs、cross-platform usage、Uber One。</td>
         </tr>
         <tr>
             <td>Long-term investor NSM</td>
-            <td>Revenue per GW / GPU-hour economics, contribution margin after fit-out, contract duration/prepayment quality, and cost of capital.</td>
+            <td>每股 FCF 与 Non-GAAP operating income / Gross Bookings，再叠加广告、U4B、AV 供给接入率。</td>
         </tr>
         <tr>
             <td>Market-consensus NSM</td>
-            <td>Forward revenue guide, capex, interest expense, EV/Sales and debt-funded ARR growth.</td>
+            <td>Gross Bookings 增速 + EBITDA 倍数，并被 AV 风险压低。</td>
         </tr>
         <tr>
             <td>Mismatch category</td>
-            <td><strong>Healthy lag candidate, with dangerous divergence risk.</strong> Management optimizes for scarcity capture and scale; market is asking whether each additional GW creates equity value after debt, depreciation, supplier cost inflation and customer credit risk.</td>
+            <td><strong>Healthy lag / narrative trap 的混合</strong>：核心价值捕获指标在改善，但市场仍用“AV 是否毁灭美国 Mobility”的旧框架频繁重定价。</td>
         </tr>
     </tbody>
 </table>
 <p><strong>Value Creation To Value Capture Chain:</strong></p>
-<p class="value-chain">AI model / enterprise value creation -> compute-intensive training and inference -> reserved capacity and multi-product usage -> operational dependency on CoreWeave clusters -> pricing power, prepayments, longer contracts, lower asset-backed financing cost -> eventual operating cash flow and equity value</p>
-<p>The decisive issue is whether the final two links hold.</p>
+<p class="value-chain">更多本地与出行意图被 Uber 捕获 → Trips / MAPCs / cross-platform usage 提升 → Uber One、U4B、广告和 AV 供给聚合加深多场景依赖 → 默认入口和交易编排权增强 → take rate、retention、operating income / Gross Bookings 与每股 FCF 改善</p>
 
-<p><strong>Upside/Downside Asymmetry</strong></p>
-<p>Upside exists if the market eventually values CoreWeave as a scarce AI factory platform: FY27 exit ARR &gt;$30B, &gt;75% already contracted per management, and lower asset-level debt cost could make current EV look reasonable. A 5x EV/revenue multiple on &gt;$30B exit ARR would imply much higher EV than today.</p>
-<p>Downside is also material: if utilization/pricing normalizes, if customers slow AI capex, if non-investment-grade AI-native counterparties become credit issues, or if capex requires continued high-cost refinancing, equity can de-rate quickly because debt and lease obligations sit ahead of common shareholders.</p>
+<p><strong>Upside/Downside Asymmetry:</strong> 若 AV 只是供给成本下降而非去中介化，且 Uber One/广告/U4B 继续提高高毛利 attach rate，UBER 可以从约 17-18x forward earnings / mid-teens FCF 多重回到更接近平台同业的高 teens/低 20s FCF 多重，叠加 20%+ EPS/FCF per share 增长，2-3 年上行足以进入组合研究。若 Waymo/Tesla 成为默认入口，或 Uber 被迫以低 take rate 接入 AV，估值应维持折价。</p>
 <h2>4. SitRep Judgment</h2>
-<p><strong>Classification: Watchlist - wait for validation or valuation reset.</strong></p>
-<p>Against the advancement standard:</p>
-<ul>
-<li><strong>Wrong anchor:</strong> Credible but not yet proven. The wrong-anchor case is that market is treating CoreWeave as a fragile levered GPU lessor, while the durable NSM may be active power monetized into high-utilization, multi-year AI cloud revenue at falling cost of capital. The counterargument is strong: this may actually be the correct anchor because capital intensity and customer/supplier concentration are fundamental, not temporary.</li>
-<li><strong>Material upside if right:</strong> Yes, but price already discounts a lot. If 2027 exit ARR &gt;$30B is delivered and contribution margins normalize, upside could matter. At current price, however, average sell-side target is roughly flat, so the setup is not obviously asymmetric today.</li>
-<li><strong>Clear validation path:</strong> Yes. The next 2-4 quarters should show whether Q1 was a margin trough, whether active power ramps from &gt;1GW to &gt;1.7GW by year-end, and whether backlog converts to revenue without another financing scare.</li>
-</ul>
+<p><strong>Classification: Advance to next-stage research.</strong></p>
+<p><strong>Wrong anchor:</strong> 成立但不是完全未被发现。市场和卖方都知道 AV 风险，但价格行为显示市场仍把 AV 当成 Uber 核心利润池的折价因子；本次研究显示更合适的框架是“需求聚合权 + 供给多元化 + 高毛利平台层”。错锚不是“市场没看到增长”，而是可能低估 Uber 在 AV 时代仍保留默认入口和交易编排权的概率。</p>
+<p><strong>Material upside:</strong> 成立。卖方目标价 110-115 美元相对 76.73 美元约 43-50% 上行；若 2026-2027 FCF per share 继续复合、AV overhang 缓解，收益来自盈利上修与倍数修复双重驱动。</p>
+<p><strong>Clear validation path:</strong> 成立。未来几个季度可以跟踪 Q2 Gross Bookings 指引是否兑现、Uber One 会员贡献占比和 spend multiple、AV 城市数量与订单量、U4B 是否朝 2028 年 100 亿美元 Gross Bookings 目标推进、Non-GAAP operating income / Gross Bookings 是否继续扩张。</p>
 <h2>5. What Would Confirm Or Break The Thesis</h2>
 <p><strong>Confirming datapoints</strong></p>
 <ul>
-<li>Q2 and Q3 revenue land within or above guidance, with sequential adjusted operating margin expansion.</li>
-<li>Active power reaches or exceeds 1.7GW by year-end 2026, with limited data-center delivery slippage.</li>
-<li>Q4 adjusted operating margin returns to low double digits, as management guided.</li>
-<li>New contracts keep roughly five-year duration and mid-20s contribution margin economics despite component inflation.</li>
-<li>Non-investment-grade AI-native/foundation lab share of backlog continues to fall from &lt;30%.</li>
-<li>DDTL 4.0 / DDTL 5.0 style financing becomes repeatable below prior cost of debt, reducing equity dilution and interest burden.</li>
+<li>Q2 2026 Gross Bookings 达到 562.5-577.5 亿美元指引，且 Non-GAAP EPS 达到 0.78-0.82 美元。</li>
+<li>Uber One 会员继续增长，会员贡献 Gross Bookings 占比维持或超过 50%，且三倍 spend/更高留存没有靠过度补贴换来。</li>
+<li>AV Mobility trips 继续高增长，并在 2026 年底接近“最多 15 个城市”部署目标。</li>
+<li>U4B 继续 40%+ 增长，组织客户数向 100 万目标推进，证明 Uber 从消费者习惯进入组织依赖。</li>
+<li>Non-GAAP operating income / Gross Bookings 继续提升，说明增长转化为可捕获经济利润。</li>
 </ul>
 <p><strong>Breaking datapoints</strong></p>
 <ul>
-<li>Another quarter of light revenue guide without offsetting backlog-to-revenue visibility.</li>
-<li>Capex rises faster than revenue backlog or active power, suggesting deteriorating unit economics.</li>
-<li>Q2 interest expense exceeds the $650-730M guide or debt financing requires materially higher spreads.</li>
-<li>Customer concentration/credit risk reappears through OpenAI, Microsoft, Meta or AI-native counterparties.</li>
-<li>GPU-hour pricing weakens while utilization stays high, indicating commodity-like competition.</li>
-<li>Power/interconnect delays push major contracted capacity beyond 2027.</li>
+<li>Waymo/Tesla 在核心美国城市显著绕开 Uber，且 ETA/价格/体验优势导致 Uber share 或 take rate 受压。</li>
+<li>AV 合作从“平台抽成”变成“低毛利分销”，Uber 承担车队、保险或融资风险但拿不到对应利润池。</li>
+<li>Uber One 增长放缓或补贴强度上升，会员经济性恶化。</li>
+<li>Delivery 与 local commerce 为追赶 DASH 被迫重新加大补贴，广告收入无法抵消利润压力。</li>
+<li>保险、司机分类、佣金上限等监管风险重新抬高成本结构。</li>
 </ul>
 <h2>6. Recommended Next Diligence</h2>
 <ol>
-<li>Build a GW-to-revenue cohort model: active power, contracted power, assumed GPUs/MW, revenue/GW/year, contribution margin, depreciation and interest burden.</li>
-<li>Reconcile backlog quality: RPO vs broader “revenue backlog,” expected recognition by year, prepayment level, customer credit mix and renewal assumptions.</li>
-<li>Compare GPU-hour pricing using SemiAnalysis / market rental indices against CoreWeave’s implied contract economics.</li>
-<li>Stress-test capital stack: capex at $31-35B, debt maturities, DDTL draw schedules, interest coverage and sensitivity to 200-400 bps spread widening.</li>
-<li>Channel-check customers: why choose CoreWeave vs Azure/Oracle/AWS/Nebius, and whether software/operations advantages are durable or replicable.</li>
-<li>Track Form 4 / lockup / large-holder supply, because elevated short interest plus insider selling can dominate short-term price action around earnings.</li>
+<li>建立分部 SOTP：美国 Mobility、国际 Mobility、Delivery、广告/U4B、Freight、equity stakes 分开估值，显式测试 AV take rate 与供给方议价权。</li>
+<li>做 Uber One cohort 分析：会员 spend multiple、跨平台渗透、留存、补贴成本、hotel/grocery 新权益的 LTV/CAC。</li>
+<li>深挖 AV 合同经济：Waymo、Rivian/Lucid/Nuro、Zoox、Pony.ai、WeRide/Baidu 等合作中，谁拥有客户关系、定价权、保险责任和车队资本开支。</li>
+<li>对比 DASH 与 UBER Eats 商户广告：广告 load、ROAS、商户 churn、take rate、merchant-funded offers 是否提升而非侵蚀利润。</li>
+<li>检查监管/保险敏感性：美国 Mobility 尤其 California/LA/SF 保险成本改善是否可持续。</li>
 </ol>
 <h2>Sources Used</h2>
 <ul>
-<li>CoreWeave Q1 2026 press release / 8-K: <a href="../collected_resources/sec_filings/CRWV_8-K_2026-05-07_000176962826000220.md">CRWV_8-K_2026-05-07_000176962826000220.md</a></li>
-<li>Q1 2026 earnings call transcript: <a href="../collected_resources/earnings_calls/CRWV_FY2026-Q1_earnings_call_transcript.md">CRWV_FY2026-Q1_earnings_call_transcript.md</a></li>
-<li>Q1 2026 earnings presentation: <a href="../collected_resources/coreweave_1q26_earnings_presentation.pdf">coreweave_1q26_earnings_presentation.pdf</a></li>
-<li>Q1 2026 outlook presentation: <a href="../collected_resources/coreweave_1q26_outlook_presentation.pdf">coreweave_1q26_outlook_presentation.pdf</a></li>
-<li>FY2025 10-K: <a href="../collected_resources/sec_filings/CRWV_10-K_2026-03-02_000176962826000104.md">CRWV_10-K_2026-03-02_000176962826000104.md</a></li>
-<li>News stream: <a href="../collected_resources/20260508_coreweave_latest_news.md">20260508_coreweave_latest_news.md</a></li>
-<li>Podcast stream: <a href="../temp/podwise_coreweave_ask.txt">podwise_coreweave_ask.txt</a></li>
-<li>Buy-side / practitioner stream: Clouded Judgement, SemiAnalysis, Stratechery and Apoorv materials saved in <code>collected_resources/</code>.</li>
-<li>Tool limitation log: <a href="../error.md">error.md</a></li>
+<li>Uber Q1 2026 earnings release, supplemental data, prepared remarks, transcript: <code>../collected_resources/Uber-Q1-26-*.pdf</code></li>
+<li>Uber latest SEC extraction: <code>../collected_resources/uber_sec_extraction.md</code></li>
+<li>Earnings call transcript export: <code>../collected_resources/earnings_calls/</code></li>
+<li>Sell-side reports: <code>../collected_resources/sell_side_md/</code> and <code>../collected_resources/sell_side_pdfs/</code></li>
+<li>News research: CNBC / Platform Aeronaut / Stratechery files in <code>../collected_resources/</code></li>
+<li>Podwise report: <code>../collected_resources/podwise_uber_topic_research_2026-05-08.md</code></li>
+<li>Market/technical/peer data: <code>../collected_resources/uber_technical_30d.csv</code>, <code>../collected_resources/uber_peer_snapshot_yfinance.csv</code>, <code>../collected_resources/uber_market_snapshot_yfinance.json</code></li>
 </ul>
     </div>
 </body>

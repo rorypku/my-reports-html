@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Reports</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #667085;
+      --line: #d9dee7;
+      --accent: #1d6f8f;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 28px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .reports {
+      display: grid;
+      gap: 12px;
+    }
+
+    a.report {
+      display: block;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a.report:hover,
+    a.report:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .title {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 18px;
+      font-weight: 650;
+    }
+
+    .path {
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>My Reports</h1>
+    <p>Published HTML situation reports.</p>
+
+    <div class="reports">
+      <a class="report" href="./20260508_coreweave_latest/">
+        <span class="title">CoreWeave Situation Report</span>
+        <span class="path">20260508_coreweave_latest/</span>
+      </a>
+      <a class="report" href="./20260508_uber_latest/">
+        <span class="title">Uber Technologies Situation Report</span>
+        <span class="path">20260508_uber_latest/</span>
+      </a>
+      <a class="report" href="./20260509_aaoi_latest/">
+        <span class="title">Applied Optoelectronics Situation Report</span>
+        <span class="path">20260509_aaoi_latest/</span>
+      </a>
+      <a class="report" href="./20260509_astera_labs/">
+        <span class="title">Astera Labs Situation Report</span>
+        <span class="path">20260509_astera_labs/</span>
+      </a>
+      <a class="report" href="./20260509_intel_latest/">
+        <span class="title">Intel Situation Report</span>
+        <span class="path">20260509_intel_latest/</span>
+      </a>
+      <a class="report" href="./20260509_nbis/">
+        <span class="title">Nebius Group Situation Report</span>
+        <span class="path">20260509_nbis/</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
