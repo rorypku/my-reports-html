@@ -41,6 +41,61 @@
       line-height: 1.55;
     }
 
+    .request {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 28px 0 36px;
+    }
+
+    .request input {
+      min-width: 0;
+      flex: 1;
+      height: 42px;
+      box-sizing: border-box;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 13px;
+      background: var(--panel);
+      color: var(--text);
+      font: inherit;
+    }
+
+    .request input:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .request button {
+      height: 42px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 0 16px;
+      background: var(--accent);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .request button:focus,
+    .request button:hover {
+      background: #185e79;
+      outline: none;
+    }
+
+    @media (max-width: 560px) {
+      .request {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .request button {
+        width: 100%;
+      }
+    }
+
     .date-group {
       margin-top: 18px;
       border-top: 1px solid var(--line);
@@ -141,10 +196,27 @@
     <h1>My Reports</h1>
     <p>Published HTML situation reports.</p>
 
+    <form class="request" id="request-form">
+      <input
+        id="request-query"
+        name="query"
+        type="text"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="amazon"
+        aria-label="Report request"
+        required
+      >
+      <button type="submit">Request report</button>
+    </form>
+
     <div id="reports" aria-live="polite"></div>
   </main>
   <script>
     const reportsRoot = document.getElementById("reports");
+    const requestForm = document.getElementById("request-form");
+    const requestQuery = document.getElementById("request-query");
+    const issuesUrl = "https://github.com/rorypku/my-reports-requests/issues/new";
 
     function escapeText(value) {
       return String(value).replace(/[&<>"']/g, (character) => ({
@@ -199,6 +271,23 @@ ${links}
       }
       renderReports(await response.json());
     }
+
+    requestForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const query = requestQuery.value.trim().replace(/\s+/g, " ");
+      if (!query) {
+        requestQuery.focus();
+        return;
+      }
+
+      const parameters = new URLSearchParams({
+        title: `report request: ${query}`,
+        body: query,
+      });
+
+      window.location.href = `${issuesUrl}?${parameters.toString()}`;
+    });
 
     loadReports();
   </script>
