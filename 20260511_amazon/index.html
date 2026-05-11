@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table {
+            table-layout: auto;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> AMZN</p>
+            <p><strong>Date:</strong> 2026-05-11</p>
+            <p><strong>Classification:</strong> Watchlist / Quality Compounder</p>
+        </div>
+
+        <h1>Amazon Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：Amazon 值得持续跟踪，但暂不建议直接进入下一阶段深挖。</strong> 这不是因为业务质量不够，而是因为当前股价已经把相当多的 AWS 再加速、广告高增和零售利润率修复纳入定价。真正的错锚假设是：市场把 2026 年约 2000 亿美元级别 Capex 主要当作 FCF 压制，而管理层认为这是被客户承诺支撑的 AI 算力资产建设，未来两三年会转化为营业利润、ROIC 和 FCF。</p>
+        <p>这个错锚方向有吸引力，但还不够“便宜”。截至 2026-05-08，AMZN 收于约 272.68 美元，接近 52 周高点 278.56 美元；yfinance 口径市值约 2.93 万亿美元、EV 约 3.03 万亿美元、forward P/E 约 27.6 倍。UBS 与 Bernstein 最新摘要目标价分别约 333 和 315 美元，隐含上行大致在 15%-22% 区间，并非没有空间，但对一个 mega-cap 来说还不足以单独构成组合层面的重大错误定价。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr><th>Item</th><th>Latest Situation</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>2026-05-08 收盘约 272.68 美元；52 周区间约 196.00-278.56 美元；市值约 2.93 万亿美元，EV 约 3.03 万亿美元；机构持股约 68.3%，short float 约 0.95%。</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>2026Q1 收入 1815 亿美元，同比增长 17%；经营利润 239 亿美元，经营利润率 13.1%；AWS 收入 376 亿美元，同比增长 28%，经营利润 142 亿美元；TTM operating cash flow 1485 亿美元，但 TTM FCF 降至 12 亿美元，主因 AI 相关 property/equipment 支出大增。</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>30 日价格从约 199 美元反弹至 273 美元附近，明显站上 EMA50；MACD 仍为正，但柱状图收敛；RSI 约 75，短期已偏超买，追价的风险回报下降。</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>卖方摘要整体仍偏正面：UBS TP 333、Bernstein TP 315；但共识辩论集中在“AI Capex 是否能兑现 ROIC”以及 Q1 净利润中 Anthropic 投资收益的可持续性。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AWS growth</td>
+                    <td align="center">28% YoY</td>
+                    <td>15 个季度最快增速，是市场是否愿意淡化短期 FCF 压力的核心验证点。</td>
+                </tr>
+                <tr>
+                    <td>Advertising revenue</td>
+                    <td align="center">172 亿美元，+22%</td>
+                    <td>高毛利广告继续补贴零售和 AI 投资，也支撑 Rufus/agentic commerce 的货币化叙事。</td>
+                </tr>
+                <tr>
+                    <td>TTM FCF</td>
+                    <td align="center">12 亿美元</td>
+                    <td>这是市场折价的表面锚；若未来收入滞后 Capex 的时间差被证伪，估值会受压。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前市场最直接的锚是 forward P/E / EV-EBITDA 与 FCF 恢复路径，而不是传统零售 GMV。卖方框架也印证这一点：UBS 摘要使用 P/E + FCF 混合口径、30x 倍数；Bernstein 使用零售 2027E EV/S 3x 与 AWS 2027E EV/EBIT 25x 的 SOTP，并用 DCF 校验。换言之，市场已经不是单纯把 Amazon 当零售商，但仍可能低估 AI 算力供给、Trainium/Graviton 自研芯片和广告/物流平台化对中期 ROIC 的作用。</p>
+        <p><strong>Peer Benchmarking:</strong> AMZN 相比 MSFT/GOOGL/META 的利润率显著更低，但收入增长已重新加速，估值处在云/广告平台与零售平台之间。与 WMT 相比，AMZN 的 EV/Sales 更高但收入增长和利润结构质量明显不同。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">Forward P/E</th>
+                    <th align="right">EV/EBITDA</th>
+                    <th align="right">Revenue Growth</th>
+                    <th align="right">Operating Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>AMZN</td><td align="right">$2.93T</td><td align="right">27.6x</td><td align="right">19.4x</td><td align="right">16.6%</td><td align="right">13.1%</td></tr>
+                <tr><td>MSFT</td><td align="right">$3.08T</td><td align="right">21.4x</td><td align="right">17.0x</td><td align="right">18.3%</td><td align="right">46.3%</td></tr>
+                <tr><td>GOOGL</td><td align="right">$4.85T</td><td align="right">27.7x</td><td align="right">29.9x</td><td align="right">21.8%</td><td align="right">36.1%</td></tr>
+                <tr><td>META</td><td align="right">$1.55T</td><td align="right">16.8x</td><td align="right">14.2x</td><td align="right">33.1%</td><td align="right">40.6%</td></tr>
+                <tr><td>WMT</td><td align="right">$1.04T</td><td align="right">39.7x</td><td align="right">25.1x</td><td align="right">5.6%</td><td align="right">4.6%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 三张图显示：股价已从 2025 初的估值压缩中恢复；P/TTM EPS 从 2023 年高位大幅回落后又稳定在 30x 左右；AWS 增速从 2025 年 17% 再加速到 2026Q1 的 28%，但估值并未同步回到早期高位。</p>
+        <img src="./assets/amzn_price_action_narrative_eras.png" alt="Amazon price action and narrative eras chart">
+        <img src="./assets/amzn_historical_valuation_bands.png" alt="Amazon historical valuation bands chart">
+        <img src="./assets/amzn_nsm_mismatch_jaws_chart.png" alt="Amazon NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead>
+                <tr><th>Lens</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>可控 AI 算力供给与利用率：AWS AI revenue run-rate、Bedrock 客户/Token 使用、Trainium/Graviton 预订与价格性能、Rufus 月活和广告 prompts 互动。</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor NSM</td>
+                    <td>AI/物流/广告三类平台资产的资本回收效率：AWS ROIC、Capex 转收入滞后期、广告利润池、零售履约单位成本下降与外部物流收入。</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus NSM</td>
+                    <td>AWS 增速、Capex/FCF 压力、forward P/E 与 AWS EBIT 倍数；短期交易层面还看 Q2/Q3 margin guidance 和一次性收益剔除后的 EPS。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td>Healthy lag，但不是深度错杀。业务正在从“零售+云利润引擎”转向“AI 算力+广告+物流平台复用”，市场仍用 FCF 谷值惩罚 Capex；不过股价已接近高位，错锚收益被部分提前支付。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">更低单位算力成本 / 更快配送 / 更高意图广告 → 客户和商家更多工作流迁入 AWS、Prime、Rufus 与广告系统 → 企业与消费者形成默认入口依赖 → 长约、广告预算、履约网络利用率和云迁移提高 → AWS ROIC、广告利润率、零售 margin 与 FCF 恢复</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 上行来自两条路径：一是 AWS AI backlog 与 Trainium/Graviton 承诺在 2026-2027 年转化为收入，证明 2026 年 Capex 是“预售式扩产”而非盲目军备竞赛；二是广告和履约效率继续把零售从低 margin 成本中心改造成利润池。下行则更直接：若 Capex 继续超收入增速、AWS margin 因芯片/内存/电力通胀下滑，或 Rufus/agentic commerce 稀释广告货币化，市场会重新用 FCF yield 压估值。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Watchlist / Quality compounder，暂不 Advance。</strong></p>
+        <p>按 advancement standard 的三项条件：第一，<strong>wrong anchor</strong> 部分成立，市场可能过度锚定当期 FCF 和 Capex，而低估 AI 算力资产的客户承诺、使用寿命和广告/物流复用价值；第二，<strong>material upside</strong> 目前不够强，卖方 TP 315-333 美元与当前 272.68 美元相比提供的是中等上行，且股票已接近 52 周高点；第三，<strong>validation path</strong> 很清楚，未来几个季度可用 AWS 增速、backlog 转收入、Capex-to-revenue 滞后、AWS margin、广告增长和物流商业化收入来验证。因此，本次结论是放入高优先级观察名单：等价格给出更大 margin of safety，或等 AWS/Capex 回收证据足够强再推进下一阶段。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>2026Q2-Q4 AWS 增速保持 25% 以上，且 backlog/commitments 转收入不依赖单一 AI lab。</li>
+            <li>Capex 继续高企但 AWS operating margin 稳在 mid-30s 或更高，管理层能给出更细的利用率、供给投产和客户承诺证据。</li>
+            <li>广告保持 20% 左右增长，Rufus sponsored prompts 和 agentic commerce 没有破坏广告 take rate，反而增加高意图广告库存。</li>
+            <li>零售单位增长与履约效率继续改善，外部供应链服务出现可量化收入/客户扩张。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>AWS 增速回落到低 20s 或以下，同时 Capex 指引继续上调，说明需求信号弱于管理层叙事。</li>
+            <li>Trainium/Graviton 的价格性能优势无法转化为 margin，或大客户承诺推迟/取消。</li>
+            <li>广告增长显著降速，Rufus/第三方 agent 改变购物入口后压低 Amazon 的广告可见度和数据优势。</li>
+            <li>反垄断、关税、内存/电力成本或 Leo/Kuiper 投资让集团 operating margin 和 FCF 恢复路径持续后移。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 AWS AI capacity model：按 data center、Trainium/GPU、power、客户 commitment、投产滞后期拆 2026-2028 收入和 ROIC。</li>
+            <li>拆分广告利润池：估算 retail media、Prime Video/CTV、Rufus sponsored prompts 的收入、毛利和可持续增长。</li>
+            <li>做 SOTP 敏感性：AWS 2027E EBIT 20x/25x/30x，零售+广告 EV/Sales 2x/3x/4x，Leo 负价值从 0 到 750 亿美元。</li>
+            <li>设置价格纪律：若股价回到 230-240 美元以下但 AWS/ads 证据未恶化，再把 AMZN 提升为下一阶段研究候选。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>Amazon Q1 2026 earnings release: <code>../research/20260511_amazon/collected_resources/AMZN-Q1-2026-Earnings-Release.pdf</code></li>
+            <li>Amazon 2025 Annual Report / SEC 10-K: <code>../research/20260511_amazon/collected_resources/Amazon-2025-Annual-Report.pdf</code></li>
+            <li>EdgarTools SEC extract and financial CSVs: <code>../research/20260511_amazon/collected_resources/edgartools_amzn_summary.md</code></li>
+            <li>Earnings-call transcripts: <code>../research/20260511_amazon/collected_resources/earnings_calls/</code></li>
+            <li>News stream findings: <code>../research/20260511_amazon/collected_resources/20260511_amzn_news_findings.md</code></li>
+            <li>Podcast / in-depth discussion stream: <code>../research/20260511_amazon/collected_resources/podwise_amzn_aws_ai_ads_retail_2026.md</code></li>
+            <li>Sell-side report summary logs: <code>../research/20260511_amazon/temp/search_amzn.jsonl</code></li>
+            <li>Buy-side/operator long-form evidence: <code>../research/20260511_amazon/collected_resources/20260505_stratechery_amazons_durability.md</code>, <code>../research/20260511_amazon/collected_resources/20260428_stratechery_altman_garman_bedrock_agents.md</code>, <code>../research/20260511_amazon/collected_resources/20260501_semianalysis_ai_value_capture_model_labs.md</code></li>
+            <li>Agentic commerce / advertising evidence: <code>../research/20260511_amazon/collected_resources/20260203_mobiledevmemo_amazon_openai_ads_not_agentic_commerce.md</code>, <code>../research/20260511_amazon/collected_resources/20260504_mobiledevmemo_amazon_rufus_agentic_commerce.md</code></li>
+            <li>Technical indicators and market/peer data: <code>../research/20260511_amazon/collected_resources/amzn_technical_30d.csv</code>, <code>../research/20260511_amazon/collected_resources/yfinance_peer_market_summary_20260511.json</code></li>
+        </ul>
+    </div>
+</body>
+</html>

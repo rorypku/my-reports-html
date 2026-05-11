@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260511_amazon",
+    "title": "Amazon Situation Report",
+    "date": "2026-05-11",
+    "url": "./20260511_amazon/",
+    "path": "20260511_amazon/",
+    "sortKey": "20260511"
+  },
+  {
     "id": "20260509_nbis",
     "title": "Nebius Group Situation Report",
     "date": "2026-05-09",

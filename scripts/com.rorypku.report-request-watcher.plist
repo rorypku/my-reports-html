@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.rorypku.report-request-watcher</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/uv</string>
+    <string>run</string>
+    <string>/Users/kai/agent/my-reports-html/scripts/process_report_requests.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/kai/agent/my-reports-html</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StartInterval</key>
+  <integer>300</integer>
+
+  <key>StandardOutPath</key>
+  <string>/Users/kai/Library/Logs/report-request-watcher.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/kai/Library/Logs/report-request-watcher.err.log</string>
+</dict>
+</plist>
