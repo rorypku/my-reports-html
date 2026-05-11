@@ -129,6 +129,11 @@
       color: var(--muted);
       font-size: 14px;
     }
+
+    .empty {
+      margin-top: 36px;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
@@ -136,47 +141,66 @@
     <h1>My Reports</h1>
     <p>Published HTML situation reports.</p>
 
-    <details class="date-group" open>
-      <summary>
-        <span class="date-label">2026-05-09</span>
-        <span class="report-count">4 reports</span>
-      </summary>
-      <div class="reports">
-        <a class="report" href="./20260509_nbis/">
-        <span class="title">Nebius Group Situation Report</span>
-        <span class="path">20260509_nbis/</span>
-        </a>
-        <a class="report" href="./20260509_intel_latest/">
-        <span class="title">Intel Situation Report</span>
-        <span class="path">20260509_intel_latest/</span>
-        </a>
-        <a class="report" href="./20260509_astera_labs/">
-        <span class="title">Astera Labs Situation Report</span>
-        <span class="path">20260509_astera_labs/</span>
-        </a>
-        <a class="report" href="./20260509_aaio_latest/">
-        <span class="title">Applied Optoelectronics Situation Report</span>
-        <span class="path">20260509_aaio_latest/</span>
-        </a>
-      </div>
-    </details>
-
-    <details class="date-group">
-      <summary>
-        <span class="date-label">2026-05-08</span>
-        <span class="report-count">2 reports</span>
-      </summary>
-      <div class="reports">
-        <a class="report" href="./20260508_uber_latest/">
-        <span class="title">Uber Technologies Situation Report</span>
-        <span class="path">20260508_uber_latest/</span>
-        </a>
-        <a class="report" href="./20260508_coreweave_latest/">
-        <span class="title">CoreWeave Situation Report</span>
-        <span class="path">20260508_coreweave_latest/</span>
-        </a>
-      </div>
-    </details>
+    <div id="reports" aria-live="polite"></div>
   </main>
+  <script>
+    const reportsRoot = document.getElementById("reports");
+
+    function escapeText(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[character]));
+    }
+
+    function groupReports(reports) {
+      return reports.reduce((groups, report) => {
+        if (!groups.has(report.date)) {
+          groups.set(report.date, []);
+        }
+        groups.get(report.date).push(report);
+        return groups;
+      }, new Map());
+    }
+
+    function renderReports(reports) {
+      if (reports.length === 0) {
+        reportsRoot.innerHTML = '<p class="empty">No published reports yet.</p>';
+        return;
+      }
+
+      const groups = groupReports(reports);
+      reportsRoot.innerHTML = Array.from(groups.entries()).map(([date, dateReports], index) => {
+        const links = dateReports.map((report) => `
+        <a class="report" href="${escapeText(report.url)}">
+        <span class="title">${escapeText(report.title)}</span>
+        <span class="path">${escapeText(report.path)}</span>
+        </a>`).join("");
+
+        return `    <details class="date-group"${index === 0 ? " open" : ""}>
+      <summary>
+        <span class="date-label">${escapeText(date)}</span>
+        <span class="report-count">${dateReports.length} reports</span>
+      </summary>
+      <div class="reports">
+${links}
+      </div>
+    </details>`;
+      }).join("\n\n");
+    }
+
+    async function loadReports() {
+      const response = await fetch("./reports.json", { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`Failed to load reports.json: ${response.status}`);
+      }
+      renderReports(await response.json());
+    }
+
+    loadReports();
+  </script>
 </body>
 </html>
