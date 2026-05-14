@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260514_tencent",
+    "title": "腾讯控股 Situation Report",
+    "date": "2026-05-14",
+    "url": "./20260514_tencent/",
+    "path": "20260514_tencent/",
+    "sortKey": "20260514"
+  },
+  {
     "id": "20260511_amazon",
     "title": "Amazon Situation Report",
     "date": "2026-05-11",
