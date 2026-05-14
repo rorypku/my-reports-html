@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alibaba SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table {
+            table-layout: auto;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> BABA / 9988.HK</p>
+            <p><strong>Date:</strong> 2026-05-14</p>
+            <p><strong>Classification:</strong> Advance to next-stage research</p>
+        </div>
+
+        <h1>Alibaba Group Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：推进到下一阶段研究，但不是因为“便宜中国互联网”这个旧框架。</strong> 阿里巴巴现在的可研究点在于一个真实的计分牌迁移：市场仍在用集团利润、CMR表观增速和中国资产折价约束估值，而公司正在把价值创造重心转向 AI + Cloud 外部收入、Qwen/通义生态带来的 token 消耗、以及淘宝/天猫/即时零售整合后的消费入口。</p>
+        <p>这不是无风险的重估故事。FY2026 Q4 调整后 EBITA 同比下降 84%，全年自由现金流转为 RMB 466.09 亿流出，说明 AI 基建和快速商务投入已经真实压低当期财务。错配成立的前提是：云外部收入高增长不是一次性供给周期，CMR 的口径扰动可以被核心电商 EBITA 和真实 take-rate 解释，资本回报仍能约束管理层资本配置。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>Item</th><th>Latest Situation</th></tr></thead>
+            <tbody>
+                <tr><td>Market Data &amp; Positioning</td><td>BABA 最新价格约 $139.3，52 周区间 $103.7-$192.7，市值约 $334.1B。以公司披露现金及其他流动投资 US$75.5B、供应商债务口径不同计算，EV 应被视为约 US$300B 量级而非一个精确点数。</td></tr>
+                <tr><td>Key Financial Metrics</td><td>FY2026 Q4 收入 RMB 2433.8 亿，同比增长 3%；云智能收入 RMB 416.3 亿，同比增长 38%；云外部收入增长 40%，AI 相关产品占云外部收入 30%；调整后 EBITA RMB 51.0 亿，同比下降 84%。</td></tr>
+                <tr><td>Price Action &amp; Technicals</td><td>30 日技术层从 4 月初的弱势修复到 5 月中旬的高波动上行：最新收盘约 $140.1，高于 12/26/50 日 EMA，MACD 为正，RSI 约 55，但 5 月 13 日放量冲高后回落，短线不是低风险买点。</td></tr>
+                <tr><td>Positioning</td><td>卖方最新可得目标价集中在 US$180-237，评级多为 Buy/Overweight。市场分歧不是“公司是否有资产”，而是云 AI 该不该给独立倍数、以及快速商务/AI 投入是否会吞噬电商现金流。</td></tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead><tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr></thead>
+            <tbody>
+                <tr><td>云外部收入增速</td><td align="center">40%</td><td>这是市场验证 AI 叙事是否进报表的第一指标；若持续，SOTP 云倍数有上修空间。</td></tr>
+                <tr><td>AI产品占云外部收入</td><td align="center">30%</td><td>说明 AI 不是纯内部成本中心，但还需要跟踪毛利、折旧和客户续费。</td></tr>
+                <tr><td>FY2026 FCF</td><td align="center">-RMB 46.6B</td><td>最大反证点：增长正变成重资本开支周期，传统 FCF per share 框架短期失灵。</td></tr>
+                <tr><td>FY2026 分红</td><td align="center">US$1.05/ADS</td><td>现金回报仍在，但相比 AI/即时零售投入规模，分红只能提供估值底部，不足以单独构成 thesis。</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前最合理的市场锚是“核心电商 P/E + 云 P/S 的 SOTP 折价”。JPM 用 16x FY28E P/E 得到 Dec-26 目标价 US$200；Citi 用 FY27E 电商净利 10x P/E、云收入 6.5x P/S、AIDC 2.0x P/S，并对净现金打 30% 折价；Bernstein 将云外部收入倍数从 5x 上调至 8x。换句话说，卖方已开始换尺子，但市场价格仍没有完全承认云 AI 的独立价值。</p>
+        <p><strong>Peer Benchmarking:</strong> 公开市场快照显示，BABA forward P/E 约 14.8x，低于 Amazon，但与 PDD/JD 的低倍数中国互联网框架仍相邻。若阿里云能被视为中国 AI full-stack 稀缺资产，当前集团倍数低估了可选性；若云只是高 capex、低利润率的再投资周期，则折价合理。</p>
+
+        <table class="peer-table">
+            <thead><tr><th>Company</th><th align="right">Market Cap</th><th align="right">Forward P/E</th><th align="right">P/S</th><th align="right">Revenue Growth</th><th align="right">Net Margin</th></tr></thead>
+            <tbody>
+                <tr><td>Alibaba</td><td align="right">$334.1B</td><td align="right">14.8x</td><td align="right">0.3x</td><td align="right">2.9%</td><td align="right">10.1%</td></tr><tr><td>PDD</td><td align="right">$136.6B</td><td align="right">6.8x</td><td align="right">0.3x</td><td align="right">12.0%</td><td align="right">22.7%</td></tr><tr><td>JD.com</td><td align="right">$44.7B</td><td align="right">7.7x</td><td align="right">0.0x</td><td align="right">4.9%</td><td align="right">1.0%</td></tr><tr><td>Tencent</td><td align="right">$533.8B</td><td align="right">11.7x</td><td align="right">0.7x</td><td align="right">9.1%</td><td align="right">30.6%</td></tr><tr><td>Amazon</td><td align="right">$2.89T</td><td align="right">27.2x</td><td align="right">3.9x</td><td align="right">16.6%</td><td align="right">12.2%</td></tr><tr><td>MercadoLibre</td><td align="right">$78.9B</td><td align="right">25.6x</td><td align="right">2.5x</td><td align="right">49.0%</td><td align="right">6.0%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 下列估值带使用公开价格与公司 GAAP EPS 的代理口径，不等同于精确卖方 NTM P/E；用途是观察市场倍数方向，而不是替代模型。</p>
+        <img src="./assets/baba_price_action_narrative_eras.png" alt="Alibaba price action and narrative eras chart">
+        <img src="./assets/baba_historical_valuation_bands.png" alt="Alibaba historical valuation bands chart">
+        <img src="./assets/baba_nsm_mismatch_jaws_chart.png" alt="Alibaba NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead><tr><th>Lens</th><th>Assessment</th></tr></thead>
+            <tbody>
+                <tr><td>CEO NSM</td><td>高质量 token / AI 云消耗：管理层在电话会上把重点放在模型迭代、推理服务、客户愿付费的 token 质量，以及 AI 使用带动传统云计算、存储需求。</td></tr>
+                <tr><td>Long-term investor NSM</td><td>每股可持续现金流 + 云 AI 高毛利收入占比：长期价值捕获取决于云外部收入能否转化为利润率，同时电商 take-rate 和回购注销不能被补贴周期稀释。</td></tr>
+                <tr><td>Market-consensus NSM</td><td>云外部收入增速与核心电商 EBITA。卖方已明确从表观 CMR 迁移到“剔除外卖/补贴扰动后的核心盈利能力”，但股价仍受集团调整后 EBITA 与 FCF 下滑惩罚。</td></tr>
+                <tr><td>Mismatch category</td><td><strong>Healthy lag with execution risk.</strong> 产品价值创造正在从电商流量扩展为 AI/云/消费入口，但价值捕获还没有稳定反映在 FCF 和集团利润中。</td></tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">AI模型能力与电商/本地生活场景 → 开发者和企业更高 token 消耗 → 外部云收入与传统云资源复用 → 业务流程依赖和客户愿付费提升 → 云利润率、CMR take-rate、每股现金流改善</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 若云外部收入维持 30-40% 增长、AI 收入占比继续上升且云 EBITA margin 从约 9% 向更高水平修复，集团可以从低 P/E 中国互联网框架转向“电商现金牛 + 中国 AI 云稀缺资产”的 SOTP，卖方 US$180-237 目标价暗示相对当前价格有实质空间。下行则来自两个方向：FY2026 FCF 已经为负，若 capex 与快速商务补贴不能收敛，市场会继续把云 AI 当作利润黑洞而不是增长资产。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Advance to next-stage research.</strong></p>
+        <p>三条推进标准基本满足。第一，存在可信的 wrong-anchor：市场仍容易用集团利润下滑和中国资产折价定价，而新的价值创造指标是云外部收入、AI 产品收入占比和消费生态协同。第二，如果判断正确，重估幅度足够进入组合讨论：卖方目标价区间 US$180-237，对应的不只是小幅 EPS 修正，而是云倍数与 SOTP 折价的再定价。第三，验证路径清晰：未来 2-4 季度只需要看云外部收入、AI收入占比、云 EBITA margin、核心电商 EBITA/CMR 可比口径、FCF 和回购节奏。</p>
+        <p>但推进不是直接建仓建议。当前最危险的地方是管理层承认 RMB 3800 亿三年 capex 计划可能偏小，同时 FY2026 自由现金流已经转负。这意味着下一阶段研究必须先做资本开支回报和云单位经济，而不是只做 SOTP 乐观重估。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>云外部收入继续维持约 30-40% 增长，AI 相关产品占云外部收入比例从 30% 继续上升，且不是由低毛利 GPU 租赁驱动。</li>
+            <li>云 EBITA margin 稳定或改善，证明 AI capex 正在形成规模经济，而不是折旧吞噬收入增长。</li>
+            <li>剔除补贴/contra-revenue 后的 CMR 和核心电商 EBITA 改善，快速商务单均亏损继续收窄并带来淘宝高价值用户留存。</li>
+            <li>FCF 从 FY2026 的大幅流出回到可解释区间，同时回购注销和分红继续执行。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>云收入加速但利润率下行，AI 收入主要来自低附加值算力转售，无法体现模型和平台层定价权。</li>
+            <li>CMR 表观与可比口径都放缓，说明即时零售和补贴只是争夺份额，没有提升商家 ROI 或广告变现。</li>
+            <li>All Others / Qwen / 快速商务亏损继续扩大，管理层不给投入上限，导致 FCF per share thesis 失效。</li>
+            <li>外卖/即时零售监管或中美技术限制升级，直接影响补贴、合规成本或 AI 芯片供给。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立云 AI 单位经济模型：外部收入、AI 收入占比、折旧、服务器利用率、EBITA margin 到 ROIC 的桥。</li>
+            <li>重建核心电商口径：拆 CMR、软件服务费、补贴 contra-revenue、快速商务亏损，判断真实 take-rate 是否上升。</li>
+            <li>做 SOTP 敏感性：电商 P/E 8-14x、云 P/S 4-8x、AIDC 1-2x、净现金折价 20-40%，量化 US$180-237 目标价区间是否自洽。</li>
+            <li>跟踪监管与竞争：外卖/即时零售监管、PDD/JD 价格战、抖音电商、以及 AI 芯片供应限制。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>Alibaba FY2026 Q4 and annual results 6-K Exhibit 99.1: <code>../collected_resources/alibaba_2026_q4_fy_results_ex99-1.html</code></li>
+            <li>Alibaba FY2026 dividend announcement: <code>../collected_resources/alibaba_2026_dividend_ex99-1.html</code></li>
+            <li>SEC filing index and latest 20-F: <code>../collected_resources/alibaba_sec_filings_index.json</code>, <code>../collected_resources/alibaba_latest_20-F_2025-06-26_0000950170-25-090161.html</code></li>
+            <li>Latest earnings call transcripts: <code>../collected_resources/earnings_calls/</code></li>
+            <li>Sell-side reports and parsed markdown: <code>../collected_resources/sell_side_md/</code></li>
+            <li>Buy-side/operator-style notes and podcast evidence: <code>../collected_resources/2025-11-26_fundaai_review_baba_cy3q25.md</code>, <code>../collected_resources/podwise_alibaba_discussion.txt</code></li>
+            <li>News stream and local FreshRSS evidence: <code>../collected_resources/bernstein_q4_note_20260514__entry_1778747456321225.md</code>, <code>../collected_resources/daxingtouyan_ms_ai_token_20260326__entry_1774533641230015.md</code></li>
+            <li>Market and technical data: <code>../collected_resources/baba_technical_30d.csv</code>, <code>../collected_resources/baba_price_history_3y.csv</code>, <code>../collected_resources/baba_peer_market_snapshot_yfinance.json</code></li>
+        </ul>
+    </div>
+</body>
+</html>
