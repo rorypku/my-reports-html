@@ -1,571 +1,175 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Tencent SitRep
-  </title>
-  <style>
-   :root {
-            --paper: #f6f4ed; --paper-edge: #efece2; --ink: #15151a; --ink-soft: #2a2a30; --muted: #6b6a64;
-            --rule-strong: #15151a; --rule: #cdc9bc; --rule-soft: #e3dfd2;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tencent SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
             --serif: "Iowan Old Style", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
             --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
             --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
         }
         * { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; background: var(--paper); }
-        body { font-family: var(--sans); font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--sans); font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); text-rendering: optimizeLegibility; }
         .container { max-width: 760px; margin: 0 auto; padding: 88px 32px 144px; }
         .frontmatter { display: flex; flex-wrap: wrap; gap: 14px 40px; margin: 0 0 80px; padding: 14px 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule); }
         .frontmatter p { margin: 0; font-size: 11.5px; line-height: 1.4; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
-        .frontmatter strong { color: var(--ink); font-weight: 600; margin-right: 8px; }
+        .frontmatter strong { color: var(--ink); margin-right: 8px; }
         h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(40px, 5.6vw, 60px); line-height: 1.04; letter-spacing: -0.018em; color: var(--ink); margin: 0 0 88px; }
-        h2 { font-weight: 600; font-size: 17px; line-height: 1.35; color: var(--ink); margin: 80px 0 28px; padding: 22px 0 0; border-top: 1px solid var(--rule); }
-        p { margin: 0 0 18px; font-size: 16.5px; line-height: 1.72; color: var(--ink-soft); }
+        h2 { font-weight: 600; font-size: 17px; line-height: 1.35; color: var(--ink); margin: 80px 0 28px; padding-top: 22px; border-top: 1px solid var(--rule); }
+        p { margin: 0 0 18px; font-size: 16.5px; line-height: 1.72; }
         strong { color: var(--ink); font-weight: 600; }
-        table { width: 100%; border-collapse: collapse; margin: 28px 0 36px; font-size: 14.5px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+        table { width: 100%; border-collapse: collapse; margin: 28px 0 36px; font-size: 14.5px; line-height: 1.5; font-variant-numeric: tabular-nums lining-nums; }
         thead th { color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left; padding: 14px 18px 12px 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
         tbody td { padding: 14px 18px 14px 0; border-bottom: 1px solid var(--rule-soft); vertical-align: top; color: var(--ink); }
         tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
         td[align="right"], th[align="right"] { text-align: right; white-space: nowrap; }
         td[align="center"], th[align="center"] { text-align: center; }
         .snapshot-table td:first-child, .nsm-table td:first-child { width: 28%; min-width: 124px; padding-right: 28px; }
+        .metric-table td:first-child { width: 22%; }
         .peer-table { table-layout: fixed; font-size: 13px; line-height: 1.35; }
         ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
         ol { counter-reset: olist; }
-        li { position: relative; padding-left: 30px; margin: 0 0 12px; font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); }
+        li { position: relative; padding-left: 30px; margin: 0 0 12px; font-size: 16.5px; line-height: 1.7; }
         ul li::before { content: ""; position: absolute; left: 6px; top: 0.78em; width: 8px; height: 1px; background: var(--ink); }
         ol li { counter-increment: olist; }
-        ol li::before { content: counter(olist) "."; position: absolute; left: 0; top: 0; width: 22px; font-size: 14px; font-weight: 600; line-height: 1.7; color: var(--muted); }
-        code { font-family: var(--mono); font-size: 0.85em; color: var(--ink); background: rgba(21,21,26,.06); padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+        ol li::before { content: counter(olist) "."; position: absolute; left: 0; top: 0; width: 22px; font-size: 14px; font-weight: 600; color: var(--muted); }
+        code { font-family: var(--mono); font-size: 0.85em; color: var(--ink); background: rgba(21,21,26,0.06); padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
         img { display: block; width: 100%; height: auto; margin: 24px 0; background: var(--paper-edge); }
-        .value-chain { font-size: 15px; line-height: 1.55; color: var(--ink); letter-spacing: .015em; background: linear-gradient(90deg, rgba(21,21,26,.07), rgba(21,21,26,.025)); padding: 12px 14px; border-left: 2px solid var(--rule-strong); border-radius: 3px; overflow-wrap: anywhere; }
-        @media (max-width: 720px) { .container { padding: 48px 22px 96px; } h1 { font-size: 38px; margin-bottom: 56px; } h2 { margin-top: 64px; } table { display: block; overflow-x: auto; font-size: 13.5px; } .peer-table td, .peer-table th { min-width: 92px; } }
-  </style>
- </head>
- <body>
-  <div class="container">
-   <div class="frontmatter">
-    <p>
-     <strong>
-      Ticker:
-     </strong>
-     0700.HK / TCEHY
-    </p>
-    <p>
-     <strong>
-      Date:
-     </strong>
-     2026-05-14
-    </p>
-    <p>
-     <strong>
-      Classification:
-     </strong>
-     Advance to next-stage research
-    </p>
-   </div>
-   <h1>
-    腾讯控股 Situation Report
-   </h1>
-   <h2>
-    1. Executive View
-   </h2>
-   <p>
-    <strong>
-     结论：值得进入下一阶段研究。
-    </strong>
-    腾讯不是一个单纯“便宜的中国互联网龙头”故事，而是一个可能存在错误锚定的故事：市场短期把问题锚在 AI 投入导致的利润率、CapEx 和回购节奏压力上；但公司正在把 AI 首先嵌入广告、游戏、视频号、小店、云和微信工作流，真正应观察的长期 NSM 是“微信生态内的闭环商业化和 AI 代理带来的可持续现金流扩张”。
-   </p>
-   <p>
-    1Q26 表面上收入 1,964.6 亿元人民币、同比 +9%，略低于市场预期；但毛利 +11%、FCF +20% 至 567 亿元、净现金 +63% 至 1,469 亿元，说明核心业务仍在产现金。争议点在于新 AI 产品拖累：剔除 Hy、元宝、CodeBuddy、WorkBuddy、QClaw 等新 AI 产品，非 IFRS 经营利润同比 +17%、经营利润率 43.0%；合并口径非 IFRS 经营利润仅 +9%、利润率 38.5%。这正是 mispricing 的观察窗口。
-   </p>
-   <h2>
-    2. Current Snapshot
-   </h2>
-   <table class="snapshot-table">
-    <thead>
-     <tr>
-      <th>
-       Item
-      </th>
-      <th>
-       Latest Situation
-      </th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       Market Data &amp; Positioning
-      </td>
-      <td>
-       0700.HK 收盘价约 HK$460.2；52周区间 HK$454 - HK$683；市值约 4,159bn HKD。OpenBB/yfinance 报价显示股价低于 50日均线约 HK$501、200日均线约 HK$580，仍处下行技术结构。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Key Financial Metrics
-      </td>
-      <td>
-       1Q26 收入 1,964.6 亿元人民币，同比 +9%；毛利率 57%；非 IFRS 经营利润 756.3 亿元，同比 +9%；剔除新 AI 产品后非 IFRS 经营利润 844 亿元，同比 +17%；FCF 567 亿元，同比 +20%；1Q 回购约 1270 万股、金额 HK$76 亿元。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Price Action &amp; Technicals
-      </td>
-      <td>
-       30日 RSI 约 38，MACD 仍在零轴下方但柱状图亏损收窄；布林带宽从 4月中旬低点扩张，说明波动释放后仍未形成明确反转。技术层更像“基本面需要催化”的等待区，而不是动量买点。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Positioning
-      </td>
-      <td>
-       Prosus/Naspers 官方仍执行开放式回购并定期小额卖出腾讯以回购自身股份；这形成持续供给扰动，但 Prosus 同时声明仍会保持腾讯大股东身份并看好长期前景。腾讯自身 2025 年回购 HK$800 亿元，2026 年因 AI 投入预计回购额低于 2025。
-      </td>
-     </tr>
-    </tbody>
-   </table>
-   <table class="metric-table">
-    <thead>
-     <tr>
-      <th>
-       Key Metric
-      </th>
-      <th align="center">
-       Value
-      </th>
-      <th>
-       Implication
-      </th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       Weixin/WeChat MAU
-      </td>
-      <td align="center">
-       14.32亿
-      </td>
-      <td>
-       用户层仍是中国消费互联网的操作系统级入口，MAU 只小幅增长，但生态深度比用户数更重要。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Marketing Services
-      </td>
-      <td align="center">
-       1Q26 +20% YoY
-      </td>
-      <td>
-       AI 广告模型、AIM+、视频号和小店闭环转化仍是最直接的价值捕获代理指标。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Business Services
-      </td>
-      <td align="center">
-       1Q26 +20% YoY
-      </td>
-      <td>
-       云收入受 AI 需求、价格环境和小店技术服务费推动，正在从低质项目转向利润化增长。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       FCF
-      </td>
-      <td align="center">
-       RMB 56.7bn
-      </td>
-      <td>
-       即便 AI CapEx 增加，核心业务仍能自融资；关键是未来 4-6 个季度能否维持。
-      </td>
-     </tr>
-    </tbody>
-   </table>
-   <h2>
-    3. Valuation Framing &amp; Peer Benchmarking
-   </h2>
-   <p>
-    <strong>
-     Pricing Anchor &amp; Embedded Expectations:
-    </strong>
-    当前市场锚点更接近 2026 年 P/E 与非 IFRS 经营利润率纪律。卖方片段显示摩根士丹利目标价 HK$650 对应 2026E P/E 约 19x、现价约 15x；野村目标价 HK$727；高盛以 SOTP 给 HK$770。也就是说，买方真正要判断的是：腾讯应被看作“AI 投入压利润的中国互联网公司”，还是“微信闭环商业化 + 全球游戏现金流 + AI 代理选项”的 SOTP/FCF 复合体。
-   </p>
-   <table class="peer-table">
-    <thead>
-     <tr>
-      <th>
-       Company
-      </th>
-      <th align="right">
-       Market Cap
-      </th>
-      <th align="right">
-       Forward P/E
-      </th>
-      <th align="right">
-       EV/Sales
-      </th>
-      <th align="right">
-       Revenue Growth
-      </th>
-      <th align="right">
-       Profit Margin
-      </th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       Tencent
-      </td>
-      <td align="right">
-       4,159bn HKD
-      </td>
-      <td align="right">
-       11.8x
-      </td>
-      <td align="right">
-       5.5x
-      </td>
-      <td align="right">
-       9.1%
-      </td>
-      <td align="right">
-       30.6%
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Alibaba
-      </td>
-      <td align="right">
-       2,647bn HKD
-      </td>
-      <td align="right">
-       13.4x
-      </td>
-      <td align="right">
-       2.4x
-      </td>
-      <td align="right">
-       2.9%
-      </td>
-      <td align="right">
-       10.1%
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Meituan
-      </td>
-      <td align="right">
-       529bn HKD
-      </td>
-      <td align="right">
-       16.0x
-      </td>
-      <td align="right">
-       1.2x
-      </td>
-      <td align="right">
-       2.8%
-      </td>
-      <td align="right">
-       -6.4%
-      </td>
-     </tr>
-     <tr>
-      <td>
-       NetEase
-      </td>
-      <td align="right">
-       $76bn
-      </td>
-      <td align="right">
-       11.7x
-      </td>
-      <td align="right">
-       2.0x
-      </td>
-      <td align="right">
-       3.0%
-      </td>
-      <td align="right">
-       30.0%
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Meta
-      </td>
-      <td align="right">
-       $1,565bn
-      </td>
-      <td align="right">
-       17.0x
-      </td>
-      <td align="right">
-       7.3x
-      </td>
-      <td align="right">
-       33.1%
-      </td>
-      <td align="right">
-       32.8%
-      </td>
-     </tr>
-    </tbody>
-   </table>
-   <p>
-    同业表的信号不是“腾讯绝对便宜”这么简单，而是腾讯以接近 NetEase 的 forward P/E 交易，却拥有更复杂的广告、支付、云、微信生态与 AI 代理选项；折价是否合理，取决于监管/中国折价与 AI ROI 的证伪速度。
-   </p>
-   <img alt="Tencent price action and narrative eras chart" src="./assets/tencent_price_action_narrative_eras.png"/>
-   <img alt="Tencent historical valuation bands chart" src="./assets/tencent_historical_valuation_bands.png"/>
-   <img alt="Tencent NSM mismatch jaws chart" src="./assets/tencent_nsm_mismatch_jaws_chart.png"/>
-   <p>
-    <strong>
-     NSM Framework:
-    </strong>
-   </p>
-   <table class="nsm-table">
-    <thead>
-     <tr>
-      <th>
-       Lens
-      </th>
-      <th>
-       Assessment
-      </th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr>
-      <td>
-       CEO NSM
-      </td>
-      <td>
-       AI 提升核心产品价值与生态活跃：视频号时长、小店 GMV、AIM+广告预算占比、游戏 DAU/流水、元宝/WorkBuddy 留存。公开代理指标是 Marketing Services 增速、视频号时长 +20%、小店 GMV 快速增长。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Long-term investor NSM
-      </td>
-      <td>
-       生态内闭环商业活动强度：微信生态 GMV/交易笔数 × 支付渗透 × 商户和服务供给深度；最终落到广告 eCPM/点击率、游戏长线流水、云利润化、FinTech 风险调整后利润、FCF 转化率。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Market-consensus NSM
-      </td>
-      <td>
-       非 IFRS 经营利润增速、利润率、AI CapEx/Opex 强度和回购规模。1Q26 的短期市场惩罚集中在收入 miss、AI 投入、回购放缓。
-      </td>
-     </tr>
-     <tr>
-      <td>
-       Mismatch category
-      </td>
-      <td>
-       <strong>
-        Healthy lag，带有执行风险。
-       </strong>
-       CEO NSM 和长期 NSM 正在改善，但市场要求先看到 AI 投入转化为利润和 FCF；若 2026 下半年仍只见投入不见留存/收入，健康滞后会转成 dangerous divergence。
-      </td>
-     </tr>
-    </tbody>
-   </table>
-   <p class="value-chain">
-    微信/游戏/内容/支付的用户价值 → 视频号、小店、小游戏、AI助手和企业工具中的更高频行为 → 商家和开发者把交易、投放、客服、生产工作流迁入微信生态 → 闭环数据与社交关系形成组织依赖 → 广告定价、云/工具订阅、游戏长线流水、支付/金融科技利润和 FCF
-   </p>
-   <p>
-    <strong>
-     Upside/Downside Asymmetry:
-    </strong>
-    如果市场继续用 15x 左右 P/E 锚定“利润率被 AI 稀释”，而腾讯证明新 AI 投入可以通过广告闭环、游戏生产、云和 WorkBuddy/Yuanbao 留存产生现金流，则从 15x 回到 19-21x 加上中高个位数至低双位数 EPS 复合增长，2-3 年回报空间足够进入下一阶段。下行主要来自监管折价、AI ROI 不清、游戏新品周期掉头和 Prosus 供给压制。
-   </p>
-   <h2>
-    4. SitRep Judgment
-   </h2>
-   <p>
-    <strong>
-     Classification: Advance to next-stage research.
-    </strong>
-   </p>
-   <p>
-    <strong>
-     Wrong anchor:
-    </strong>
-    条件基本满足。市场正在用“AI 投入压利润 + 中国风险 + 回购下降”的利润率框架定价，而更合理的研究框架应拆成核心现金牛、自研游戏/广告闭环、云利润化、微信 AI 代理期权和投资资产五块。
-   </p>
-   <p>
-    <strong>
-     Material upside:
-    </strong>
-    条件满足但需要建模。卖方目标价区间 HK$650-770 相对 HK$460 附近现价有明显空间；但要确认该空间不是单纯 sell-side optimistic bias，下一步必须做分部 SOTP 与 FCF 情景。
-   </p>
-   <p>
-    <strong>
-     Clear validation path:
-    </strong>
-    条件满足。接下来 2-4 个季度可用广告增速、AIM+占比、小店 GMV/技术服务费、云收入与利润、AI 产品 DAU/留存、CapEx/FCF 转化和回购节奏来证伪。
-   </p>
-   <h2>
-    5. What Would Confirm Or Break The Thesis
-   </h2>
-   <p>
-    <strong>
-     Confirming datapoints
-    </strong>
-   </p>
-   <ul>
-    <li>
-     Marketing Services 连续保持高十位数增长，同时管理层明确广告 load 仍低于同行，说明不是一次性提价或透支库存。
-    </li>
-    <li>
-     Business Services 维持约 20% 增速且云利润继续改善，证明 AI 云需求不是低毛利 GPU 转售。
-    </li>
-    <li>
-     元宝、WorkBuddy、QClaw 或微信 AI agent 披露 DAU、留存、企业付费或生态交易拉动，显示新 AI 产品从“成本中心”走向“产品入口”。
-    </li>
-    <li>
-     FCF 在 AI CapEx 上升期仍维持增长或高转换率，同时回购/股息组合保持每股价值增厚。
-    </li>
-   </ul>
-   <p>
-    <strong>
-     Breaking datapoints
-    </strong>
-   </p>
-   <ul>
-    <li>
-     非 IFRS 经营利润连续两个季度低个位数或负增长，而广告/云/游戏没有同步加速。
-    </li>
-    <li>
-     AI 产品只靠补贴和营销拉新，留存不佳，无法解释为什么腾讯需要自研模型和新增 CapEx。
-    </li>
-    <li>
-     游戏流水高点后回落，Delta Force、Valorant Mobile、Roco Kingdom 等新品无法进入长线运营状态。
-    </li>
-    <li>
-     监管、支付费率、内容治理或金融科技风控导致 FinTech/广告变现被结构性压低。
-    </li>
-   </ul>
-   <h2>
-    6. Recommended Next Diligence
-   </h2>
-   <ol>
-    <li>
-     建立分部 SOTP：国内游戏、国际游戏、广告/视频号、小店技术服务、FinTech、云、投资组合、净现金分别估值，并单独扣除/资本化新 AI 产品投入。
-    </li>
-    <li>
-     做广告闭环 channel check：AIM+ 在小游戏、小短剧、小店商家中的 ROI、预算迁移、eCPM 和转化率是否真的提高。
-    </li>
-    <li>
-     跟踪游戏流水和 DAU：Delta Force、Honor of Kings、Peacekeeper Elite、Valorant Mobile、Roco Kingdom 的月度排名和递延收入。
-    </li>
-    <li>
-     拆 AI CapEx ROI：训练/推理/云外部客户/内部广告推荐各自占用资源，判断 CapEx 是现金流拖累还是可资本化的业务基础设施。
-    </li>
-   </ol>
-   <h2>
-    Sources Used
-   </h2>
-   <ul>
-    <li>
-     Tencent IR 1Q26 results PDF:
-     <code>
-      ../collected_resources/Tencent-1Q2026-results.pdf
-     </code>
-     ; official URL:
-     <code>
-      https://static.www.tencent.com/uploads/2026/05/13/47382ae415a209fd161bc19a1f9b3704.pdf
-     </code>
-    </li>
-    <li>
-     Tencent FY2025/4Q25 results and annual report:
-     <code>
-      ../collected_resources/Tencent-FY2025-4Q2025-results.pdf
-     </code>
-     ,
-     <code>
-      ../collected_resources/Tencent-2025-annual-report.pdf
-     </code>
-    </li>
-    <li>
-     Earnings call transcripts:
-     <code>
-      ../collected_resources/earnings_calls/
-     </code>
-    </li>
-    <li>
-     Sell-side snippets and news/FreshRSS notes:
-     <code>
-      ../collected_resources/20260514_tencent_sellside_search_snippets.md
-     </code>
-     ,
-     <code>
-      ../collected_resources/primary_sources_index.md
-     </code>
-    </li>
-    <li>
-     Podwise discussion synthesis:
-     <code>
-      ../collected_resources/podwise_tencent_2026.md
-     </code>
-    </li>
-    <li>
-     Buy-side / operator-view clippings:
-     <code>
-      ../collected_resources/20260114_fundaai_ai_competition_ali_bytedance_tencent.md
-     </code>
-     ,
-     <code>
-      ../collected_resources/20260205_robonomics_china_llm_deep_dive_202602.md
-     </code>
-     ,
-     <code>
-      ../collected_resources/20260121_mobiledevmemo_humanity_scale_wechat_monetization.md
-     </code>
-     ,
-     <code>
-      ../collected_resources/20251201_robonomics_os_agent_wechat_ecosystem_context.md
-     </code>
-     ,
-     <code>
-      ../collected_resources/20251219_robonomics_micro_drama_impact_tencent_video.md
-     </code>
-    </li>
-    <li>
-     Market/technical data:
-     <code>
-      ../collected_resources/tencent_technical_30d.csv
-     </code>
-     ,
-     <code>
-      ../collected_resources/yfinance_peer_market_summary_20260514.json
-     </code>
-     ,
-     <code>
-      ../collected_resources/tencent_peer_3y_prices.csv
-     </code>
-    </li>
-    <li>
-     External web checks used: Reuters summary via StreetInsider, SCMP 2026-05-13 earnings article, Prosus official share buyback programme page.
-    </li>
-   </ul>
-  </div>
- </body>
+        .value-chain { font-size: 15px; line-height: 1.55; color: var(--ink); letter-spacing: 0.015em; background: linear-gradient(90deg, rgba(21,21,26,0.07), rgba(21,21,26,0.025)); padding: 12px 14px; border-left: 2px solid var(--rule-strong); border-radius: 3px; overflow-wrap: anywhere; }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            table { display: block; width: 100%; overflow-x: auto; font-size: 13.5px; }
+            .peer-table th, .peer-table td { min-width: 92px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="frontmatter">
+        <p><strong>Ticker:</strong> 0700.HK / TCEHY</p>
+        <p><strong>Date:</strong> 2026-05-14</p>
+        <p><strong>Classification:</strong> Advance to next-stage research</p>
+    </div>
+
+    <h1>腾讯控股 Situation Report</h1>
+
+    <h2>1. Executive View</h2>
+    <p><strong>结论：腾讯值得进入下一阶段研究，但研究重点不是“腾讯是不是好公司”，而是市场是否把 2026 年 AI 投入造成的利润斜率放缓，当成了结构性利润率恶化。</strong> 最新 1Q26 显示，表观非 IFRS 经营利润同比只增长 9%，但剔除新 AI 产品后经营利润增长 17%、经营利润率达到 43.0%。这给出一个可检验的错配：核心现金流资产仍在扩张，市场却更像在用短期 P/E 与 2026E OP 下修给公司定价。</p>
+    <p>错误锚定假设是：市场当前锚在“AI capex/opex 压制 2026 利润 + 游戏增速放缓”，而长期价值捕获应锚在“微信生态内广告、交易、云和 agent 工作流的闭环能力”。这不是无风险机会；卖方样本已经普遍看多，目标价区间 HK$650-790，说明框架并非完全没人看见。真正的进一步研究价值在于验证腾讯能否把 AI 投入从费用叙事变成广告 ROI、云毛利和微信交易率的可量化增量。</p>
+
+    <h2>2. Current Snapshot</h2>
+    <table class="snapshot-table">
+        <thead><tr><th>Item</th><th>Latest Situation</th></tr></thead>
+        <tbody>
+            <tr><td>Market Data &amp; Positioning</td><td>2026-05-14 收盘 HK$460.20，接近 52 周低位 HK$454，低于 50 日均线 HK$501 和 200 日均线 HK$580；yfinance 口径市值约 HK$4.16tn，EV 约 HK$4.21tn。</td></tr>
+            <tr><td>Key Financial Metrics</td><td>1Q26 收入 RMB196.5bn，同比 +9%；毛利 RMB111.3bn，同比 +11%；非 IFRS 经营利润 RMB75.6bn，同比 +9%；剔除新 AI 产品后经营利润 RMB84.4bn，同比 +17%；FCF RMB56.7bn，同比 +20%。</td></tr>
+            <tr><td>Price Action &amp; Technicals</td><td>30 日技术面仍偏弱：RSI 约 38，MACD 仍为负且股价低于 EMA50。短线更像“估值压缩后等待基本面验证”，尚未出现明确技术反转。</td></tr>
+            <tr><td>Positioning</td><td>1Q26 回购约 12.7mn 股、金额 HK$7.6bn；FY2025 回购约 153.4mn 股、金额 HK$80.0bn。最新回购节奏较 2025 年全年强度放缓，但净现金 RMB146.9bn 仍提供资本回报能力。</td></tr>
+        </tbody>
+    </table>
+
+    <table class="metric-table">
+        <thead><tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr></thead>
+        <tbody>
+            <tr><td>微信/WeChat 合并 MAU</td><td align="center">1.432bn</td><td>入口、身份、支付和小程序工作流仍是腾讯长期价值捕获的核心底座。</td></tr>
+            <tr><td>Marketing Services</td><td align="center">RMB38.2bn, +20% YoY</td><td>AI 推荐、闭环广告和视频号/搜索库存仍在贡献高于公司平均的增长。</td></tr>
+            <tr><td>Business Services</td><td align="center">+20% YoY</td><td>云收入受 AI 需求、国际市场和更好定价环境带动，是 AI 投入回收路径之一。</td></tr>
+            <tr><td>AI 投入差额</td><td align="center">约 RMB8.8bn OP drag</td><td>1Q26 非 IFRS OP 与剔除新 AI 产品 OP 的差额，是市场争论的核心成本项。</td></tr>
+        </tbody>
+    </table>
+
+    <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+    <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前市场更像在用 2026E P/E 与经营利润增速作为锚。我们的历史代理调整后 P/E 约 14.9x，低于 3 年均值 20.6x；卖方样本中 JPM 用 21x 2026E P/E、Bernstein 用 20x P/E，Goldman Sachs 用 SOTP。若用 Bernstein 2026E adjusted EPS RMB30.62，并乘以约 1.08 HKD/RMB，20x 对应约 HK$661，较 HK$460 约 44% 上行；这与样本目标价 HK$650-790 基本一致。</p>
+    <p><strong>Peer Benchmarking:</strong> 腾讯相对阿里、网易、京东、拼多多并不便宜到“深度价值”，但它用更高经营利润率和更稳定 FCF 换来较高质量。当前定价真正便宜的是相对于自身历史倍数和核心 ex-AI 利润增速，而不是相对所有中国互联网同业。</p>
+
+    <table class="peer-table">
+        <thead>
+            <tr><th>Company</th><th align="right">Market Cap</th><th align="right">Forward P/E</th><th align="right">EV/EBITDA</th><th align="right">Revenue Growth</th><th align="right">Op Margin / FCF</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Tencent 0700.HK</td><td align="right">HK$4.16tn</td><td align="right">11.8x</td><td align="right">14.8x</td><td align="right">+9.1%</td><td align="right">34.3% / HK$149bn</td></tr>
+            <tr><td>Alibaba 9988.HK</td><td align="right">HK$2.65tn</td><td align="right">13.4x</td><td align="right">38.6x</td><td align="right">+2.9%</td><td align="right">-0.3% / HK$27.7bn</td></tr>
+            <tr><td>NetEase 9999.HK</td><td align="right">HK$586bn</td><td align="right">11.6x</td><td align="right">11.6x</td><td align="right">+3.0%</td><td align="right">30.2% / HK$33.5bn</td></tr>
+            <tr><td>JD.com 9618.HK</td><td align="right">HK$355bn</td><td align="right">8.0x</td><td align="right">45.4x</td><td align="right">+4.9%</td><td align="right">1.2% / HK$7.0bn</td></tr>
+            <tr><td>PDD</td><td align="right">US$137bn</td><td align="right">6.8x</td><td align="right">1.6x</td><td align="right">+12.0%</td><td align="right">21.1% / RMB85.6bn</td></tr>
+        </tbody>
+    </table>
+
+    <p><strong>Historical Context &amp; Charts:</strong></p>
+    <img src="./assets/tencent_price_action_narrative_eras.png" alt="Tencent price action and narrative eras chart">
+    <img src="./assets/tencent_historical_valuation_bands.png" alt="Tencent historical valuation bands chart">
+    <img src="./assets/tencent_nsm_mismatch_jaws_chart.png" alt="Tencent NSM mismatch jaws chart">
+
+    <p><strong>NSM Framework:</strong></p>
+    <table class="nsm-table">
+        <thead><tr><th>Lens</th><th>Assessment</th></tr></thead>
+        <tbody>
+            <tr><td>CEO NSM</td><td>微信生态内用户时间、内容消费、交易行为和 AI agent 使用深度。公开代理指标：视频号总时长同比 +20% 以上、Mini Shops GMV 快速增长、Marketing Services +20%。</td></tr>
+            <tr><td>Long-term investor NSM</td><td>闭环广告 ROI、微信交易抽成/技术服务费、云 AI 毛利、以及剔除新 AI 投入后的核心经营利润和 FCF。</td></tr>
+            <tr><td>Market-consensus NSM</td><td>2026E P/E、经营利润增速、AI 投入导致的 margin drag，以及国内游戏收入增速。</td></tr>
+            <tr><td>Mismatch category</td><td>Healthy lag，带有 narrative trap 风险。公司正在用核心现金流投资 AI 和 agent 工作流，市场短期惩罚利润斜率；但若 AI 产品无法转化为广告/云/交易收入，这会变成危险分歧。</td></tr>
+        </tbody>
+    </table>
+
+    <p class="value-chain">微信入口与内容分发 → 用户时长、搜索、社交推荐和交易意图 → 视频号、小程序、小店、支付与企业工具 adoption → 商家/开发者/企业对微信工作流依赖 → 广告 eCPM、交易技术服务费、云 AI 毛利、留存和 FCF</p>
+
+    <p><strong>Upside/Downside Asymmetry:</strong> 上行来自“市场把 AI 投入当费用，但实际是 1-2 年孵化周期”的重估。若腾讯能证明广告保持 teens-to-20% 增长、云利润继续扩张、AI 产品留存健康，则 20x 2026E adjusted EPS 可以支持 HK$650+。下行来自两个点：第一，AI capex/折旧和营销投入持续上行但没有收入回收；第二，视频号/小店商业化不及抖音体系，导致微信生态的结构价值无法转为 take rate 或广告预算。</p>
+
+    <h2>4. SitRep Judgment</h2>
+    <p><strong>Classification: Advance to next-stage research.</strong></p>
+    <p><strong>Wrong anchor:</strong> 初步成立。市场和部分卖方争论集中在 2026 年 AI 投入压制利润、国内游戏增速从 1Q25 的高基数放缓到 1Q26 的 +6%。但公司披露的 ex-new-AI OP +17%、广告 +20%、Business Services +20%，说明核心经济引擎没有同步恶化。</p>
+    <p><strong>Material upside:</strong> 初步成立。当前 HK$460 附近相当于约 14.9x 调整后 P/E 代理值，低于自身历史均值和卖方使用的 20-21x 目标倍数。若 2026E adjusted EPS RMB30.62 能兑现，20x 倍数对应约 HK$660，足以构成组合层面有意义的上行。</p>
+    <p><strong>Clear validation path:</strong> 成立。接下来 2-4 个季度可跟踪广告增速、AI 产品投入额、核心 ex-AI OP、云利润、Mini Shops GMV/服务费、视频号时长和游戏流水/递延收入。若这些数据无法覆盖新增 AI 成本，错配论证应被推翻。</p>
+
+    <h2>5. What Would Confirm Or Break The Thesis</h2>
+    <p><strong>Confirming datapoints</strong></p>
+    <ul>
+        <li>Marketing Services 连续维持 teens-to-20% 增长，且管理层继续确认广告库存主要来自时长/推荐质量，而不是激进提高 ad load。</li>
+        <li>Business Services/云收入和利润同时加速，特别是 AI 相关需求带来更好定价和 PaaS/SaaS mix，而非低毛利 GPU 转售。</li>
+        <li>新 AI 产品投入与核心利润被持续拆分披露，ex-AI 经营利润仍保持中高双位数增长，且 Yuanbao/WorkBuddy/Weixin agent 留存数据改善。</li>
+        <li>Mini Shops GMV、商家工具、搜索和支付链路带来可见的技术服务费或闭环广告预算增长。</li>
+    </ul>
+    <p><strong>Breaking datapoints</strong></p>
+    <ul>
+        <li>AI 投入继续翻倍但广告、云和交易服务费无法加速，导致非 IFRS OP 增速持续低个位数或转负。</li>
+        <li>视频号时长增长放缓，或商业化必须靠明显提高 ad load 才能维持收入增长，破坏用户体验 runway。</li>
+        <li>国内游戏新品流水和递延收入不能转化为收入，国际游戏 2025 的高增长被证明主要是一次性并表/买断收入。</li>
+        <li>回购显著放慢，同时 capex/折旧抬升，使 FCF yield 与股东回报框架失去支撑。</li>
+    </ul>
+
+    <h2>6. Recommended Next Diligence</h2>
+    <ol>
+        <li>建立 2026-2028 年分部模型：单列核心业务、new AI products、云 AI capex/折旧、回购摊薄和投资资产价值。</li>
+        <li>做微信商业化深挖：视频号广告 ad load/eCPM、Weixin Search、Mini Shops GMV、技术服务费率和商家 ROI，与抖音/快手作同口径对比。</li>
+        <li>验证 AI 产品留存和分发：Yuanbao、WorkBuddy、CodeBuddy/QClaw 的 DAU、使用场景、获客成本、企业付费或云消耗转化。</li>
+        <li>检查游戏 pipeline：Delta Force、Valorant Mobile、Roco Kingdom、国际 Supercell/Techland 贡献中有多少是可持续流水而非一次性收入确认。</li>
+    </ol>
+
+    <h2>Sources Used</h2>
+    <ul>
+        <li>Tencent 2026 First Quarter Results: <code>../collected_resources/tencent_2026_q1_results.pdf</code></li>
+        <li>Tencent 2025 Annual and Fourth Quarter Results: <code>../collected_resources/tencent_2025_annual_q4_results.pdf</code></li>
+        <li>Tencent earnings call transcripts: <code>../collected_resources/earnings_calls/</code></li>
+        <li>Sell-side consensus and PDFs: <code>../collected_resources/sell_side/sell_side_consensus.md</code></li>
+        <li>Buy-side/operator materials: <code>../collected_resources/buy_side/</code></li>
+        <li>News materials and search logs: <code>../collected_resources/news/</code>, <code>../temp/news/</code></li>
+        <li>Podwise podcast synthesis: <code>../collected_resources/podwise_tencent_discussion.md</code></li>
+        <li>Market, peer, technical and chart data: <code>../collected_resources/market_summary.json</code>, <code>../collected_resources/peer_yfinance_info.json</code>, <code>../collected_resources/tencent_technical_30d.csv</code></li>
+        <li>EdgarTools SEC lookup result: <code>../collected_resources/edgartools_tencent_lookup.txt</code></li>
+    </ul>
+</div>
+</body>
 </html>
