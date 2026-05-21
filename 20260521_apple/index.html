@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
+            --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--paper); }
+        body {
+            font-family: var(--sans);
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 88px 32px 144px; }
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .frontmatter strong { color: var(--ink); margin-right: 8px; }
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            color: var(--ink);
+            margin: 0 0 88px;
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule);
+        }
+        p { margin: 0 0 18px; }
+        strong { color: var(--ink); font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+        }
+        thead th {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 14px 18px 12px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border-bottom: 1px solid var(--rule-soft);
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+        td[align="right"], th[align="right"] { text-align: right; white-space: nowrap; }
+        td[align="center"], th[align="center"] { text-align: center; }
+        .snapshot-table tbody td:first-child,
+        .nsm-table tbody td:first-child { width: 28%; min-width: 124px; padding-right: 28px; }
+        .peer-table { table-layout: fixed; font-size: 13px; line-height: 1.35; }
+        ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
+        ol { counter-reset: olist; }
+        li { position: relative; padding-left: 30px; margin: 0 0 12px; }
+        ul li::before { content: ""; position: absolute; left: 6px; top: 0.78em; width: 8px; height: 1px; background: var(--ink); }
+        ol li { counter-increment: olist; }
+        ol li::before { content: counter(olist) "."; position: absolute; left: 0; top: 0; width: 22px; font-size: 14px; font-weight: 600; color: var(--muted); }
+        code { font-family: var(--mono); font-size: 0.85em; background: rgba(21, 21, 26, 0.06); padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+        img { display: block; width: 100%; height: auto; margin: 24px 0; background: var(--paper-edge); }
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+            overflow-wrap: anywhere;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            table { display: block; overflow-x: auto; font-size: 13.5px; }
+            .peer-table thead th, .peer-table tbody td { min-width: 92px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> AAPL</p>
+            <p><strong>Date:</strong> 2026-05-21</p>
+            <p><strong>Classification:</strong> Watchlist / Quality Compounder</p>
+        </div>
+
+        <h1>Apple Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：Apple 仍是高质量复利资产，但本轮 SitRep 不建议直接进入下一阶段深挖。</strong>理由不是业务差，而是“错误定价锚”不够清晰：市场和卖方已经在用 FY27 EPS、iPhone 换机周期、Services 增速/毛利、回购与 AI 产品节奏来给 Apple 定价，这些也正是长期投资人应关注的核心变量。</p>
+        <p>基本面确实在改善：FY2026 Q2 营收 1112 亿美元，同比增长 17%；iPhone 同比增长 22%；Services 达到 310 亿美元，同比增长 16%；公司指引 6 月季度营收同比增长 14% 至 17%。但股价也已接近 52 周高位，TTM P/E 约 36.6x，主流卖方目标价大多在 315 至 340 美元，较 302.25 美元现价的上行并不构成显著组合级错配。</p>
+        <p>更合适的定位是：把 Apple 放入观察名单，等待一个更明确的错配窗口。该窗口可能来自两类方向：一是市场低估“AI 设备 + Services ARPU + 企业 Mac 工作流”的长期价值捕获；二是监管、存储成本和中国需求使市场给出过度折价。目前证据更像高质量资产的再加速，而不是明显的结构性错误定价。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr><th>Item</th><th>Latest Situation</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>2026-05-20 收盘价 302.25 美元；52 周区间 193.46 至 303.20 美元；市值约 4.44 万亿美元，企业价值约 4.46 万亿美元。机构持股约 65.8%，空头占流通股约 0.92%，不是明显拥挤做空标的。</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>FY2026 Q2 营收 1111.84 亿美元，净利润 295.78 亿美元，摊薄 EPS 2.01 美元。公司毛利率 49.3%，其中 Services 毛利率 76.7%。现金与有价证券 1470 亿美元，总债务 850 亿美元，净现金约 620 亿美元。</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>30 日价格从约 260 美元升至 302.25 美元，站上 50 日均线 268.6 美元和 200 日均线 260.6 美元。RSI 74.7，MACD 为正但柱状动能从 5 月中旬高点回落，技术面偏强但短线过热。</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>新增 1000 亿美元回购授权、股息提高 4%。管理层不再把“净现金中性”作为正式目标，意味着资本结构弹性提高，但资本回报仍是估值支撑的一部分。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>iPhone revenue growth</td>
+                    <td align="center">+22% YoY</td>
+                    <td>换机周期从“AI 叙事”变成了真实收入增长，但需要验证 FY2026 下半年是否可持续。</td>
+                </tr>
+                <tr>
+                    <td>Services revenue / margin</td>
+                    <td align="center">$31.0B / 76.7%</td>
+                    <td>Services 仍是最清晰的价值捕获引擎，也是监管风险最集中的利润池。</td>
+                </tr>
+                <tr>
+                    <td>TTM P/E / Forward P/E</td>
+                    <td align="center">36.6x / 31.5x</td>
+                    <td>估值已从 2026 年 3 月低位明显修复，下一阶段需要 EPS 上修而非单纯倍数扩张。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 市场主要锚是 FY26/FY27 EPS 倍数，辅以 EV/FCF、EV/Sales 与 Services 利润占比。BofA 目标价 330 美元，使用 32x C27E EPS 10.29 美元；Bernstein 目标价 340 美元，使用 33x FY27 EPS 或 30.2x EV/FCF；Morgan Stanley 目标价 315 美元，以 FY27 EV/Sales 8.1x 桥接到约 32x FY27 P/E；UBS 的 220 美元目标价体现了更低 EPS 与约 28x 混合 CY26/CY27 P/E 的熊派框架。</p>
+        <p><strong>Peer Benchmarking:</strong> Apple 的估值溢价已不低。它的 P/S 与 Microsoft 接近，但收入增速低于多数互联网/AI 平台；毛利率显著低于纯软件/广告平台，但现金流质量、生态控制权和资本回报强于多数硬件公司。真正的问题不是“Apple 是否好”，而是 30x 以上 forward P/E 是否已经充分反映了 Services 与 AI 设备期权。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">TTM P/E</th>
+                    <th align="right">Forward P/E</th>
+                    <th align="right">Revenue Growth</th>
+                    <th align="right">Op Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>AAPL</td><td align="right">$4.44T</td><td align="right">36.6x</td><td align="right">31.5x</td><td align="right">16.6%</td><td align="right">32.3%</td></tr>
+                <tr><td>MSFT</td><td align="right">$3.13T</td><td align="right">25.1x</td><td align="right">21.8x</td><td align="right">18.3%</td><td align="right">46.3%</td></tr>
+                <tr><td>GOOGL</td><td align="right">$4.71T</td><td align="right">29.7x</td><td align="right">26.9x</td><td align="right">21.8%</td><td align="right">36.1%</td></tr>
+                <tr><td>META</td><td align="right">$1.54T</td><td align="right">22.0x</td><td align="right">16.7x</td><td align="right">33.1%</td><td align="right">40.6%</td></tr>
+                <tr><td>NVDA</td><td align="right">$5.41T</td><td align="right">34.2x</td><td align="right">19.2x</td><td align="right">73.2%</td><td align="right">65.0%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 三张图分别显示：Apple 过去三年相对 SPY/XLK 的价格表现、3 年 TTM P/E 波动区间、以及 Services 增速与估值倍数之间的 NSM 错配代理。</p>
+        <img src="./assets/aapl_price_action_narrative_eras.png" alt="Apple price action and narrative eras chart">
+        <img src="./assets/aapl_historical_valuation_bands.png" alt="Apple historical valuation bands chart">
+        <img src="./assets/aapl_nsm_mismatch_jaws_chart.png" alt="Apple NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead>
+                <tr><th>Lens</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>用户价值交付：活跃设备装机量、iPhone/Mac 新用户与升级用户、客户满意度、Apple Intelligence 在核心体验中的渗透。FY2026 Q2 管理层披露活跃设备超过 25 亿台，并强调 iPhone 17、MacBook Neo 和 AI-capable Mac 的需求。</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor NSM</td>
+                    <td>耐久价值捕获：Services ARPU、Services 毛利、留存/换机周期、生态默认入口的定价权、FCF 与每股回购增厚。最接近的公开代理是 Services 收入同比增速与公司 FCF。</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus NSM</td>
+                    <td>FY27 EPS 与 P/E 倍数。卖方虽讨论 Services 与 AI，但最终目标价大多落在 32x 至 33x FY27 EPS 的框架内。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td><strong>大体 aligned，夹杂轻微 healthy lag。</strong>市场并非完全看错 Apple，而是在等待 AI/Siri、Services 监管冲击、存储成本和中国需求的净结果。错配可能存在，但尚未大到足以优先立项。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">更好设备体验与本地 AI 能力 → 更高换机意愿与跨设备使用 → iPhone/Mac/Watch/Services 工作流绑定 → 生态默认入口和企业部署依赖 → Services ARPU、毛利率、留存、FCF 与回购能力</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 以现价 302.25 美元衡量，主流多头目标价 330 至 340 美元对应约 9% 至 12% 上行，Morgan Stanley 315 美元只有约 4% 上行；UBS 220 美元提供了清晰的估值下行参考。除非 FY27 EPS 明显上修到 10.5 美元以上且市场愿意给 35x 以上倍数，否则单靠倍数扩张很难形成足够大的错配收益。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Watchlist / Quality Compounder.</strong></p>
+        <p><strong>Wrong anchor:</strong> 不充分。市场目前并不只把 Apple 当作硬件公司，而是已经把 Services、生态锁定、AI 设备、回购和管理层交接纳入估值讨论。真正可能被低估的是“本地 AI 设备成为企业/个人 agentic workflow 节点”的长期价值，但公开数据还不足以证明这会显著改变 EPS 斜率。</p>
+        <p><strong>Material upside from being right:</strong> 不充分。股价接近 52 周高位，TTM P/E 位于三年均值上方，主流目标价相对现价的空间有限。进一步研究只有在看到 EPS 上修路径或监管风险被过度折价时才更有吸引力。</p>
+        <p><strong>Clear validation path:</strong> 充分。未来 2 至 3 个季度的 WWDC 26 / Siri 进展、6 月季度收入兑现、存储成本对毛利率的影响、China/India 增速、App Store/Epic/Google default search 风险，都能快速验证或证伪。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>FY2026 Q3 收入增速落在或高于公司 14% 至 17% 指引区间，同时 iPhone 增长不只来自一次性换机释放。</li>
+            <li>Services 在监管压力下仍维持中双位数增长，Services 毛利率保持 75% 以上，广告、企业服务、支付与订阅抵消 App Store take-rate 压力。</li>
+            <li>WWDC 26 或下半年产品周期证明更个性化 Siri、Apple Intelligence 和本地 AI 工作流能提高设备升级率或企业 Mac 渗透。</li>
+            <li>存储成本上行没有把公司毛利率持续压低至 47% 以下，且管理层不以牺牲份额或体验为代价维持利润。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>iPhone 17 周期在 6 月或 9 月季度快速降温，China 增长回落，India 增量不足以抵消成熟市场换机放缓。</li>
+            <li>Epic/App Store 或 Google default search 相关裁决使高毛利 Services 利润池出现可量化下修。</li>
+            <li>Apple Intelligence / Siri 延期或体验弱于预期，导致 AI 仅是防守性功能，而非换机或 Services ARPU 驱动。</li>
+            <li>内存和先进制程供给压力持续，导致 Mac/iPhone 供给受限或产品毛利率连续承压。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 FY26-FY28 EPS 桥：iPhone 单位/ASP、Services 增速与毛利、R&amp;D/AI 投入、存储成本、回购股数，测试 315/330/340/220 美元目标价分别隐含什么。</li>
+            <li>做 Services 风险拆分：App Store 佣金、Google TAC、广告、支付、AppleCare、iCloud、TV/Sports，估算监管压力和新广告库存的净影响。</li>
+            <li>围绕 China 和 India 做渠道检查：iPhone 17/17e、MacBook Neo、城市门店流量、补贴与本土竞品，确认增长是否具备连续性。</li>
+            <li>跟踪 WWDC 26 后的开发者与消费者反馈，特别是 Siri、on-device/private cloud AI、企业 Mac 部署和 agentic AI 开发者工作流。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>Apple FY2026 Q2 official newsroom: <code>../collected_resources/apple_q2_2026_newsroom.html</code> / <a href="https://www.apple.com/newsroom/2026/04/apple-reports-second-quarter-results/">apple.com</a></li>
+            <li>Apple FY2026 Q2 consolidated financial statements: <code>../collected_resources/FY26_Q2_Consolidated_Financial_Statements.pdf</code></li>
+            <li>Apple FY2026 Q2 Form 10-Q: <code>../collected_resources/AAPL_10Q_Q2_2026_as_filed.pdf</code> and <code>../collected_resources/sec/</code></li>
+            <li>Earnings call transcripts: <code>../collected_resources/earnings_calls/</code></li>
+            <li>Sell-side research extraction: <code>../collected_resources/sell_side/</code></li>
+            <li>Buy-side/practitioner materials: <code>../collected_resources/2026-05-06_stratechery_microsoft-earnings-apple-earnings.md</code>, <code>../collected_resources/2026-05-15_cloudedjudgement_real-app-store-opportunity.md</code>, and related saved notes.</li>
+            <li>Podcast synthesis: <code>../collected_resources/podwise_apple_discussion.md</code></li>
+            <li>OpenBB/yfinance market, peer, technical and positioning data: <code>../collected_resources/openbb_snapshot_20260521.md</code>, <code>../collected_resources/market_snapshot_yfinance.json</code>, <code>../collected_resources/peer_snapshot_yfinance.csv</code>, <code>../collected_resources/aapl_technical_30d.csv</code></li>
+            <li>News researcher raw logs: <code>../temp/vector_search_20260521.jsonl</code> and related CNBC full-text files under <code>../temp/</code></li>
+        </ul>
+    </div>
+</body>
+</html>

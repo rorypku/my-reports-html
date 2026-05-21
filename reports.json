@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260521_apple",
+    "title": "Apple Situation Report",
+    "date": "2026-05-21",
+    "url": "./20260521_apple/",
+    "path": "20260521_apple/",
+    "sortKey": "20260521"
+  },
+  {
     "id": "20260514_tencent",
     "title": "腾讯控股 Situation Report",
     "date": "2026-05-14",
