@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", Arial, sans-serif;
+            --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--paper); }
+        body {
+            font-family: var(--sans);
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+        }
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 36px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+        .frontmatter strong { color: var(--ink); font-weight: 600; margin-right: 8px; }
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.05;
+            color: var(--ink);
+            margin: 0 0 88px;
+        }
+        h2 {
+            font-size: 17px;
+            line-height: 1.35;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule);
+        }
+        h3 {
+            font-size: 15px;
+            color: var(--ink);
+            margin: 36px 0 12px;
+        }
+        p { margin: 0 0 18px; }
+        strong { color: var(--ink); font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums;
+        }
+        thead th {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 14px 16px 12px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tbody td {
+            padding: 14px 16px 14px 0;
+            border-bottom: 1px solid var(--rule-soft);
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+        td[align="right"], th[align="right"] { text-align: right; white-space: nowrap; }
+        td[align="center"], th[align="center"] { text-align: center; }
+        .snapshot-table td:first-child, .nsm-table td:first-child { width: 28%; min-width: 126px; }
+        .metric-table td:first-child { width: 23%; }
+        .peer-table { font-size: 13px; line-height: 1.35; table-layout: fixed; }
+        ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
+        li { position: relative; padding-left: 28px; margin: 0 0 12px; }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.84em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol { counter-reset: olist; }
+        ol li { counter-increment: olist; }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--muted);
+            font-weight: 600;
+        }
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 24px 0;
+            background: var(--paper-edge);
+        }
+        code {
+            font-family: var(--mono);
+            font-size: 0.86em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+        .value-chain {
+            font-size: 15px;
+            color: var(--ink);
+            background: linear-gradient(90deg, rgba(21,21,26,.07), rgba(21,21,26,.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+            overflow-wrap: anywhere;
+        }
+        .source-list li { font-size: 14px; line-height: 1.55; }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            table { display: block; overflow-x: auto; font-size: 13px; }
+            .peer-table th, .peer-table td { min-width: 96px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="frontmatter">
+        <p><strong>Ticker:</strong> WMT</p>
+        <p><strong>Date:</strong> 2026-05-22</p>
+        <p><strong>Classification:</strong> Watchlist / targeted follow-up</p>
+    </div>
+
+    <h1>Walmart Situation Report</h1>
+
+    <h2>1. Executive View</h2>
+    <p><strong>结论：</strong>Walmart 是高质量复利资产，但目前还不是一个“已经证明的优先错价”。值得进入下一步的小范围跟踪，而不是立即投入完整深度研究。核心原因是：公司正在从“低毛利大卖场”转为“门店履约网络 + 高频会员 + Marketplace/广告/数据”的平台化零售生态；但这个故事已经被一线卖方显著捕捉，且当前股价仍隐含较高的未来利润兑现要求。</p>
+    <p>最有价值的研究问题不是“Walmart 是否好”，而是<strong>市场是否仍用短期 EPS / 消费者景气 / 燃油与关税成本来锚定股票，而低估第二张损益表的持续性与利润穿透</strong>。Q1 FY27 后股价从高位回撤，给了验证窗口：如果电商、广告、会员、3P 与履约效率能在接下来 2-4 个季度继续让经营利润增速高于销售增速，错配会变得更可投资；如果只是卖方叙事而非现金利润，当前高倍数会继续压缩回报。</p>
+
+    <h2>2. Current Snapshot</h2>
+    <table class="snapshot-table">
+        <thead>
+            <tr><th>Item</th><th>Latest Situation</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Market Data &amp; Positioning</td>
+                <td>2026-05-21 收盘价约 <strong>$121.34</strong>，市值约 <strong>$967B</strong>，52 周区间约 <strong>$93.43-$135.16</strong>。Q1 FY27 公布后单日显著回撤，主要反映 EPS 指引、燃油/关税/消费者压力和高估值下的容错率。</td>
+            </tr>
+            <tr>
+                <td>Key Financial Metrics</td>
+                <td>FY26 收入 <strong>$713B</strong>，经营利润 <strong>$29.8B</strong>，自由现金流 <strong>$14.9B</strong>。Q1 FY27 总收入同比 <strong>+7.3%</strong>，全球电商 <strong>+26%</strong>，全球广告 <strong>+37%</strong>，会员费收入 <strong>+17.4%</strong>，但自由现金流为 <strong>-$1.9B</strong>。</td>
+            </tr>
+            <tr>
+                <td>Price Action &amp; Technicals</td>
+                <td>30 日技术层从温和上行转为事件性破位：5 月 21 日收盘 <strong>$121.34</strong>，RSI 降至 <strong>35.5</strong>，MACD 柱转负，价格跌破 12/26/50 日 EMA。技术面提示短期去风险仍在，但也使基本面验证窗口更清晰。</td>
+            </tr>
+            <tr>
+                <td>Positioning</td>
+                <td>新闻与期权流显示市场在财报前主要交易“指引/宏观/成本”波动。SEC Form 4 近期较多但以例行高管/董事交易为主，未构成独立投资信号。卖方主流仍偏正面，买方证据更克制。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="metric-table">
+        <thead>
+            <tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Global eCommerce</td>
+                <td align="center">+26%</td>
+                <td>CEO NSM 的核心代理变量：门店网络正在变成高频履约网络，而不是单纯线下客流。</td>
+            </tr>
+            <tr>
+                <td>Global Advertising</td>
+                <td align="center">+37%</td>
+                <td>第二张损益表的高毛利利润池。若广告/3P/会员持续复合，估值锚可从传统零售 P/E 转向平台化零售。</td>
+            </tr>
+            <tr>
+                <td>FY26 FCF</td>
+                <td align="center">$14.9B</td>
+                <td>Capex 密集转型下的现金约束仍存在。Q1 FY27 FCF 为负，市场会继续要求利润质量证明。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+    <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前市场锚仍是前瞻 P/E。WMT 以 FY26 EPS $2.73 计约 <strong>44x</strong>，以 FY27 指引 $2.75-$2.85 中点计仍约 <strong>43x</strong>。这不是传统零售低估值，而是已经在为“高质量复利 + 平台化利润池”付费。错价只在一种情况下成立：未来 EPS 和 EBIT margin 的上修幅度大于当前倍数已经反映的程度。</p>
+    <p><strong>Sell-side ruler:</strong> Morgan Stanley 采用约 <strong>44x F28E EPS $3.19</strong> 得到 $140 目标价，并用约 <strong>22x F28E EV/EBITDA</strong> 交叉验证；Bernstein 用 <strong>37x Q5-Q8 EPS $3.63</strong> 得到 $134；UBS 的“第二张损益表”报告则把目标价提高到 <strong>$147</strong>，核心假设是广告、会员、Marketplace、WFS 和数据变现会成为 2030 年前 EBIT 增量的主要来源。</p>
+
+    <table class="peer-table">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th align="right">Market Cap</th>
+                <th align="right">P/E</th>
+                <th align="right">EV/EBITDA</th>
+                <th align="right">Revenue Growth</th>
+                <th align="right">Margin / FCF</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>WMT</td>
+                <td align="right">~$967B</td>
+                <td align="right">~44x FY26</td>
+                <td align="right">~22x</td>
+                <td align="right">FY26 +4.7%</td>
+                <td align="right">FY26 op margin 4.2%; FCF $14.9B</td>
+            </tr>
+            <tr>
+                <td>COST</td>
+                <td align="right">~$466B</td>
+                <td align="right">~58x LTM</td>
+                <td align="right">~35x</td>
+                <td align="right">FY25 +8.2%</td>
+                <td align="right">会员粘性更纯，但广告/即时履约可选性较弱</td>
+            </tr>
+            <tr>
+                <td>TGT</td>
+                <td align="right">~$57B</td>
+                <td align="right">~16x FY26</td>
+                <td align="right">~8x</td>
+                <td align="right">FY26 -1.7%</td>
+                <td align="right">估值低，但份额/品类/可选消费压力更大</td>
+            </tr>
+            <tr>
+                <td>AMZN</td>
+                <td align="right">~$2.9T</td>
+                <td align="right">~37x FY25</td>
+                <td align="right">~18x</td>
+                <td align="right">FY25 +12.4%</td>
+                <td align="right">广告和 3P 是 WMT 第二张损益表的上限参照</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Historical Context &amp; Charts</h3>
+    <img src="./assets/wmt_price_action_narrative_eras.png" alt="Walmart price action and narrative eras chart">
+    <img src="./assets/wmt_historical_valuation_bands.png" alt="Walmart historical valuation bands chart">
+    <img src="./assets/wmt_nsm_mismatch_jaws_chart.png" alt="Walmart NSM mismatch jaws chart">
+
+    <h3>NSM Framework</h3>
+    <table class="nsm-table">
+        <thead>
+            <tr><th>Lens</th><th>Assessment</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CEO NSM</td>
+                <td>更快、更低成本、更高可得性的全渠道履约：店仓一体、3 小时内配送、自动化履约中心、Sparky/AI 购物入口、每周高频食品与日用品复购。</td>
+            </tr>
+            <tr>
+                <td>Long-term investor NSM</td>
+                <td>第二张损益表 EBIT 占比：广告、会员费、Marketplace、WFS 履约、数据/零售媒体的利润贡献，以及这些业务能否让合并经营利润率从 4% 多持续上移。</td>
+            </tr>
+            <tr>
+                <td>Market-consensus NSM</td>
+                <td>短期仍偏 EPS 指引、美国同店、燃油/运费、关税、消费者强弱和药房/GLP-1 价格结构。卖方已经理解平台化逻辑，但事件交易仍被短期指引主导。</td>
+            </tr>
+            <tr>
+                <td>Mismatch category</td>
+                <td><strong>Healthy lag, partially recognized.</strong> 不是叙事陷阱，但也不是隐蔽错价。市场已给高倍数，真正未证明的是利润池的持续年限和落到底线的比例。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="value-chain">user value → value + convenience → weekly grocery / replenishment behavior → Walmart+ and app/Sparky adoption → store network as fulfillment infrastructure → advertising / marketplace / membership / data monetization → operating leverage, retention, FCF</div>
+
+    <h2>4. Evidence From Three Streams</h2>
+    <h3>Stream A: Market Consensus</h3>
+    <ul>
+        <li><strong>News:</strong> Q1 FY27 后叙事集中在“收入强、指引与成本压制 EPS、股价下跌”。CNBC/市场新闻更像短期宏观框架，而非第二张损益表框架。</li>
+        <li><strong>Podwise:</strong> 讨论反复强调门店密度、杂货高频、同日达、广告高毛利和 Marketplace；同时指出 WMT 与 AMZN 在广告数据护城河上仍有差距。</li>
+        <li><strong>Sell-side:</strong> MS/Bernstein/UBS 的共识已高度平台化，估值锚从传统零售转向前瞻高倍数 P/E，理由是电商盈利改善和替代利润池。</li>
+        <li><strong>Technical layer:</strong> 财报日破位说明市场对高倍数的短期容错率低；这给基本面研究提供了更好的入场观察点，但不能单独构成买入信号。</li>
+    </ul>
+
+    <h3>Stream B: Management Reality</h3>
+    <ul>
+        <li><strong>Q1 FY27:</strong> 公司报告总收入 +7.3%，全球电商 +26%，全球广告 +37%，Walmart U.S. eCommerce +26%，Sam's Club U.S. eCommerce +23%，国际 eCommerce +27%，全球会员费收入 +17.4%。</li>
+        <li><strong>Operating reality:</strong> Q1 Operating cash flow $4.7B，但 FCF 为 -$1.9B，显示转型仍消耗资本。FY26 全年 Capex $26.6B，FCF $14.9B。</li>
+        <li><strong>SEC/10-K:</strong> 最新 10-K filed 2026-03-13，FY26 revenue $713B，operating income $29.8B。8-K 于 2026-05-21 对应 Q1 FY27 业绩披露。</li>
+        <li><strong>Management framing:</strong> 管理层把增长和效率都放在 AI/agentic commerce、自动化履约、会员和广告变现上；但资本纪律和价格投入仍优先于短期利润率最大化。</li>
+    </ul>
+
+    <h3>Stream C: Buy-side Conviction</h3>
+    <ul>
+        <li>买方/操盘手视角更谨慎：WMT 的规模和薄利模型意味着 1-2 个百分点的效率改善能显著穿透 EPS，但对“确定性再评级”的直接证据不足。</li>
+        <li>长期投资者更认可“AI 在真实经济落地”的受益逻辑，包括路线规划、库存、自动化和员工工具；但这更像质量复利和利润韧性，不必然是大幅错价。</li>
+        <li>产业研究提示一个反面约束：WMT 的广告和数据护城河弱于 Amazon，愿意开放给第三方 agentic commerce 可能是增量流量策略，也可能说明议价力仍在爬坡。</li>
+    </ul>
+
+    <h2>5. Investment Implication</h2>
+    <p><strong>Potential opportunity:</strong> 有机会，但属于“验证型机会”。如果 WMT 在 FY27 连续证明：销售增速中个位数、经营利润增速高个位数到双位数、第二张损益表 EBIT 占比上升、FCF 在高 Capex 后恢复，那么当前回撤后的估值可被证明合理，甚至有 10%-20% 的目标价空间。</p>
+    <p><strong>Main risk:</strong> 市场并非完全错误。MS、Bernstein、UBS 已经用 37x-44x 的前瞻 P/E 框架给出平台化溢价，当前股价仍要求长期利润兑现。若广告/3P/会员增长放缓，或管理层持续把毛利投入价格与履约而非落到底线，WMT 会从“结构性重估”退回“高质量但昂贵的防御股”。</p>
+    <p><strong>Decision:</strong> 放入观察名单并做一轮针对性研究，而非立刻进入完整深挖。下一步只需要验证三个问题：第二张损益表是否真的贡献大部分 EBIT 增量；Walmart+ 与三小时达是否提升高毛利品类购买；FY27 指引是否在 Q2/Q3 具备上修路径。</p>
+
+    <table class="metric-table">
+        <thead>
+            <tr><th>Validation Path</th><th align="center">Signal</th><th>Confirm / Falsify</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Q2 FY27</td>
+                <td align="center">Operating income growth</td>
+                <td>若在销售 +4%-5% 下经营利润 +7%-10% 兑现，说明 mix/效率有效；若毛利和费用再次拖累，则错配减弱。</td>
+            </tr>
+            <tr>
+                <td>Alternative profits</td>
+                <td align="center">Ads / 3P / membership</td>
+                <td>需要继续高双位数增长，并看到管理层更清晰披露利润贡献或 margin bridge。</td>
+            </tr>
+            <tr>
+                <td>Cash conversion</td>
+                <td align="center">FCF after capex</td>
+                <td>Capex 维持约销售额 3%-3.5% 的同时，FCF 不能长期被自动化和履约投资吞噬。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6. Sources &amp; Resources</h2>
+    <ul class="source-list">
+        <li>Walmart Q1 FY27 earnings release, 2026-05-21: https://corporate.walmart.com/news/2026/05/21/walmart-releases-q1-fy27-earnings</li>
+        <li>Walmart 2026 Annual Report and Proxy release, 2026-04-23: https://corporate.walmart.com/news/2026/04/23/walmart-releases-2026-annual-report-and-proxy-statement</li>
+        <li>Walmart 2026 Annual Report PDF: https://stock.walmart.com/2026-annual-report</li>
+        <li>SEC/EdgarTools extract: <code>collected_resources/wmt_sec_edgartools_extract.json</code></li>
+        <li>Earnings transcripts: <code>collected_resources/earnings_transcripts/</code></li>
+        <li>Sell-side reports and parsed Markdown: <code>collected_resources/sell_side_pdfs/</code> and <code>collected_resources/sell_side_md/</code></li>
+        <li>Buy-side/news evidence: <code>collected_resources/CNBC_*.md</code>, <code>collected_resources/20251216_robonomics_ai_beneficiaries_non_tech.md</code>, <code>collected_resources/20260203_mobiledevmemo_amazon_openai_advertising_not_agentic_commerce.md</code></li>
+        <li>Podwise synthesis: <code>collected_resources/podwise_walmart_discussion.md</code></li>
+        <li>Market/technical data: <code>collected_resources/wmt_technical_30d.csv</code>, <code>collected_resources/market_price_history_3y.csv</code>, OpenBB/yfinance outputs.</li>
+    </ul>
+</div>
+</body>
+</html>
