@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dollar General SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--paper); }
+        body {
+            font-family: var(--sans);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+        }
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .frontmatter p strong { color: var(--ink); font-weight: 600; margin-right: 8px; }
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            color: var(--ink);
+            margin: 0 0 88px;
+            text-wrap: balance;
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border-top: 1px solid var(--rule);
+        }
+        p { margin: 0 0 18px; font-size: 16.5px; line-height: 1.72; }
+        strong { color: var(--ink); font-weight: 600; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+        }
+        thead th {
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th[align="right"] { text-align: right; padding-left: 18px; padding-right: 0; }
+        thead th[align="center"] { text-align: center; padding: 14px 12px 12px; }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td[align="right"] { text-align: right; padding-left: 18px; padding-right: 0; white-space: nowrap; }
+        tbody td[align="center"] { text-align: center; padding: 14px 12px; }
+        tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child { width: 28%; min-width: 124px; padding-right: 28px; }
+        .metric-table { font-size: 14.5px; line-height: 1.48; }
+        .peer-table { table-layout: fixed; font-size: 13px; line-height: 1.35; }
+        .peer-table thead th { font-size: 10px; letter-spacing: 0.06em; }
+        ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
+        ol { counter-reset: olist; }
+        li { position: relative; padding-left: 30px; margin: 0 0 12px; font-size: 16.5px; line-height: 1.7; }
+        ul li::before { content: ""; position: absolute; left: 6px; top: 0.78em; width: 8px; height: 1px; background: var(--ink); }
+        ol li { counter-increment: olist; }
+        ol li::before { content: counter(olist) "."; position: absolute; left: 0; top: 0; width: 22px; font-size: 14px; font-weight: 600; color: var(--muted); }
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        img { display: block; width: 100%; height: auto; margin: 24px 0; background: var(--paper-edge); }
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+            overflow-wrap: anywhere;
+        }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table { display: block; overflow-x: auto; font-size: 13.5px; -webkit-overflow-scrolling: touch; }
+            .peer-table thead th, .peer-table tbody td { min-width: 92px; }
+            .peer-table thead th:first-child, .peer-table tbody td:first-child { min-width: 112px; }
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> DG</p>
+            <p><strong>Date:</strong> 2026-05-22</p>
+            <p><strong>Classification:</strong> Watchlist / Repair Story</p>
+        </div>
+
+        <h1>Dollar General Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：DG 值得放入观察名单，但暂不建议进入下一阶段深研。</strong>核心原因不是业务没有改善，而是当前市场锚并不明显错误：股价约 $105，对应管理层 FY2026 EPS 指引中点约 14.5x，OpenBB/YFinance forward P/E 约 13.2x，和 DLTR、TGT 这类零售修复/中低增长同业相近。市场已经在用“EPS 与经营利润率修复”的框架给价，而这正是 DG 最可验证的改善路径。</p>
+        <p>更有价值的争论是：DG 是否正在从“低收入消费者承压 + shrink + 库存混乱”的价值陷阱叙事，切回“高现金转化的小店网络 + 毛利自救 + 数字/媒体网络增量利润池”的正常化叙事。证据链支持经营修复正在发生：FY2025 同店销售 +3.0%，Q4 同店 +4.3%，FY2025 毛利率扩张 107bp，经营现金流 $3.6bn，FCF 约 $2.4bn。但从 SitRep 晋级标准看，尚未满足“明显错误锚 + 足够大上行 + 外部独立验证”三项条件。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr><th>Item</th><th>Latest Situation</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>市场数据</td>
+                    <td>截至 2026-05-22 数据快照，DG 股价约 $105.11，市值约 $23.1bn，EV 约 $37.7bn，52 周区间 $95.11-$158.23。股价 3 年约 -50%，当前仍低于 50 日和 200 日均线。</td>
+                </tr>
+                <tr>
+                    <td>最新财务状态</td>
+                    <td>FY2025 收入 $42.7bn，同比 +5.2%；同店 +3.0%；经营利润率 5.16%，较 FY2024 的 4.22% 修复 94bp；FY2025 EPS $6.85。FY2026 管理层指引：净销售 +3.7% 至 +4.2%，同店 +2.2% 至 +2.7%，EPS $7.10 至 $7.35。</td>
+                </tr>
+                <tr>
+                    <td>价格行为与技术面</td>
+                    <td>近 30 个交易日从约 $116 附近跌至 $105，RSI 在 30 多区间，MACD 仍为负但柱状图收敛。技术面显示超卖后的企稳尝试，但趋势尚未确认反转。</td>
+                </tr>
+                <tr>
+                    <td>资料覆盖</td>
+                    <td>已执行新闻、Podwise、卖方、技术指标、电话会、SEC、买方七条信息流。限制：本地新闻库未找到 DG 直接新闻；买方/运营者长文库命中质量差；卖方只找到一篇 GS 直接相关快评。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr><th>关键指标</th><th align="center">数值</th><th>含义</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FY2025 同店销售</td>
+                    <td align="center">+3.0%</td>
+                    <td>恢复到可投资区间，且来自客流 +1.6% 与客单 +1.4%，不是单纯价格通胀。</td>
+                </tr>
+                <tr>
+                    <td>FY2025 毛利率</td>
+                    <td align="center">30.66%</td>
+                    <td>同比 +107bp，管理层称 shrink 改善贡献显著；这是短期 EPS 修复的核心。</td>
+                </tr>
+                <tr>
+                    <td>FY2025 FCF</td>
+                    <td align="center">约 $2.4bn</td>
+                    <td>相对当前市值约 10% FCF yield，说明“现金流正常化”比 GAAP 利润更有吸引力。</td>
+                </tr>
+                <tr>
+                    <td>门店与覆盖</td>
+                    <td align="center">约 20,959 店</td>
+                    <td>DG 仍是美国最大折扣零售商之一；问题在成熟店效率，而不是缺少规模。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>市场定价锚：</strong>DG 当前主要按 EPS / P/E 与经营利润率修复定价，而不是按门店数、收入规模或“防御性消费”稀缺性定价。GS 直接相关快评使用相对 P/E 风险收益框架，给出 Buy 与 $116 目标价，但该目标价相对当时价格上行有限；这说明即使看多卖方也没有给出显著重估叙事。</p>
+        <p><strong>嵌入预期：</strong>当前价格大致反映 FY2026 EPS $7.10-$7.35 能达成、毛利继续小幅改善、但同店增长从 Q4 高点回落到 2% 中段。若 3-4 年经营利润率能接近管理层 6%-7% 框架，EPS 可继续修复；但市场已经在给 13-15x P/E，重估空间主要来自盈利上修，而非估值倍数大幅扩张。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">P/E</th>
+                    <th align="right">Fwd P/E</th>
+                    <th align="right">Rev Growth</th>
+                    <th align="right">Op Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>DG</td><td align="right">$23.1B</td><td align="right">15.3x</td><td align="right">13.2x</td><td align="right">5.9%</td><td align="right">6.1%</td></tr>
+                <tr><td>DLTR</td><td align="right">$18.6B</td><td align="right">16.1x</td><td align="right">13.0x</td><td align="right">9.0%</td><td align="right">13.5%</td></tr>
+                <tr><td>TGT</td><td align="right">$57.3B</td><td align="right">16.7x</td><td align="right">14.2x</td><td align="right">6.7%</td><td align="right">4.5%</td></tr>
+                <tr><td>WMT</td><td align="right">$967.2B</td><td align="right">42.7x</td><td align="right">36.8x</td><td align="right">7.3%</td><td align="right">4.3%</td></tr>
+                <tr><td>OLLI</td><td align="right">$5.0B</td><td align="right">21.4x</td><td align="right">16.3x</td><td align="right">16.8%</td><td align="right">14.0%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>三张图：</strong>价格与叙事、估值带、NSM mismatch 均使用公开市场数据和公司披露代理指标构建。估值图使用股价除以最近可得 TTM EPS 的近似 P/E，不等同于精确 NTM consensus P/E。</p>
+        <img src="./assets/dg_price_action_narrative_eras.png" alt="DG price action and narrative eras chart">
+        <img src="./assets/dg_historical_valuation_bands.png" alt="DG historical valuation bands chart">
+        <img src="./assets/dg_nsm_mismatch_jaws_chart.png" alt="DG NSM mismatch jaws chart">
+
+        <table class="nsm-table">
+            <thead>
+                <tr><th>Lens</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>“省钱 + 便利”的可见交付，最接近的可披露代理是同店销售、客流、Value Valley / $1 商品表现、in-stock 与门店体验指标。</td>
+                </tr>
+                <tr>
+                    <td>长期投资者 NSM</td>
+                    <td>成熟店单位经济与现金转化：经营利润率、库存周转、FCF、可持续门店回报。核心不是多开店，而是现有网络恢复到 6%-7% 经营利润率框架。</td>
+                </tr>
+                <tr>
+                    <td>市场共识 NSM</td>
+                    <td>FY2026 EPS 与 P/E。市场惩罚的是“低收入消费者压力下，毛利改善是否可持续”，奖励的是 EPS 上修与现金流恢复。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td>轻度“健康滞后”，但不是足够强的结构性错价。经营 NSM 已改善，市场倍数却被压缩；不过 P/E 框架本身合理，缺的是更大上修证据。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">低价与近场便利 → 更高到店频次 / 配送频次 → 成熟店同店销售与非消耗品渗透恢复 → shrink、损耗、库存与门店劳效改善 → 毛利率和经营利润率修复 → FCF、去杠杆、2027 后潜在回购</p>
+
+        <p><strong>上行/下行不对称：</strong>若 DG 达到 FY2029 20% 非消耗品渗透、经营利润率接近 6.5%，并恢复回购，EPS 可能向 $9-$10 迈进；15x 对应 $135-$150，叠加股息是有意义但不是压倒性的上行。若同店跌回 0%-1%、shrink 改善停止、工资/维修/配送成本吃掉毛利，市场可能把 DG 拉回 11-12x $6-$7 EPS，即 $66-$84 区间。当前不对称性不足以直接晋级。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Watchlist / Repair Story.</strong></p>
+        <p><strong>Wrong anchor：</strong>不充分。市场当前锚是 EPS、同店销售和经营利润率，而 DG 的投资争论也确实应围绕这些指标展开。可能的错价只在于市场低估了 shrink、库存、非消耗品与 DG Media Network 的持续性，但这属于“斜率判断”，不是框架错误。</p>
+        <p><strong>Material upside：</strong>中等。FCF yield 很有吸引力，经营修复若持续会带来 EPS 上修和回购重启，但在 13-15x P/E 的当前价格上，上行更多像正常化收益，而不是组合层面必须优先配置的显著错价。</p>
+        <p><strong>Clear validation path：</strong>充分。接下来 2-4 个季度可以用同店客流、毛利率、shrink / damages、库存增速低于销售增速、非消耗品渗透和 delivery / DG Media Network 贡献来验证。但由于前两项不够强，本次结论是不晋级，继续观察。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>FY2026 上半年同店维持 2% 以上，且客流为正，而不是仅由价格推动。</li>
+            <li>毛利率继续扩张，管理层能把 shrink / damages 改善量化，并证明不是一次性低基数。</li>
+            <li>库存增速持续低于销售增速，in-stock 不恶化，说明 SKU 精简没有伤害销售。</li>
+            <li>非消耗品连续跑赢 consumables，且 delivery / DG Media Network 对同店和毛利有可见贡献。</li>
+            <li>管理层确认 2027 年恢复回购，同时杠杆与利息费用继续下降。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>Q1/Q2 同店低于低个位数，且客流重新转负，表明 Q4 受天气备货或低基数扭曲。</li>
+            <li>SG&amp;A 去杠杆扩大，工资、维修维护、配送和 IT 投入吞掉毛利改善。</li>
+            <li>shrink 改善放缓或 damages 反弹，导致 FY2026 毛利率改善无法延续。</li>
+            <li>新店/改造项目回报下降，pOpshelf 或 Mexico 继续分散管理层注意力。</li>
+            <li>低收入消费者压力加剧，SNAP/税收/食品通胀变化导致 mix 重新向低毛利 consumables 倾斜。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立单店 cohort 模型：区分新店、成熟店、Project Renovate、Project Elevate，估算真实成熟店 ROIC 是否恢复。</li>
+            <li>做毛利桥敏感性：shrink、damages、LIFO、markdown、非消耗品 mix、DG Media Network 各自对 6%-7% 经营利润率框架的贡献。</li>
+            <li>补卖方覆盖：定向找 Morgan Stanley、JPM、BofA、UBS、Evercore 等 2026 年 DG 报告，确认目标价区间和 2026E/2027E 修正。</li>
+            <li>做实地与渠道检查：农村/小镇门店的上架、整洁、排队、人工、价格相对 Walmart/Dollar Tree/Aldi 的真实体验。</li>
+            <li>跟踪政策变量：SNAP、低收入税收返还、食品通胀、关税替代政策对 DG 核心客群和商品成本的影响。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>DG FY2025 Q4 earnings call transcript: <code>../collected_resources/DG_FY2025-Q4_earnings_call_transcript.md</code></li>
+            <li>DG FY2025 Q3 earnings call transcript: <code>../collected_resources/DG_FY2025-Q3_earnings_call_transcript.md</code></li>
+            <li>DG 2025 10-K EdgarTools extraction: <code>../collected_resources/dg_sec_extraction.md</code></li>
+            <li>Latest SEC filings index: <code>../collected_resources/dg_sec_latest_filings.json</code></li>
+            <li>Goldman Sachs DG first take: <code>../collected_resources/GS_DollarGeneral_DGUS_Q2_preannounce_20260522.md</code></li>
+            <li>Podwise transcript-grounded discussion search: <code>../collected_resources/podwise_dg_ask_sources.md</code></li>
+            <li>FreshRSS news search notes and Walmart consumer proxy: <code>../collected_resources/20260522_freshrss_search_notes_DG.md</code>, <code>../collected_resources/20260521_CNBC_walmart_q1_earnings_preview_trade_down_proxy_for_DG.md</code></li>
+            <li>Technical indicator history: <code>../collected_resources/dg_technical_30d.csv</code></li>
+            <li>Market and peer data: <code>../collected_resources/dg_market_snapshot_yfinance.json</code>, <code>../collected_resources/dg_peer_market_snapshot_yfinance.csv</code>, <code>../collected_resources/dg_spy_xlp_3y_prices.csv</code></li>
+            <li>Buy-side search logs with no usable direct DG long-form hits: <code>../temp/buy_side_log_dg_*.jsonl</code></li>
+        </ul>
+    </div>
+</body>
+</html>
