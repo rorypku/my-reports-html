@@ -8,6 +8,14 @@
     "sortKey": "20260522"
   },
   {
+    "id": "20260522_nvda",
+    "title": "NVIDIA Situation Report",
+    "date": "2026-05-22",
+    "url": "./20260522_nvda/",
+    "path": "20260522_nvda/",
+    "sortKey": "20260522"
+  },
+  {
     "id": "20260521_apple",
     "title": "Apple Situation Report",
     "date": "2026-05-21",

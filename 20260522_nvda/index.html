@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table {
+            table-layout: auto;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> NVDA</p>
+            <p><strong>Date:</strong> 2026-05-22</p>
+            <p><strong>Classification:</strong> Advance to next-stage research / Structural mispricing candidate</p>
+        </div>
+
+        <h1>NVIDIA Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：值得进入下一阶段研究，但不是因为“财报强”这一层面。</strong>NVDA 当前已经是强共识资产，Q1 FY2027 收入 816 亿美元、数据中心 752 亿美元、Q2 指引 910 亿美元、毛利率约 75%，这些都已被卖方快速上修进模型。真正需要研究的是市场是否仍在用 <strong>FY27/FY28 EPS × P/E</strong> 和 hyperscaler CapEx beta 给 NVDA 定价，而公司经济实质正在切换到 <strong>AI factory lifetime economics</strong>：每瓦、每美元、每机架产生 token 与毛利的能力。</p>
+        <p><strong>错锚假设：</strong>如果 Vera Rubin、GB300、Spectrum-X/NVLink 与 CUDA 软件栈让 NVDA 持续降低 token cost，并把 ACIE、AI native cloud、sovereign、enterprise/industrial 与 physical AI 纳入同一平台，市场用“GPU 周期峰值”或“云厂商 CapEx 一阶导”可能低估了增长持续期。反过来，如果 AI 辅助迁移削弱 CUDA 锁定、ASIC 在稳定推理负载上快速吃份额，或 GB300/Rubin 供给斜率落后，当前估值就只是看起来便宜。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>Item</th><th>Latest Situation</th></tr></thead>
+            <tbody>
+                <tr><td>Market Data &amp; Positioning</td><td>2026-05-21 收盘价 <strong>$219.51</strong>，52 周区间 $129.16–236.54；市值约 <strong>$5.32T</strong>，EV 约 <strong>$5.38T</strong>。OpenBB/YFinance 一致显示卖方共识为 strong buy，均值目标价 $278.03，中位数 $275。</td></tr>
+                <tr><td>Key Financial Metrics</td><td>Q1 FY2027 收入 <strong>$81.6B</strong>，同比 +85%；Data Center <strong>$75.2B</strong>，同比 +92%；GAAP/non-GAAP GM <strong>74.9%/75.0%</strong>；FCF 约 <strong>$48.6B</strong>；Q2 FY2027 收入指引 <strong>$91.0B ±2%</strong>，不包含中国数据中心计算收入。</td></tr>
+                <tr><td>Price Action &amp; Technicals</td><td>30 日技术层仍偏强：收盘价高于 50 日和 200 日均线，RSI 57.8；但 MACD histogram 转负，说明财报后创新高附近出现短线动能降温。</td></tr>
+                <tr><td>Positioning</td><td>空头占流通股约 <strong>1.22%</strong>，机构持股约 <strong>70.7%</strong>。这不是 crowded short；风险更多来自多头高预期与 benchmark 权重，而不是空头挤压。</td></tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead><tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr></thead>
+            <tbody>
+                <tr><td>Q2 FY2027 指引</td><td align="center">$91B</td><td>核心验证点：若无中国数据中心计算收入仍能顺利交付，需求广度和供给斜率会被进一步确认。</td></tr>
+                <tr><td>Data Center revenue</td><td align="center">$75.2B</td><td>同比 +92%，其中 compute $60.4B、networking $14.8B，说明利润池正在从 GPU die 扩展到系统/网络。</td></tr>
+                <tr><td>Reported P/E proxy</td><td align="center">33.6x</td><td>低于本次 3 年代理均值 36.9x；市场表面高估值，但 EPS 上修速度正在稀释倍数。</td></tr>
+                <tr><td>Shareholder return</td><td align="center">$80B auth.</td><td>额外回购授权和季度股息升至 $0.25，显示 FCF 质量强；但也需要判断是否代表再投资空间边际下降。</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Market pricing anchor:</strong> 卖方样本高度一致，核心都是 <strong>P/E × 前瞻或标准化 EPS</strong>。高盛用 30x P/E × 标准化 EPS $8.25 得到 $250；摩根士丹利用约 22x P/E × CY27/FY28 MW EPS $13.08 得到 $288；瑞银用 19x P/E × C2027E EPS $12.68 得到 $245。换言之，市场不是没有看到增长，而是在争论应看哪一年 EPS、给多少倍，以及中国/ASIC/CapEx 风险是否压低倍数。</p>
+        <p><strong>Embedded expectations:</strong> 当前股价对应 OpenBB/YFinance forward P/E 约 18.8x、trailing P/E 约 33.7x；FMP/YFinance 目标价均值 $278，隐含约 27% 上行。真正的 upside 不是把 2026 年收入简单外推，而是证明“token cost 下降 → 更高利用率/更长资产寿命 → 更高每 MW 毛利 → 更宽融资能力”的机制能持续。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr><th>Company</th><th align="right">Market Cap</th><th align="right">Forward P/E</th><th align="right">EV/EBITDA</th><th align="right">Revenue Growth</th><th align="right">Op. Margin</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>NVDA</td><td align="right">$5.32T</td><td align="right">18.8x</td><td align="right">40.4x</td><td align="right">73.2%</td><td align="right">65.0%</td></tr>
+                <tr><td>AMD</td><td align="right">$0.73T</td><td align="right">34.7x</td><td align="right">97.5x</td><td align="right">37.8%</td><td align="right">14.4%</td></tr>
+                <tr><td>AVGO</td><td align="right">$1.96T</td><td align="right">22.7x</td><td align="right">54.1x</td><td align="right">29.5%</td><td align="right">44.9%</td></tr>
+                <tr><td>MRVL</td><td align="right">$0.17T</td><td align="right">35.0x</td><td align="right">64.2x</td><td align="right">22.1%</td><td align="right">18.7%</td></tr>
+                <tr><td>TSM</td><td align="right">$2.11T</td><td align="right">20.9x</td><td align="right">2.9x</td><td align="right">35.1%</td><td align="right">58.1%</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 三张图用于区分“价格已经反映了 AI boom”与“估值倍数是否仍落后于 NSM 转换”。P/E 图使用 reported TTM EPS proxy；NSM 图用季度收入同比作为公开可得的 value-creation proxy，原因是 token-per-watt/每 MW 毛利等理论 NSM 尚未系统披露。</p>
+        <img src="./assets/nvda_price_action_narrative_eras.png" alt="NVIDIA price action and narrative eras chart">
+        <img src="./assets/nvda_historical_valuation_bands.png" alt="NVIDIA historical valuation bands chart">
+        <img src="./assets/nvda_nsm_mismatch_jaws_chart.png" alt="NVIDIA NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead><tr><th>Lens</th><th>Assessment</th></tr></thead>
+            <tbody>
+                <tr><td>CEO NSM</td><td><strong>Lowest lifetime cost per token / token throughput per watt and dollar.</strong> 管理层反复强调客户买的不是 GPU，而是能持续生产 intelligence 的 AI factory；公开代理指标是 Data Center revenue、networking attach、GB300/Rubin ramp、MLPerf 与 token-cost 改善。</td></tr>
+                <tr><td>Long-term investor NSM</td><td><strong>每 MW/每机架的可持续 gross profit 与 FCF，并由平台份额保护。</strong> 需要跟踪 frontier model 与 inference 份额、ACIE/sovereign/enterprise 渗透、网络 attach、gross margin 是否能维持 mid-70s。</td></tr>
+                <tr><td>Market-consensus NSM</td><td><strong>FY27/FY28 EPS、Data Center 指引与 hyperscaler CapEx。</strong> 卖方目标价仍主要由 P/E × EPS 决定，说明市场锚仍是财务模型而非 AI factory 单位经济。</td></tr>
+                <tr><td>Mismatch category</td><td><strong>Healthy lag with narrative-trap risk.</strong> 如果 AI factory 经济继续改善，市场的 P/E 锚低估 duration；如果 CUDA/ASIC/China 风险压低长期 EPS，市场并未错。</td></tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">user value → agentic/reasoning workload expansion → higher token demand and utilization → AI factory dependence across hyperscale + ACIE + edge → networking/software/rack attach → pricing power, gross margin durability, FCF → higher justified EPS duration / multiple</p>
+
+        <h2>4. Evidence From Required Streams</h2>
+        <p><strong>Stream A — Market Consensus:</strong> 新闻流显示 Q1 beat-and-raise 仍引发“高预期兑现”式反应；中国 H200/H20 链条的核心是许可不等于交付，更不等于收入确认。Podwise 与买方材料把争议拉到更深层：多头看 inference output factory 和系统化 moat，空头看 CUDA 切换成本下降、ASIC 在稳定推理负载上的替代、以及 hyperscaler CapEx 的融资/ROI 压力。技术层面仍在上升趋势中，但财报后动能短线降温。</p>
+        <p><strong>Stream B — Management Reality:</strong> 最新电话会和 10-Q 支持管理层叙事：Data Center $75B、Hyperscale $38B、ACIE $37B，第二类 AI data center 已经接近 hyperscale 规模；Q2 指引 $91B 且不含中国数据中心计算收入；Vera Rubin 计划 Q3 开始生产出货，管理层给出 standalone CPU 约 $20B 机会和 $1T Blackwell/Rubin revenue visibility。</p>
+        <p><strong>Stream C — Buy-side Conviction:</strong> 买方流最有用的不是“看多/看空”，而是 falsification map：token economics 是否压缩、hyperscaler 是否把稳定推理迁到自研 ASIC、软件 moat 是否体现在 margin premium、Blackwell/Rubin 是否出现供给/封装/网络 ramp air pocket。</p>
+
+        <h2>5. Investment Implication</h2>
+        <p><strong>潜在机会存在，且更像 timing mismatch + framework mismatch 的组合。</strong>Timing mismatch 在于 FY27/FY28 EPS 仍可能随着 Q2/Q3 交付、ACIE 增长和 Rubin 订单上修；framework mismatch 在于市场仍以 P/E 讨论一家正在把芯片、网络、软件、整机柜和融资可得性组合成 AI factory 平台的公司。</p>
+        <p><strong>但这不是低风险错杀。</strong>NVDA 已是强共识，卖方样本目标价 $245–288、OpenBB 共识均值 $278，说明“质量”和“大部分增长”已被看见。下一阶段研究应聚焦三个可证伪问题：第一，GB300/Rubin 是否继续把 token cost 降到竞争对手难以追的水平；第二，ACIE/AI native/sovereign/enterprise 是否能证明第二增长曲线不只是 hyperscaler 外溢；第三，GM mid-70s 与 FCF conversion 是否在系统业务占比提升后仍稳定。</p>
+
+        <h2>6. What Confirms Or Falsifies</h2>
+        <ul>
+            <li><strong>确认：</strong>Q2 FY2027 收入接近或高于 $91B 指引，且不依赖中国数据中心计算恢复；Data Center networking attach 和 ACIE 继续高增长。</li>
+            <li><strong>确认：</strong>Vera Rubin Q3/Q4 生产出货顺利，客户从 Blackwell 平滑迁移，GB300/Rubin 的实际 token cost 或利用率优势被第三方 benchmark 和客户订单验证。</li>
+            <li><strong>确认：</strong>卖方 FY28/CY27 EPS 继续上修而 P/E 不扩张，说明 upside 来自 earnings power 而非更激进倍数。</li>
+            <li><strong>否定：</strong>H100/Blackwell 租赁价格明显走弱、neocloud/of-fake 风险扩大，或 AI 应用收入无法支撑 CapEx 增速。</li>
+            <li><strong>否定：</strong>Hyperscaler 自研 ASIC 从内部/稳定推理负载外溢到更广泛模型，造成 NVDA price/performance concessions 或 gross margin pressure。</li>
+            <li><strong>否定：</strong>中国收入恢复被市场当作催化但迟迟无法交付，或出口管制进一步压缩产品组合。</li>
+        </ul>
+
+        <h2>7. Source Map</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>Stream</th><th>Primary files used</th></tr></thead>
+            <tbody>
+                <tr><td>News</td><td><code>temp/news_nvda_findings.md</code>; FreshRSS evidence files under <code>collected_resources/20260522_freshrss_entry_*.txt</code>.</td></tr>
+                <tr><td>Podwise</td><td><code>collected_resources/podwise_nvda_discussion.md</code>.</td></tr>
+                <tr><td>Sell-side</td><td><code>temp/sell_side_nvda_findings.md</code>; markdown excerpts under <code>collected_resources/sell_side/</code>.</td></tr>
+                <tr><td>Technical / Market Data</td><td><code>collected_resources/nvda_technical_30d.csv</code>, <code>openbb_snapshot_20260522.md</code>, <code>nvda_yfinance_snapshot.json</code>, <code>nvda_peer_snapshot_yfinance.csv</code>.</td></tr>
+                <tr><td>Earnings Calls</td><td><code>collected_resources/earnings_calls/NVDA_FY2027-Q1_earnings_call_transcript.md</code> plus prior three call transcripts.</td></tr>
+                <tr><td>SEC</td><td><code>collected_resources/nvda_2026-05-20_10q_0001045810-26-000052.html</code>, <code>nvda_2026-02-25_10k_0001045810-26-000021.html</code>, <code>nvda_sec_filings_index.json</code>.</td></tr>
+                <tr><td>Buy-side</td><td><code>temp/buy_side_nvda_findings.md</code>; source markdown files from SemiAnalysis, Stratechery, FundaAI and Clouded Judgement in <code>collected_resources/</code>.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
