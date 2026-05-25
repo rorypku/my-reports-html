@@ -20,7 +20,7 @@ from typing import Any
 DEFAULT_REPO = "rorypku/my-reports-requests"
 DEFAULT_TITLE_PREFIX = "report request:"
 DEFAULT_AGENT_DIR = "/Users/kai/agent/investment_research/sitrep-agent"
-REQUEST_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9 ._:+/\-]{0,79}")
+REQUEST_PATTERN = re.compile(r"[^\s\x00-\x1f\x7f][^\x00-\x1f\x7f]{0,79}")
 
 
 def run(command: list[str], cwd: Path | None = None, capture: bool = True) -> subprocess.CompletedProcess[str]:
@@ -63,7 +63,7 @@ def validate_request(value: str) -> str:
     request = re.sub(r"\s+", " ", value.strip())
     if not REQUEST_PATTERN.fullmatch(request):
         raise ValueError(
-            f"Invalid request {request!r}. Use 1-80 characters: letters, numbers, spaces, . _ : + / -"
+            f"Invalid request {request!r}. Use 1-80 non-control characters"
         )
     return request
 

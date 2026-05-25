@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Holdings SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; background: var(--paper); }
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p, h2 + table, h2 + ul, h2 + ol { margin-top: 0; }
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong { color: var(--ink); font-weight: 600; }
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] { text-align: right; padding: 14px 0 12px 18px; }
+        thead th[align="center"] { text-align: center; padding: 14px 12px 12px; }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+        tr:nth-child(even) { background: transparent; }
+        .snapshot-table, .nsm-table { table-layout: auto; }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table { table-layout: auto; font-size: 14.5px; line-height: 1.48; }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) { width: 22%; min-width: 96px; padding-right: 18px; }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) { width: 24%; min-width: 88px; padding-left: 8px; padding-right: 8px; }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) { width: auto; min-width: 180px; padding-left: 18px; padding-right: 0; }
+        .peer-table { table-layout: fixed; font-size: 13px; line-height: 1.35; }
+        .peer-table thead th { font-size: 10px; letter-spacing: 0.06em; }
+        ul, ol { margin: 0 0 24px; padding: 0; list-style: none; }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li { counter-increment: olist; }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain { overflow-wrap: anywhere; }
+        ::selection { background: var(--ink); color: var(--paper); }
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table, table.metric-table { table-layout: auto; }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th, .peer-table tbody td { min-width: 92px; }
+            .peer-table thead th:first-child, .peer-table tbody td:first-child { min-width: 112px; }
+            .value-chain { font-size: 14px; line-height: 1.6; }
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> BKNG</p>
+            <p><strong>Date:</strong> 2026-05-25</p>
+            <p><strong>Classification:</strong> Advance to next-stage research</p>
+        </div>
+
+        <h1>Booking Holdings Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：进入下一阶段研究，但核心不是“旅游龙头便宜”，而是“AI 去中介化叙事是否把 BKNG 的直连、忠诚度、支付和端到端旅程控制权低估了”。</strong>拆股后股价截至 2026-05-22 收于 $161.06，接近过去一年低位；OpenBB/YFinance 口径显示 forward P/E 约 13.1x、EV/EBITDA 约 12.3x。卖方最新目标价集中在 $175-$245，较现价仍有可观空间，但分歧已经很清楚：高盛用 15.0x NTM GAAP EBITDA 与 16.0x EV/(FCF-SBC) 做锚，伯恩斯坦则警惕 AI 代理与 Google Hotels/API 可能压缩 OTA 的流量入口价值。</p>
+        <p>我认为这不是一个已经被证明的结构性错误定价，而是一个值得深入验证的错配候选：市场容易把 BKNG 当成“靠 Google 流量、靠酒店佣金的 OTA”，并在中东冲突和 AI 代理风险下压低倍数；管理层披露的 direct/mobile/Genius、merchant payments、connected transactions 与 AI 客服效率则显示，公司正在把价值捕获从单点住宿中介，推向更高频、更直连、更可复购的 trip operating layer。下一阶段研究必须验证：这些指标是否真的能转化为每股 FCF，而不是被竞争、折扣、监管与低毛利垂直品类吃掉。</p>
+
+        <h2>2. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Latest Situation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>2026-05-22 收盘价 $161.06；按生成的 3 年价格序列，52 周调整后区间约 $154.13-$231.27。OpenBB/YFinance 口径：市值约 $124.8bn，EV 约 $128.0bn。BKNG 于 2026-04-06 开始按 25:1 拆股后交易，因此 2026 年前后目标价需统一到拆股后口径。</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>Q1 2026：gross bookings $53.8bn，同比增长 15.2%；revenue $5.53bn，同比增长 16.2%；management call 口径 adjusted EBITDA 约 $1.3bn，同比增长 19%；room nights 338mn，同比增长 6%，剔除中东冲突影响约 8%。2025 年 gross bookings $186.1bn，revenue $26.9bn，segment adjusted EBITDA less capex $9.85bn。</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>过去 30 个交易日从 4 月中高点约 $192 回落至 5 月中低点 $154，随后反弹至 $161。RSI 从 33.5 回升至 44.4，MACD 柱状图从 -2.13 收窄至 -0.05，说明下跌动能减弱但仍未形成明确上升趋势；价格仍低于 EMA50 约 $169.8。</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>公司 Q1 2026 回购 $3.6bn；管理层称自 2014 年以来股本数已减少超过 40%。卖方分歧集中在短期中东影响与长期 AI 入口风险：4 月下旬多个券商下调目标价，但高盛和部分机构仍把估值锚放在 EBITDA/FCF 质量上。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr>
+                    <th>Key Metric</th>
+                    <th align="center">Value</th>
+                    <th>Implication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Q1 room nights</td>
+                    <td align="center">338mn / +6%</td>
+                    <td>剔除中东冲突约 +8%，底层需求没有显示全球性断崖；但短期交易仍会被 booking/cancellation 节奏牵引。</td>
+                </tr>
+                <tr>
+                    <td>Mobile mix</td>
+                    <td align="center">high-50%</td>
+                    <td>移动端是 connected trip 的主界面，且大部分移动间夜为 direct，有助于降低长期获客成本。</td>
+                </tr>
+                <tr>
+                    <td>Alternative accommodations</td>
+                    <td align="center">约 38%</td>
+                    <td>说明 BKNG 已不是纯酒店平台；但替代住宿服务成本和欧洲暴露可能压低利润率。</td>
+                </tr>
+                <tr>
+                    <td>Merchant gross bookings</td>
+                    <td align="center">约 72%</td>
+                    <td>支付能力是 connected trip 的基础设施，提升收入捕获和灵活性，但也带来支付、欺诈和合规成本。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 当前市场锚更像 forward P/E / EV/EBITDA，而不是单纯 GMV。OpenBB/YFinance 口径下 BKNG forward P/E 约 13.1x、EV/EBITDA 约 12.3x；高盛 Q1 复盘采用等权的 EV/GAAP EBITDA 与 EV/(FCF-SBC) 改造 DCF，base multiple 分别为 15.0x 与 16.0x；伯恩斯坦同业框架用 16.6x NTM+1 EV/EBITDA 与 20x NTM+1 P/E。隐含预期是：BKNG 仍能中高个位数到低双位数增长，但 AI/Google 分发风险、监管和低毛利垂直品类会限制倍数。</p>
+        <p><strong>Peer Benchmarking:</strong> 相比 EXPE，BKNG 的利润率和资本回报质量明显更强；相比 ABNB，BKNG 估值更低但叙事更受“中介入口被替代”压制。TCOM 数据因币种、净现金与中国市场结构差异不适合直接放入主表。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">Forward P/E</th>
+                    <th align="right">EV/EBITDA</th>
+                    <th align="right">Revenue Growth</th>
+                    <th align="right">Operating / EBITDA Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BKNG</td>
+                    <td align="right">$124.8bn</td>
+                    <td align="right">13.1x</td>
+                    <td align="right">12.3x</td>
+                    <td align="right">16.2%</td>
+                    <td align="right">25.0% / 37.5%</td>
+                </tr>
+                <tr>
+                    <td>ABNB</td>
+                    <td align="right">$78.6bn</td>
+                    <td align="right">21.9x</td>
+                    <td align="right">26.4x</td>
+                    <td align="right">17.9%</td>
+                    <td align="right">3.2% / 20.7%</td>
+                </tr>
+                <tr>
+                    <td>EXPE</td>
+                    <td align="right">$25.8bn</td>
+                    <td align="right">9.3x</td>
+                    <td align="right">10.0x</td>
+                    <td align="right">14.7%</td>
+                    <td align="right">7.1% / 17.1%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 三张图分别展示拆股调整后的 3 年相对走势、forward P/E proxy 区间，以及 CEO NSM proxy 与市场倍数之间的错配。forward P/E proxy 使用价格与公开一致预期 EPS 点插值，NSM 图用 room-night YoY growth 近似 CEO NSM；这是代理变量，不是公司正式披露的单一北极星。</p>
+        <img src="./assets/bkng_price_action_narrative_eras.png" alt="Booking Holdings price action and narrative eras chart">
+        <img src="./assets/bkng_historical_valuation_bands.png" alt="Booking Holdings historical valuation bands chart">
+        <img src="./assets/bkng_nsm_mismatch_jaws_chart.png" alt="Booking Holdings NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead>
+                <tr>
+                    <th>Lens</th>
+                    <th>Assessment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>可代理为 room nights、connected transactions、mobile/direct mix、Genius high-tier engagement。产品价值是降低旅行搜索、组合、支付、改签和服务成本。</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor NSM</td>
+                    <td>每股 FCF：由 direct/loyalty 降低获客成本、merchant/payments 提升 take-rate 和贡献利润、回购提高每股价值共同驱动。</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus NSM</td>
+                    <td>短期 gross bookings/room-night growth、EBITDA/EPS 修正、AI/Google 流量入口风险，以及用 EV/EBITDA 或 P/E 表达的倍数。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td><strong>Healthy lag 与 narrative trap 的混合。</strong>如果 direct/Genius/mobile/connected trip 继续提升，市场可能过度锚定“OTA 被 AI 绕过”；如果 AI 入口真的迁移给 Google/LLM，当前低倍数不是机会而是正确折价。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Value Creation To Value Capture Chain:</strong></p>
+        <p class="value-chain">旅行选择更全、更可靠、更少摩擦 → 用户在 app/会员体系内完成更多预订 → 住宿、机票、用车、餐厅和景点形成 connected transactions → direct mix、Genius 与 payments 增强平台依赖 → 获客成本下降 / take-rate 与贡献利润提升 / 回购放大每股 FCF</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 如果市场错把 BKNG 当作被动承受 AI 分发冲击的传统 OTA，而公司实际把 AI 用于提升转化、自助服务、个性化与 direct channel 防守，那么 13x forward P/E 附近的估值可能存在再评级空间。用 FY2026 高盛修正后 GAAP EPS $10.67 粗略看，若市场重新接受 18x-20x P/E，对应 $192-$213；若采用卖方 $210-$230 区间，较 $161 现价约 30%-43% 上行。反面是，若 AI agents/Google Hotels 真正把前门和支付链路拿走，BKNG 可能面对更高营销成本、更低佣金率和更重折扣，低倍数会变成价值陷阱。</p>
+
+        <h2>4. SitRep Judgment</h2>
+        <p><strong>Classification: Advance to next-stage research.</strong></p>
+        <p><strong>Wrong anchor:</strong> 有可信但未证实的 wrong-anchor case。卖方和市场已经看到 AI 风险，但定价可能过度把 BKNG 归类为“搜索流量中介”，而没有充分区分 direct/mobile/Genius、merchant payments、connected trip 与 AI 客服效率对每股 FCF 的防守能力。</p>
+        <p><strong>Material upside from being right:</strong> 条件满足。当前 forward P/E 约 13x，相对 ABNB 的 21.9x、BKNG 历史 proxy 区间和高盛/伯恩斯坦估值锚存在折价；如果 EPS 预期不继续下修，倍数回到 18x 左右就足以产生组合层面有意义的上行。</p>
+        <p><strong>Clear validation path:</strong> 条件满足。未来 2-4 个季度可跟踪 direct mix、mobile mix、Genius high-tier room-night share、connected transactions、merchant contribution margin、customer-service cost per booking、Q2/Q3 中东冲击恢复斜率，以及管理层是否能在 AI 产品中看到更高转化和更低取消。</p>
+
+        <h2>5. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>Q2/Q3 2026 room-night growth 剔除中东影响后回到高个位数，且 gross bookings 与 revenue take-rate 没有明显恶化。</li>
+            <li>Direct/mobile/Genius 指标继续上升：mobile room-night mix 维持 high-50% 或更高，Genius level 2/3 贡献继续接近或高于 high-50% room-night share。</li>
+            <li>Connected transactions 维持高双位数增长，同时 merchant payments 的增量收入大于增量变量成本，营销费用占 gross bookings 没有上行。</li>
+            <li>AI 产品从“概念”进入经营指标：搜索到预订路径更短、取消率更低、自助服务率更高、客服成本/booking 继续下降。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>Direct mix 停滞或下降，同时 SEO/paid marketing 压力使营销费用占 gross bookings 上升。</li>
+            <li>Connected trip 增长主要来自低毛利 flights/cars/attractions，导致收入增长但 EBITDA margin 或 FCF conversion 变差。</li>
+            <li>AI/Google/酒店直连渠道开始带来可见佣金率压力，或大型酒店集团进一步绕开 OTA 并减少库存供给。</li>
+            <li>DMA/DSA、平台排序、数据使用或支付监管导致欧洲产品限制、合规成本上升，削弱 BKNG 最强区域的规模优势。</li>
+        </ul>
+
+        <h2>6. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 2026-2028 每股 FCF 框架：拆分 room nights、ADR、take-rate、merchant contribution、marketing efficiency、SBC 与回购，检验 $190/$210/$230 的可实现路径。</li>
+            <li>做 AI 分发压力情景：Google Hotels、OpenAI/Anthropic/Amazon agent、酒店直连 API 分别对 paid traffic、SEO、佣金率和 repeat rate 的影响。</li>
+            <li>按地区拆 U.S./Europe/Asia：验证美国 low-teens room-night growth 是否是份额获取，亚洲增长是否被低 ADR 和折扣抵消，欧洲 DMA 是否改变经济性。</li>
+            <li>对比 EXPE/ABNB/TCOM 的供给深度、direct mix、支付能力、会员体系和 app 使用频率，判断 BKNG 的 connected trip 是否真有差异化。</li>
+            <li>用电话会逐季追踪 management KPI：connected transactions、Genius high-tier active base、AI 客服成本、merchant gross bookings mix 与 marketing ROI。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li>BKNG Q1 2026 earnings calls: <code>../collected_resources/earnings_calls/</code></li>
+            <li>BKNG SEC 10-K / 10-Q / 8-K via EdgarTools: <code>../collected_resources/sec_edgar/</code></li>
+            <li>Sell-side consensus evidence and reports: <code>../collected_resources/sell_side_consensus_evidence.md</code>, <code>../collected_resources/sell_side_reports/</code></li>
+            <li>Buy-side / operator evidence: <code>../collected_resources/20260312_robonomics_agentic_commerce.md</code>, <code>../collected_resources/20260227_clouded_judgement_poison_of_inertia.md</code>, <code>../collected_resources/20251219_clouded_judgement_front_door.md</code></li>
+            <li>News researcher evidence: <code>../collected_resources/20260525_bkng_news_evidence.md</code></li>
+            <li>Podwise discussion synthesis: <code>../collected_resources/podwise_booking_discussion.md</code></li>
+            <li>Market, peer and technical data: <code>../collected_resources/bkng_technical_30d.csv</code>, <code>../collected_resources/bkng_market_snapshot.csv</code>, <code>../collected_resources/bkng_spy_3y_prices.csv</code>, OpenBB/YFinance outputs</li>
+            <li>Charts: <code>./assets/bkng_price_action_narrative_eras.png</code>, <code>./assets/bkng_historical_valuation_bands.png</code>, <code>./assets/bkng_nsm_mismatch_jaws_chart.png</code></li>
+        </ul>
+    </div>
+</body>
+</html>

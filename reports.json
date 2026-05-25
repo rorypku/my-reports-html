@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260525_booking",
+    "title": "Booking Holdings Situation Report",
+    "date": "2026-05-25",
+    "url": "./20260525_booking/",
+    "path": "20260525_booking/",
+    "sortKey": "20260525"
+  },
+  {
     "id": "20260522_walmart",
     "title": "Walmart Situation Report",
     "date": "2026-05-22",
