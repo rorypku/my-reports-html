@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowflake SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> SNOW</p>
+            <p><strong>Date:</strong> 2026-05-29</p>
+            <p><strong>Classification:</strong> Advance to next-stage research, valuation-sensitive</p>
+        </div>
+
+        <h1>Snowflake Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：</strong>Snowflake 值得进入下一阶段研究，但不是因为 Q1 FY2027 后股价仍便宜，而是因为市场的定价锚可能正在从“高估值消费型数据仓库”切换到“企业 AI 工作流控制面”。5 月 27 日财报把这个转换推到台前：Q1 产品收入 13.34 亿美元，同比 34%，NRR 回升到 126%，FY27 产品收入指引从 56.6 亿美元上调到 58.4 亿美元，且管理层明确把增量归因于核心平台加速和 Cortex Code、Snowflake Intelligence 的可观察消费。</p>
+        <p>这不是干净的便宜股。5 月 28 日收盘价 239.20 美元，单日上涨约 36%，基于当前股本和净现金估算的 EV/FY27 产品收入约 13.8 倍，已经回到三年估值区间上半部。错误定价的机会只在一个更窄的问题上：如果 AI 产品不是一次性消费脉冲，而是让 Snowflake 从数据仓库预算进入 AI 开发、迁移、治理和业务动作预算，那么市场用 EV/Sales 对近端增长斜率定价仍偏短视。</p>
+
+        <h2>2. Source Freshness Check</h2>
+        <table class="source-freshness-table">
+            <thead>
+                <tr><th>Source Category</th><th>Latest Source Date</th><th>Freshness Status</th><th>Age vs. Report Date</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Sell-side reports</td><td>2026-05-28 public target updates; local reports through Q1 FY27 preview</td><td>Mostly current</td><td>1 day for public updates; local bank PDFs lag latest print</td></tr>
+                <tr><td>Earnings call transcript</td><td>FY2027 Q1, 2026-05-27</td><td>Current</td><td>2 days</td></tr>
+                <tr><td>SEC filings</td><td>8-K 2026-05-27; 10-K filed 2026-03-20</td><td>Current for earnings, annual risk factors current</td><td>2 days / 70 days</td></tr>
+                <tr><td>Buy-side reports</td><td>2026-04-29 general regime note; Snowflake-specific 2026-02-26</td><td>Useful but partly pre-Q1</td><td>~1 to 3 months</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>Item</th><th>Latest Situation</th></tr></thead>
+            <tbody>
+                <tr><td>Market Data &amp; Positioning</td><td>收盘价 239.20 美元，52 周区间约 121.11 至 277.14 美元，市值约 829 亿美元。按约 21 亿美元净现金估算，企业价值约 808 亿美元。空头股数约 1,947 万股，约为流通股 5.8%。</td></tr>
+                <tr><td>Key Financial Metrics</td><td>Q1 FY2027 产品收入 13.34 亿美元，同比 34%；总收入 13.91 亿美元，同比 33%；RPO 92.1 亿美元，同比 38%；$1M+ 客户 779 家；NRR 126%；非 GAAP 经营利润率 12%。FY27 产品收入指引 58.4 亿美元，同比约 31%。</td></tr>
+                <tr><td>Price Action &amp; Technicals</td><td>30 日技术序列显示股价从 4 月底低位 136.47 美元快速上行到 239.20 美元，5 月 28 日放量突破。RSI 84.9，MACD 显著转正，价格大幅高于 50 日 EMA，动量强但短线过热。</td></tr>
+                <tr><td>Positioning</td><td>Q1 回购约 3 亿美元股票，剩余授权约 8 亿美元。市场共识在 Q1 后快速上调，S&amp;P Global 聚合 51 名分析师平均目标价约 274 美元，中位数 282 美元。</td></tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead><tr><th>Key Metric</th><th align="center">Value</th><th>Implication</th></tr></thead>
+            <tbody>
+                <tr><td>Product revenue growth</td><td align="center">34%</td><td>从 FY26 Q1 的 26% 和 FY26 Q4 的 30% 再加速，市场原先的“优化后低斜率”锚被打破。</td></tr>
+                <tr><td>NRR</td><td align="center">126%</td><td>消费模式恢复健康，AI 和迁移工作负载正在补回此前优化压力。</td></tr>
+                <tr><td>AI adoption</td><td align="center">13,600+ AI accounts; COCO 7,100+</td><td>AI 不只是销售叙事，已经进入可计量消费和平台活跃度。</td></tr>
+                <tr><td>FY27 operating margin guide</td><td align="center">13.5%</td><td>管理层称 AI 毛利率较低，但 AWS 成本和内部 AI 效率可抵消，利润率担忧暂时缓解。</td></tr>
+            </tbody>
+        </table>
+
+        <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 卖方主要尺子仍是 EV/Sales 或 EV/FCF/G。Bernstein 在 2 月用约 13 倍 P/S 得到 237 美元目标价，GS 使用 DCF 与 15.5 倍 EV/Sales 混合框架，MS 用 CY30 FCF 折现和约 34 倍 EV/FCF。Q1 后公开调价显示 Stifel/Needham 到 300 美元、BTIG 到 280 美元、JMP 到 325 美元、Monness 到 320 美元。市场锚已经从“是否继续减速”转到“AI 能否支撑 25% 以上中期产品收入增长，并让 FCF 杠杆兑现”。</p>
+        <p><strong>Embedded expectations:</strong> 以当前约 808 亿美元 EV 和 FY27 产品收入指引 58.4 亿美元计算，SNOW 交易在约 13.8 倍 EV/FY27 product revenue。若用 S&amp;P Global 聚合 FY27 总收入 60.3 亿美元，约 13.4 倍 EV/FY27 revenue。这个价格已经要求 FY28 继续 20% 以上增长，并且非 GAAP OPM/FCF margin 继续向高 teens 或 20%+ 推进。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr><th>Company</th><th align="right">Market Cap</th><th align="right">EV/Sales</th><th align="right">Forward P/E</th><th align="right">Revenue Growth</th><th align="right">Margin / FCF</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>SNOW</td><td align="right">$82.9B</td><td align="right">~13.8x FY27 product rev</td><td align="right">~92x</td><td align="right">30.1% TTM / 31% guide</td><td align="right">23% FY27 adj. FCF margin guide</td></tr>
+                <tr><td>DDOG</td><td align="right">$80.2B</td><td align="right">20.9x TTM</td><td align="right">79x</td><td align="right">32.2%</td><td align="right">Positive GAAP margin, high reinvestment</td></tr>
+                <tr><td>MDB</td><td align="right">$26.2B</td><td align="right">9.7x TTM</td><td align="right">46x</td><td align="right">26.7%</td><td align="right">Near breakeven operating margin</td></tr>
+                <tr><td>PLTR</td><td align="right">$343.6B</td><td align="right">64.3x TTM</td><td align="right">69x</td><td align="right">84.7%</td><td align="right">46.2% operating margin</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 图 2 的估值带使用日频股价、当前股本、约 21 亿美元净现金和 FY27 产品收入指引构造 EV/Product Revenue 代理。它不是精确的逐日 NTM 共识序列，但能显示市场愿意为同一 FY27 收入基准支付的倍数变化。</p>
+        <img src="./assets/snow_price_action_narrative_eras.png" alt="Snowflake price action and narrative eras chart">
+        <img src="./assets/snow_historical_valuation_bands.png" alt="Snowflake historical valuation bands chart">
+        <img src="./assets/snow_nsm_mismatch_jaws_chart.png" alt="Snowflake NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+        <table class="nsm-table">
+            <thead><tr><th>Lens</th><th>Assessment</th></tr></thead>
+            <tbody>
+                <tr><td>CEO NSM</td><td>“可治理的数据到可执行动作”的生产速度。公开代理指标包括 deployed use cases、Snowflake Intelligence/COCO 使用账户、数据分享客户比例和大客户迁移周期缩短。</td></tr>
+                <tr><td>Long-term investor NSM</td><td>高质量消费收入的可持续复利，核心指标是产品收入增长、NRR、$1M/$10M 客户、RPO、产品毛利率和 FCF margin 的组合。</td></tr>
+                <tr><td>Market-consensus NSM</td><td>EV/Sales 对产品收入增长的敏感度，辅以 FCF/G。市场仍用“增长斜率乘以利润率可信度”给倍数。</td></tr>
+                <tr><td>Mismatch category</td><td><strong>Healthy lag, partly closing.</strong> Q1 已让滞后开始修复，但市场还没有完全证明愿意把 Snowflake 当作企业 AI 控制面定价，而不是数据仓库再加速。</td></tr>
+            </tbody>
+        </table>
+
+        <p class="value-chain">治理数据基础 → 更快迁移和开发 → 更多生产用例上线 → 组织工作流依赖 Snowflake → 消费收入扩张 / NRR 稳定 / AI 产品附加收入 → FCF 杠杆与估值重估</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 上行来自两个层次。第一，FY27 指引仍可能被“观察到的 COCO 行为”继续上修。第二，如果 Snowflake Intelligence 与 Cortex Code 成为迁移和应用构建入口，FY28 收入增长和 FCF 率可能同时高于当前共识。下行也清楚：AI 产品毛利率较低，AWS 等 hyperscaler 既是供应商也是竞争者，Databricks 在非结构化、实时和 AI-native 数据工程上仍有强势叙事。如果 Q1 是一次性 token/agent 消费脉冲，13 倍以上前瞻销售倍数并不宽容。</p>
+
+        <h2>5. SitRep Judgment</h2>
+        <p><strong>Classification: Advance to next-stage research, valuation-sensitive.</strong></p>
+        <p><strong>Wrong anchor:</strong> 有。市场在 Q1 前更像是在惩罚消费软件减速和 SaaS 被 AI 替代的风险，但本季度显示 AI 正在推动迁移、开发、支持和业务查询消费，错误锚从“AI 威胁”转向“AI 增量消费”。</p>
+        <p><strong>Material upside from being right:</strong> 有但不无脑。若 FY28 仍能 25% 左右增长，且 OPM 向 16% 至 20% 走，当前 13.8 倍 FY27 产品收入可以被更高收入基数和 FCF 转化吸收。若只是 FY27 一次性上修，Q1 后的 36% 股价跳升已经吃掉大量容易的钱。</p>
+        <p><strong>Clear validation path:</strong> 有。未来两个季度看 COCO/Snowflake Intelligence 账户增长、AI 产品收入披露、NRR、RPO、产品毛利率是否保持 75% 指引，以及 Q2/Q3 是否继续 beat and raise。</p>
+
+        <h2>6. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>Q2 FY2027 产品收入高于 14.20 亿美元上沿，并且全年产品收入指引再次上调，而不是只消化 Q1 beat。</li>
+            <li>COCO、Snowflake Intelligence 和 AI accounts 继续环比增长，同时 NRR 保持 125% 以上。</li>
+            <li>产品毛利率维持 75% 左右，证明 AI 消费不是以永久性毛利率牺牲换收入。</li>
+            <li>更多大型迁移周期从多年缩短到 1 至 2 个季度，并转化为 RPO 和 $10M+ 客户增长。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>AI 账户增长强但产品收入增长回落到 20% 中段，说明 adoption broad but shallow。</li>
+            <li>客户开始治理或限流 token/agent 消费，NRR 或使用强度回落。</li>
+            <li>毛利率低于 75% 指引，或 AWS/模型成本抵消不了 AI 产品成本。</li>
+            <li>Databricks、Microsoft Fabric、BigQuery/Vertex 等在大客户 AI 数据工作流中拿走更多新增预算。</li>
+        </ul>
+
+        <h2>7. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 FY27 至 FY30 情景模型：产品收入增长 20%/25%/30%，OPM 13.5% 到 22%，FCF margin 23% 到 30%，对应 EV/Sales 和 EV/FCF 敏感性。</li>
+            <li>做客户/伙伴 channel check，重点问 COCO 是否缩短迁移周期、是否产生净新增消费、客户是否计划限流 AI 用量。</li>
+            <li>拆解 AI 毛利率：模型调用、GPU/云成本、AWS Graviton/采购效率、内部 AI 节省，判断 75% 产品毛利率能否长期守住。</li>
+            <li>比较 Databricks/Fabric/Snowflake 在同一企业中的 workload 分工，确认 Snowflake 是否真的从 warehouse 扩到 agentic control plane。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li><strong>Transcript:</strong> Snowflake FY2027 Q1 earnings call transcript, 2026-05-27, local earnings-call export.</li>
+            <li><strong>SEC:</strong> Snowflake 8-K Exhibit 99.1, Q1 FY2027 results, filed 2026-05-27; Form 10-K for FY2026 filed 2026-03-20.</li>
+            <li><strong>Sell-side:</strong> Bernstein Snowflake vs MongoDB preview, 2026-02-20; Morgan Stanley SNOW 1Q26 preview; Goldman Sachs SNOW AI/Cortex notes; public May 28, 2026 analyst target updates from StockAnalysis and Investing.com.</li>
+            <li><strong>Buy-side:</strong> FundaAI SNOW Q4 review, 2026-02-26; Clouded Judgement “Get in the token path,” 2026-03-06; Clouded Judgement AI over-earning risk note, 2026-04-17.</li>
+            <li><strong>In-depth discussion / podcasts:</strong> Podwise synthesis across 20VC, No Priors, Business Breakdowns, SaaStr, and related Snowflake/Databricks discussions.</li>
+            <li><strong>News:</strong> CNBC Snowflake Q1/AWS/AI market reaction articles, 2026-05-27 and 2026-05-28; Snowflake investor relations overview.</li>
+        </ul>
+    </div>
+</body>
+</html>
