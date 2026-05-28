@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDD Holdings SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 22px 0 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> PDD</p>
+            <p><strong>Date:</strong> 2026-05-29</p>
+            <p><strong>Classification:</strong> Advance to next-stage research, with unit-economics gating</p>
+        </div>
+
+        <h1>PDD Holdings Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：PDD 值得进入下一阶段研究，但不是因为“便宜”本身，而是因为市场可能正在用错误的短期锚定给一个正在换经济制度的资产定价。</strong> 2026 年 5 月 27 日 Q1 业绩后，股价跌到 52 周低位附近；市场惩罚的是营销服务增速放缓、EPS miss、Temu 关税和合规压力，以及供应链/自营品牌投入可能让利润率继续波动。但与此同时，交易服务收入仍同比增长约 20%，集团仍有约 RMB4361 亿现金和短投，且 FY2025 仍产生约 RMB1069 亿经营现金流。</p>
+        <p>这不是一个干净的“质量复利”故事。PDD 的核心问题是：国内主站广告变现是否进入成熟/内卷期，而 Temu 是否必须从轻资产跨境撮合转向更重的本地仓、合规、供应链和自营品牌模式。如果这些投入只是为了维持补贴驱动的低质增长，股票是价值陷阱；如果它们把 PDD 从流量分发平台推向供应链组织者，当前约 7-8x forward P/E、约 US$62B 净现金的定价可能过度惩罚了过渡期利润。</p>
+
+        <h2>2. Source Freshness Check</h2>
+        <table class="source-freshness-table">
+            <thead>
+                <tr>
+                    <th>Source Category</th>
+                    <th>Latest Source Date</th>
+                    <th>Freshness Status</th>
+                    <th>Age vs. Report Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sell-side reports</td>
+                    <td>2026-05-28</td>
+                    <td>Current</td>
+                    <td>约 1 天；覆盖 Q1 2026 后高盛等更新</td>
+                </tr>
+                <tr>
+                    <td>Earnings call transcript</td>
+                    <td>2026-05-27 Q1 2026；本地库完整导出至 FY2025 Q4</td>
+                    <td>Mostly current</td>
+                    <td>约 2 天；Q1 用公开转录/公告补齐</td>
+                </tr>
+                <tr>
+                    <td>SEC filings</td>
+                    <td>2026-04-29 Form 20-F for FY2025</td>
+                    <td>Current</td>
+                    <td>约 1 个月</td>
+                </tr>
+                <tr>
+                    <td>Buy-side reports</td>
+                    <td>2026-03-04 经营者访谈；2025-12 FundaAI 研究</td>
+                    <td>Useful but incomplete</td>
+                    <td>约 3 个月；未找到系统性 hedge fund memo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Latest Situation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>2026-05-28 美股收盘价 US$83.03；52 周区间约 US$81.56-139.41；市值约 US$118.2B，企业价值约 US$54.5B。现金和短投约 RMB436.1B，折合约 US$63.2B，净现金约 US$62.5B。</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>Q1 2026 收入 RMB106.2B，同比 +11%；交易服务 RMB56.3B，同比 +20%；在线营销 RMB49.9B，同比约 +2%；经营利润 RMB19.6B，同比 +22%；non-GAAP 净利润 RMB14.1B，同比 -17%。FY2025 收入 RMB431.8B，同比 +9.7%，经营现金流 RMB106.9B。</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>价格跌破 50 日均线 US$99 和 200 日均线 US$113；近 1 周约 -10.7%，YTD 约 -26.8%。30 日技术指标显示 RSI 约 29、MACD 在财报后转弱，短线是超卖状态，但还没有趋势反转确认。</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>Insider ownership 约 32%，机构持股约 30%；空头约 28.4M 股、约 3.7% outstanding，days-to-cover 约 4.6。不是典型高空头 squeeze 结构，更多是基本面锚定重估问题。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr>
+                    <th>Key Metric</th>
+                    <th align="center">Value</th>
+                    <th>Implication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Transaction services growth</td>
+                    <td align="center">+20% YoY</td>
+                    <td>最接近 Temu/跨境 GMV 与平台交易规模的公开 proxy，仍强于广告业务。</td>
+                </tr>
+                <tr>
+                    <td>Online marketing growth</td>
+                    <td align="center">约 +2% YoY</td>
+                    <td>市场担心国内主站广告 ROI 和商家投放意愿进入成熟/竞争压力期。</td>
+                </tr>
+                <tr>
+                    <td>Net cash per share</td>
+                    <td align="center">约 US$43.9</td>
+                    <td>现金占股价和市值比例高，是估值安全垫，也是资本配置争议点。</td>
+                </tr>
+                <tr>
+                    <td>FCF yield</td>
+                    <td align="center">约 13%</td>
+                    <td>若现金流韧性保持，当前折价隐含市场对 Temu 投入和监管风险给了很重惩罚。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+        <p><strong>Pricing Anchor &amp; Embedded Expectations:</strong> 市场当前主要锚在 <strong>FY26/FY27 EPS、在线营销增速、Temu 单位经济和供应链投入周期</strong>。卖方更常用 SOTP + 现金：国内核心电商给 10-12x FY26E P/E，Temu 用 1.5x FY26F P/S 或 GMV→利润率→倍数法，现金部分有机构打折。当前股价约对应 7-8x forward P/E、EV/FCF 约 3-4x，基本隐含：Temu 长期价值被大幅折价，且国内广告变现不会很快恢复。</p>
+        <p><strong>Sell-side ruler:</strong> 高盛 Q1 2026 后 TP US$145、MS TP US$148、野村 TP US$136、Bernstein PT US$132、Jefferies PT US$146、UBS SOTP 表内 PT US$198。核心差异不是目标价数字，而是 Temu 是否应被当作亏损负债、还是有独立平台期权价值。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">Forward P/E</th>
+                    <th align="right">Trailing P/E</th>
+                    <th align="right">Revenue Growth</th>
+                    <th align="right">Net Margin / FCF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PDD</td>
+                    <td align="right">US$118B</td>
+                    <td align="right">约 7-8x</td>
+                    <td align="right">约 9x</td>
+                    <td align="right">Q1 +11%</td>
+                    <td align="right">净利率约 22%；FCF yield 约 13%</td>
+                </tr>
+                <tr>
+                    <td>BABA</td>
+                    <td align="right">US$303B</td>
+                    <td align="right">约 14x</td>
+                    <td align="right">约 19x</td>
+                    <td align="right">约 +3%</td>
+                    <td align="right">净利率约 10%</td>
+                </tr>
+                <tr>
+                    <td>JD</td>
+                    <td align="right">US$39B</td>
+                    <td align="right">约 7x</td>
+                    <td align="right">约 21x</td>
+                    <td align="right">约 +5%</td>
+                    <td align="right">净利率约 1%</td>
+                </tr>
+                <tr>
+                    <td>MELI</td>
+                    <td align="right">US$86B</td>
+                    <td align="right">约 29x</td>
+                    <td align="right">约 45x</td>
+                    <td align="right">约 +49%</td>
+                    <td align="right">净利率约 6%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Historical Context &amp; Charts:</strong> 三张图表均已保存至 <code>outputs/assets/</code>。估值图使用公开每股收益/一致预期构建 forward P/E proxy；NSM 图使用交易服务收入增速作为 CEO NSM proxy，因为 PDD 不披露 GMV、活跃买家、Temu cohort 或留存。</p>
+        <img src="./assets/pdd_price_action_narrative_eras.png" alt="PDD price action and narrative eras chart">
+        <img src="./assets/pdd_historical_valuation_bands.png" alt="PDD historical valuation bands chart">
+        <img src="./assets/pdd_nsm_mismatch_jaws_chart.png" alt="PDD NSM mismatch jaws chart">
+
+        <p><strong>NSM Framework:</strong></p>
+
+        <table class="nsm-table">
+            <thead>
+                <tr>
+                    <th>Lens</th>
+                    <th>Assessment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO NSM</td>
+                    <td>供应链创造的“可售低价好货 + 确定履约 + 商家经营效率”。公开 proxy 是交易服务收入增速、远端物流/产业带项目覆盖、商家成本下降后的复投。</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor NSM</td>
+                    <td>可持续现金利润：Temu LTV/CAC、补贴/广告强度、履约和退货成本、国内广告 take rate，以及集团 FCF 在重投入期是否仍能保持。</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus NSM</td>
+                    <td>在线营销服务增速、季度 EPS/利润率、Temu 亏损和关税/合规成本。市场目前更惩罚“利润表噪音”和广告放缓。</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td><strong>Healthy lag with narrative-trap risk.</strong> 如果供应链投入正在把 Temu 和主站变成更深的商家基础设施，市场的利润率锚太短；如果增长靠补贴维持、留存和单位经济不能改善，则这是叙事陷阱。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Value Creation To Value Capture Chain:</strong></p>
+        <p class="value-chain">更低全链路成本 / 更确定履约 / 更丰富低价供给 → 消费者复购与商家留存 → 商家把省下的费用投入新品、质量和投放 → 平台从交易服务与广告工具捕获价值 → 规模化现金流与更强议价能力</p>
+
+        <p><strong>Upside/Downside Asymmetry:</strong> 上行来自两个通道：一是 EPS 预期修复，二是 P/E 从当前约 7-8x 回到中国互联网中位数或核心业务 10-12x 的卖方 SOTP 框架。下行则不是“估值再便宜一点”，而是 Temu 变重后现金回报率下降、国内广告增长停滞、监管成本永久侵蚀低价优势。</p>
+
+        <h2>5. SitRep Judgment</h2>
+        <p><strong>Classification: Advance to next-stage research, with unit-economics gating.</strong></p>
+        <p><strong>Wrong anchor:</strong> 有可信错误锚定。市场在用在线营销增速和季度 EPS 给 PDD 定价，但公司真实转型点可能是供应链/交易服务经济性是否能形成长期价值捕获。Q1 2026 的错配很典型：交易服务 +20%，但营销服务仅约 +2% 和 EPS miss 主导股价。</p>
+        <p><strong>Material upside:</strong> 存在足够大上行。当前 US$83 附近对比 S&P Global 35 位分析师平均目标价约 US$124，以及多家卖方 US$132-148 的中枢，隐含约 50% 左右的一年期重估空间。更重要的是，现金占市值比例高，使 ex-cash 的核心业务估值非常低。</p>
+        <p><strong>Clear validation path:</strong> 有可证伪路径，但需要下一阶段补充 Temu cohort 和商家 channel checks。未来 2-4 个季度如果交易服务保持强增长、在线营销企稳、现金流不被供应链投入吞噬，wrong-anchor case 会增强；反之，若投入只带来更低利润率而无留存/履约改善，应降级为价值陷阱观察。</p>
+
+        <h2>6. What Would Confirm Or Break The Thesis</h2>
+        <p><strong>Confirming datapoints</strong></p>
+        <ul>
+            <li>Q2-Q4 2026 交易服务收入继续维持高 teens 或 20%+ 增速，同时在线营销增速从低个位数回到中个位数以上。</li>
+            <li>管理层或第三方数据显示 Temu 主要市场广告/补贴强度下降、local-to-local 履约占比提升、复购和退货/纠纷指标改善。</li>
+            <li>FY2026 经营现金流仍保持 RMB90B+ 量级，且现金/短投没有因自营品牌和库存模式显著恶化。</li>
+            <li>卖方估计开始上调 FY27 normalized net profit，而不是仅上调 GMV 或收入。</li>
+        </ul>
+
+        <p><strong>Breaking datapoints</strong></p>
+        <ul>
+            <li>在线营销服务连续多个季度接近零增长或负增长，说明国内商家 ROI 或广告库存变现能力受损。</li>
+            <li>Temu 交易服务增长依赖补贴和亏损，且合规、关税、本地仓和退货成本导致单位经济没有学习曲线。</li>
+            <li>现金流显著弱于利润，商家应付款、保证金、短投结构或其他营运资本项目显示平台议价能力退化。</li>
+            <li>欧美小包、UFLPA、产品安全、平台责任等监管进一步升级，直接削弱 Temu 的低价优势或限制品类扩张。</li>
+        </ul>
+
+        <h2>7. Recommended Next Diligence</h2>
+        <ol>
+            <li>建立 Temu 国家/品类 cohort 框架：CAC、复购、退款/退货、履约时效、广告强度和毛利，区分“可回收获客成本”和“结构性亏损”。</li>
+            <li>做 15-20 个商家与服务商 channel checks：国内产业带、Temu 跨境卖家、本地仓服务商、广告代理和空运/尾程物流。</li>
+            <li>拆分 SOTP 敏感性：国内核心 8-12x P/E、Temu 0-2x P/S、现金 50-100% 计价，测试 US$80 附近的 downside floor。</li>
+            <li>专项跟踪监管：美国 de minimis / UFLPA、欧盟小包费用和平台责任、意大利小包收费试点，以及对 Shein/Temu 的产品安全调查。</li>
+            <li>复核会计与营运资本质量：商家应付款、限制性现金、短投/债券收益、税费和罚款项目，避免把金融收益或营运资本扩张误认为经营改善。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li><strong>Company release:</strong> PDD Holdings Q1 2026 unaudited financial results, GlobeNewswire, 2026-05-27.</li>
+            <li><strong>Transcript:</strong> PDD Q1 2026 earnings call transcript, Seeking Alpha, 2026-05-27; local exported PDD FY2025 Q1-Q4 transcripts.</li>
+            <li><strong>SEC:</strong> PDD Holdings Form 20-F, FY2025, filed 2026-04-29; EdgarTools extraction and declared-UA SEC HTML copy.</li>
+            <li><strong>Sell-side:</strong> Goldman Sachs 1Q26 review, Morgan Stanley Temu Progress Check, Nomura tactical upgrade, Bernstein, UBS, Jefferies reports collected under task resources.</li>
+            <li><strong>Buy-side / operator:</strong> FundaAI Temu/SHEIN ad research; Norges Bank IM interview with Zalando co-founder Robert Gentz; Podwise PDD/Temu discussion extract.</li>
+            <li><strong>Market data:</strong> OpenBB/yfinance quote and performance, StockAnalysis valuation/forecast/statistics pages, yfinance peer snapshot, technical-indicator 30-day CSV.</li>
+            <li><strong>News:</strong> FreshRSS sub-agent evidence pack on Q1 reaction, LatePost supply-chain/self-operated brand plan, Nomura competition/margin note, Italy small-package fee item.</li>
+        </ul>
+    </div>
+</body>
+</html>
