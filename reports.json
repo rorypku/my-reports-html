@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260601_hermes",
+    "title": "Hermès Situation Report",
+    "date": "2026-06-01",
+    "url": "./20260601_hermes/",
+    "path": "20260601_hermes/",
+    "sortKey": "20260601"
+  },
+  {
     "id": "20260529_snowflake",
     "title": "Snowflake Situation Report",
     "date": "2026-05-29",
