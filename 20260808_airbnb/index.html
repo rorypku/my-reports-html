@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb SitRep | 2026-08-08</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 0;
+            border: none;
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            letter-spacing: 0;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h3 + p,
+        h3 + table,
+        h3 + ul,
+        h3 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> ABNB · Nasdaq</p>
+            <p><strong>Date:</strong> 2026-08-08</p>
+            <p><strong>Classification:</strong> 质量复利观察名单 · 估值门控</p>
+        </div>
+
+        <h1>Airbnb Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：公司值得持续跟踪，但暂不满足“进入下一阶段优先研究”的定价错误门槛。</strong> Q2’26 已证明核心业务重新加速：Nights &amp; Seats Booked 同比增长 10%，GBV 增长 16%，收入增长 17%，调整后 EBITDA 利润率升至 35%。与此同时，AI 客服、产品迭代和酒店/服务/体验扩张开始形成可观察的执行证据。<a href="https://www.sec.gov/Archives/edgar/data/1559720/0001559720-26-000027-index.html">[SEC 10-Q]</a></p>
+        <p>真正的潜在错误锚，是把 Airbnb 只当作“住宿夜数 × 稳定 take rate”的成熟 OTA，而忽略其品牌直达流量、供给流动性和围绕一次旅行增加可售服务的能力。但这个错误锚在最新业绩后已快速修复：8 月 7 日股价单日上涨 17.4% 至 178.07 美元，超过本次取得的高盛、瑞银、伯恩斯坦和德银最新目标价 149–168 美元区间。市场已经开始为增长再加速与 AI/新业务期权付费，尚未留下足够的可见上行空间。</p>
+        <p><strong>PM 动作：watchlist / wait for proof。</strong> 等待两个条件之一：新业务用附加率、复购和增量利润证明其确实提高“每次旅行的价值捕获”；或估值回落到无需依赖新业务成功也能获得合理回报的区间。</p>
+
+        <h2>2. Source Freshness Check</h2>
+        <table class="source-freshness-table">
+            <thead><tr><th>来源类别</th><th>最新来源日期</th><th>状态</th><th>距报告日</th></tr></thead>
+            <tbody>
+                <tr><td>卖方报告</td><td>高盛 Q2’26 回顾 · 2026-08-06</td><td>当前</td><td>2 天</td></tr>
+                <tr><td>财报电话会</td><td>Q2’26 · 2026-08-06</td><td>当前</td><td>2 天</td></tr>
+                <tr><td>SEC 披露</td><td>Q2’26 10-Q · 2026-08-06</td><td>当前</td><td>2 天</td></tr>
+                <tr><td>新闻</td><td>AI 战略访谈 · 2026-08-07</td><td>当前</td><td>1 天</td></tr>
+                <tr><td>买方 / 经营者</td><td>Chesky AI 战略访谈 · 2026-05-05</td><td>机制有效、非量化</td><td>约 3 个月</td></tr>
+                <tr><td>播客讨论</td><td>跨 12 期 Podwise 逐字稿综合</td><td>观点层</td><td>多时期</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>项目</th><th>最新情况</th></tr></thead>
+            <tbody>
+                <tr><td>市场数据</td><td>收盘价 178.07 美元；52 周区间 110.81–178.48 美元；市值约 1,066 亿美元。现金及短期投资 120.7 亿美元、债务 24.8 亿美元，剔除客户资金后的净现金约 95.9 亿美元。价格/市值取自 yfinance 2026-08-08 快照；资产负债数据来自 Q2’26 10-Q。</td></tr>
+                <tr><td>经营质量</td><td>Q2 收入 36.08 亿美元（+17%）；调整后 EBITDA 12.61 亿美元、利润率 35%；FCF 12.53 亿美元、利润率 35%。不过季度 SBC 4.87 亿美元，占收入 13.5%，不能从“股东可得现金”中忽略。<a href="https://www.sec.gov/Archives/edgar/data/1559720/0001559720-26-000027-index.html">[SEC]</a></td></tr>
+                <tr><td>价格与技术面</td><td>业绩后单日 +17.4%，成交量约为此前 29 日均量的 4.4 倍；RSI 79.1，收盘高于布林带上轨 165.38 美元，MACD 继续向上。动量强，但短期进入超买区，不适合作为基本面安全边际。</td></tr>
+                <tr><td>持仓 / 拥挤</td><td>本次没有取得同一冻结时点的可靠空头、主动/被动持仓和借券数据，因此不称其“拥挤”。更准确的标签是 <strong>expectations-heavy</strong>：价格反应和估值已把增长再加速纳入预期。</td></tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead><tr><th>关键指标</th><th align="center">Q2’26</th><th>含义</th></tr></thead>
+            <tbody>
+                <tr><td>Nights &amp; Seats Booked</td><td align="center">1.48 亿 · +10%</td><td>最接近 CEO NSM；规模重新加速，但“Seats”目前仍极小，几乎全部来自住宿夜数。</td></tr>
+                <tr><td>GBV</td><td align="center">272.47 亿美元 · +16%</td><td>高于交易量增速，ADR +5% 提供量价杠杆；公司提示 RNPL 也提高 ADR 与取消率，不能全部解释为同房定价权。</td></tr>
+                <tr><td>FCF / SBC</td><td align="center">12.53 / 4.87 亿美元</td><td>现金生成强，但 FCF-SBC 仅约 7.66 亿美元；长期投资人应盯每股净兑现而非 headline FCF。</td></tr>
+                <tr><td>AI 客服</td><td align="center">45% 无需人工</td><td>管理层称每单客服成本下降 16%；这是 AI 从叙事进入利润表的第一条可验证链路，仍需连续季度验证。</td></tr>
+            </tbody>
+        </table>
+
+        <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+        <h3>Pricing Anchor &amp; Embedded Expectations</h3>
+        <p>卖方的“标尺”高度一致地落在远期 EBITDA 与 SBC 后自由现金流：高盛以 20x NTM+1 EV/GAAP EBITDA 与 18x NTM+4 EV/(FCF−SBC) 等权得出 165 美元；瑞银以 15x 1Q27–4Q27 EV/调整后 EBITDA 得出 149 美元；德银以约 20x 2026E FCF/股得出 165 美元；伯恩斯坦给出 168 美元并强调增长加速的倍数期权。<a href="../collected_resources/sell_side/高盛-Airbnb（ABNB.US）Q2 26业绩回顾：加速势头与AI原生执行推动上调全年展望.md">[高盛]</a> <a href="../collected_resources/sell_side/瑞银—爱彼迎—战略定位驱动增长加速.md">[瑞银]</a> <a href="../collected_resources/sell_side/伯恩斯坦-爱彼迎（ABNB.US）爱彼迎：实现20%增长之路.md">[伯恩斯坦]</a></p>
+        <p>当前 178.07 美元分别高于这些目标价约 6%–20%。因此市场已不再只按 FY25 8% 夜数增长和 10% 收入增长定价，而是在押注 FY26 中双位数收入、约 35.5% EBITDA margin、AI 降本以及至少一个新垂直开始贡献。以最近披露 FY25 FCF/稀释股作透明代理，P/FCF 约 24.0x，高于三年均值 21.9x；这不是同一口径的 NTM 一致预期，但足以说明安全边际已收窄。</p>
+
+        <h3>Peer Benchmarking</h3>
+        <table class="peer-table">
+            <thead><tr><th>公司</th><th align="right">市值</th><th align="right">TTM EV/EBITDA</th><th align="right">Forward P/E</th><th align="right">收入增速</th><th align="right">净利率</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Airbnb</strong></td><td align="right">$106.6bn</td><td align="right">30.7x</td><td align="right">29.2x</td><td align="right">17.9%</td><td align="right">19.9%</td></tr>
+                <tr><td>Booking</td><td align="right">$161.1bn</td><td align="right">15.8x</td><td align="right">17.3x</td><td align="right">8.1%</td><td align="right">25.5%</td></tr>
+                <tr><td>Expedia</td><td align="right">$37.3bn</td><td align="right">12.6x</td><td align="right">13.1x</td><td align="right">14.0%</td><td align="right">13.0%</td></tr>
+                <tr><td>Tripadvisor</td><td align="right">$1.3bn</td><td align="right">12.4x</td><td align="right">7.5x</td><td align="right">−16.5%</td><td align="right">0.3%</td></tr>
+            </tbody>
+        </table>
+        <p><em>同行表为 yfinance 2026-08-08 快照，仅作同日相对定位；供应商口径、TTM/NTM 和调整项并不完全一致。结论只取方向：Airbnb 的增长溢价已明显，而不是“静态折价”。</em></p>
+
+        <h3>Historical Context &amp; Charts</h3>
+        <img src="./assets/abnb_price_action_narrative_eras.png" alt="Airbnb 三年股价与叙事阶段">
+        <p><em>ABNB 三年明显跑输 SPY，直到 Q2’26 业绩后发生跳升；这说明旧叙事确有压制，但也说明重新定价已在发生。价格数据：yfinance，2023-08-08 至 2026-08-07。</em></p>
+        <img src="./assets/abnb_historical_valuation_bands.png" alt="Airbnb 历史现金流估值带">
+        <p><em>估值带使用“股价 ÷ 最近已披露年度 FCF/稀释股”的可复算代理，不伪装为历史 NTM 一致预期。最新约 24.0x，处于三年均值之上、+1σ 以内。</em></p>
+        <img src="./assets/abnb_nsm_mismatch_jaws_chart.png" alt="Airbnb NSM mismatch jaws chart">
+        <p><em>CEO NSM 使用 Nights &amp; Seats YoY；市场锚使用同一现金流代理。H1’26 夜数回升至 +10%，估值同时升至 24.0x：错配正在关闭，而非继续扩大。</em></p>
+
+        <h3>North Star Metrics Framework</h3>
+        <table class="nsm-table">
+            <thead><tr><th>视角</th><th>判断</th></tr></thead>
+            <tbody>
+                <tr><td>CEO NSM</td><td><strong>质量调整后的 Nights &amp; Seats Booked</strong>，辅以 App 预订占比、取消率和房源质量。它直接衡量用户完成住宿/服务的价值交付；公司也把该指标定义为平台规模的关键管理指标。</td></tr>
+                <tr><td>长期投资人 NSM</td><td><strong>FCF−SBC 的每股复合增长</strong>。它把直达流量、take rate、客服效率、工作资本时点和回购纪律统一到股东价值捕获，并防止 headline FCF 掩盖稀释。</td></tr>
+                <tr><td>市场共识 NSM</td><td><strong>收入/GBV 增长是否持续加速，同时守住约 35% EBITDA margin</strong>。Q2 后的 17% 股价跳升表明市场正在奖励增长斜率与 AI/新业务期权，而非单纯稳定现金流。</td></tr>
+                <tr><td>错配类别</td><td><strong>Healthy lag，正在快速关闭。</strong> FY24–FY25 期间产品投入先于收入再加速，市场曾主要惩罚夜数放缓；Q2’26 后运营证据和估值同时向上。潜在“旧锚”仍存在，但价格已先行吃掉大部分近端差异。</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Value Creation → Value Capture Chain</h3>
+        <p class="value-chain">独特且可负担的住宿 / 本地服务 → 更多搜索、成交与复购 → 更多优质房东和服务供给加入 → 城市级流动性、信任与 App 习惯增强 → 更高转化与直达流量、较低获客和客服成本 → 稳定 take rate + 每次旅行附加收入 → FCF−SBC/股增长</p>
+        <p>链条最薄弱的一环是“附加收入”：截至 Q2，几乎所有 Nights &amp; Seats 仍来自住宿；体验供给增长 80%、酒店夜数增长约为住房的三倍，但基数很小。若公司不披露 attach rate、复购或收入贡献，市场可能把供给/产品活动误当作已实现的价值捕获。</p>
+
+        <h3>Upside/Downside Asymmetry</h3>
+        <table class="metric-table">
+            <thead><tr><th>情景</th><th align="center">两三年机制</th><th>投资含义</th></tr></thead>
+            <tbody>
+                <tr><td>上行</td><td align="center">核心 10–12% + 新垂直 3–5%</td><td>若服务、体验、酒店和亚洲扩张把收入长期推向 15%–20%，且利润率重返扩张，盈利上修与 20x 左右远期现金流可以共同支持显著上行。问题是当前价格已预付一部分。</td></tr>
+                <tr><td>基准</td><td align="center">收入中双位数 → 低双位数</td><td>核心增长健康、margin 约 35%，但新业务仍是小基数；在 24x 历史 FCF 代理下，回报更多依赖每股现金流增长，重估空间有限。</td></tr>
+                <tr><td>下行</td><td align="center">夜数回落至中高个位数</td><td>若 ADR 主要是 mix/RNPL、营销投资上升、新业务缺乏复购，市场会重新按成熟 OTA/现金流资产定价；同业 TTM EV/EBITDA 仅约 12–16x，倍数压缩将放大盈利下修。</td></tr>
+            </tbody>
+        </table>
+
+        <h2>5. SitRep Judgment</h2>
+        <p><strong>Classification: 质量复利观察名单 · 估值门控（不进入优先下一阶段）。</strong></p>
+        <p><strong>Wrong anchor：</strong>部分成立。市场过去可能过度使用“住宿夜数正常化 + 稳定 take rate”的旧框架，低估了 AI 降本、国际扩张和围绕旅行的品类延展；但业绩后价格和估值已明显修复，错锚并非仍然宽阔。</p>
+        <p><strong>Material upside：</strong>当前证据不足。本次获得的最新卖方目标价全部低于现价，且 Airbnb 相对 Booking / Expedia 已享受明显增长溢价。要产生组合层面的显著上行，需要新业务接近伯恩斯坦所设想的 20% 收入增长路径，而这尚未进入已报告财务。</p>
+        <p><strong>Clear validation path：</strong>成立。未来 2–4 个季度可用新业务附加率、Nights &amp; Seats 中非住宿占比、核心/扩张市场夜数、take rate、FCF−SBC/股和客服成本验证。三项进阶条件只满足约 1.5 项，因此保持 watchlist，而不是把“好公司”误写成“当前好股票”。</p>
+
+        <h2>6. What Would Confirm Or Break The Thesis</h2>
+        <h3>确认信号</h3>
+        <ul>
+            <li>未来两个季度 Nights &amp; Seats 保持至少 10% 增长，且北美/EMEA 不是仅靠 ADR 或大型活动，扩张市场继续约为核心市场两倍。</li>
+            <li>公司开始披露 Services / Experiences 的附加率、复购或收入，并显示非住宿 Seats/收入占比持续上升；激励退出后 take rate 不下降。</li>
+            <li>AI 客服无需人工比例由 45% 继续提升、每单成本降幅保持两位数，同时退款/客诉和品牌信任指标不恶化。</li>
+            <li>FCF−SBC/稀释股连续四季度双位数增长，净回购真实降低稀释股数，而非仅抵消股权薪酬。</li>
+        </ul>
+
+        <h3>破坏信号</h3>
+        <ul>
+            <li>Nights &amp; Seats 回落到中个位数，而 GBV/收入仍主要依赖 ADR、汇率或预订时点；RNPL 取消率持续上升。</li>
+            <li>新业务供给快速增长但交叉购买、复购和收入不披露或长期微不足道，证明“更多品类”只是活动指标。</li>
+            <li>销售营销费用继续快于收入增长，或 AI 降本被更高支持/退款成本抵消，使 EBITDA margin 明显低于 35%。</li>
+            <li>城市级监管从局部限制演变为可复制模板，显著压缩高价值供给；10-K 已确认纽约 2023 规则构成事实上的短租禁令，并披露意大利 2023 税务期间结算 1.79 亿欧元。<a href="https://www.sec.gov/Archives/edgar/data/1559720/0001559720-26-000004-index.html">[2025 10-K]</a></li>
+        </ul>
+
+        <h2>7. Recommended Next Diligence</h2>
+        <ol>
+            <li><strong>做一张 NSM 驱动模型：</strong>按核心/扩张市场拆 Nights、ADR、take rate、收入、EBITDA、SBC 和 FCF/股；单独隔离汇率、RNPL 时点和 mix，避免把 GBV 加速全归因于定价权。</li>
+            <li><strong>验证第二曲线：</strong>对 20 个主要城市做房源/酒店/Experiences/Services 的 attach-rate 代理跟踪，结合 App 排名、评价量和房东访谈，判断供给增长是否变成重复成交。</li>
+            <li><strong>建立估值门槛：</strong>以高盛的 20x EBITDA / 18x FCF−SBC、瑞银 15x EBITDA 和德银 20x FCF 为三套标尺，反推在 178 美元下市场要求的 FY27–FY29 增长与 margin。</li>
+            <li><strong>补足监管与持仓：</strong>量化纽约、巴塞罗那、意大利等重点城市的 GBV 暴露，并取得同一冻结时点的短仓、机构持仓和借券数据；当前不能据此判断拥挤。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul>
+            <li><strong>财报电话会：</strong>Airbnb Q2’26 earnings call，2026-08-06，FMP 完整电话会；并回溯 Q2’23–Q2’25。<a href="../collected_resources/earnings_calls/abnb_q2_2026_20260806_selected_evidence.md">[精选证据]</a></li>
+            <li><strong>SEC：</strong>Airbnb Q2’26 Form 10-Q（2026-08-06）与 FY2025 Form 10-K（2026-02-12）。<a href="https://www.sec.gov/Archives/edgar/data/1559720/0001559720-26-000027-index.html">[10-Q]</a> <a href="https://www.sec.gov/Archives/edgar/data/1559720/0001559720-26-000004-index.html">[10-K]</a></li>
+            <li><strong>卖方：</strong>高盛 Q2’26 回顾（2026-08-06）；瑞银《战略定位驱动增长加速》（2026-02）；伯恩斯坦《实现20%增长之路》（2026-04-06）；德银 Q1’26 预览（2026-04-27）；摩根士丹利互联网定位（2026-07-30）。</li>
+            <li><strong>买方 / 经营者：</strong>a16z Anish Acharya（2026-02-09）、Reid Hoffman / NBIM（2026-02-25）、Scott Nolan / Founders Fund（2026-04-14）、Brian Chesky / Invest Like the Best（2026-05-05）。</li>
+            <li><strong>新闻：</strong>CNBC Q2’26 业绩（2026-08-06）与 CEO AI 战略访谈（2026-08-07）。<a href="../collected_resources/news/2026-08-06_cnbc_q2_earnings.md">[业绩]</a> <a href="../collected_resources/news/2026-08-07_cnbc_ai_strategy.md">[AI]</a></li>
+            <li><strong>播客：</strong>Podwise 跨 12 期逐字稿综合，核心包括 Acquired《Airbnb》、TIVP010《Airbnb: A Silicon Valley Gem》及 Chesky 访谈。<a href="https://podwise.ai/dashboard/episodes/39308">[Acquired]</a> <a href="https://podwise.ai/dashboard/episodes/3252262">[TIVP010]</a></li>
+            <li><strong>市场与技术：</strong>yfinance，检索日 2026-08-08；30 个交易日 RSI、MACD、EMA 与布林带历史已本地留档。字段方法不足处均已标注为指示性，而非正式一致预期。</li>
+        </ul>
+    </div>
+</body>
+</html>
