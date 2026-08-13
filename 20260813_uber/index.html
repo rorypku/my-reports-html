@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uber SitRep — 2026-08-13</title><style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 0;
+            border: none;
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            letter-spacing: 0;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h3 + p,
+        h3 + table,
+        h3 + ul,
+        h3 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style></head><body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> UBER</p>
+            <p><strong>Date:</strong> 2026-08-13</p>
+            <p><strong>Classification:</strong> 进入下一阶段研究（AV 错锚专项）</p>
+        </div>
+
+        <h1>Uber Situation Report</h1>
+
+        <h2>1. Executive View</h2>
+        <p><strong>结论：值得进入下一阶段，但研究对象不是“Uber 是不是好公司”，而是“市场是否把 AV 的产业结构押错了”。</strong>当前股价 75.36 美元，对应约 15.2 倍 TTM P/FCF；Goldman 与 Bernstein 的最新目标价分别为 110／95 美元，隐含 46%／26% 上行。市场正在用 <strong>AV 去中介风险 + 资本强度</strong>压低现金流倍数，而产品侧仍交付 18% 的 Trips 增长、16% 的 MAPC 增长和超过 100 亿美元的 TTM FCF。若 AV 最终呈多供应商格局，Uber 的需求聚合、混合运力与车队商业化层可能比今天更值钱；若 Waymo／Tesla 等垂直整合者控制用户入口，或 Uber 的逾 100 亿美元投入无法被第三方金融化，则低倍数是合理的。</p>
+        <p>这不是无条件看多。Q2 的 Delivery 增长强、Mobility 收入受英国会计模式变化干扰，但 AV 投资的损益与现金流轮廓尚未披露；Waymo 计划 2028 年在 Austin／Atlanta 推自有 app，也说明去中介不是假想敌。下一阶段应围绕城市级 AV 单车利用率、独立 app 分流、跨平台 cohort 和资产承诺回报率做可证伪研究。</p>
+
+        <h2>2. Source Freshness Check</h2>
+        <table class="source-freshness-table"><thead><tr><th>来源类别</th><th>最新来源日期</th><th>新鲜度</th><th>距报告日</th></tr></thead><tbody>
+            <tr><td>卖方报告</td><td>Goldman 2026-08-06；Bernstein 2026-08-05</td><td>当前</td><td>约 1 周</td></tr>
+            <tr><td>电话会</td><td>2026Q2，2026-08-05（FMP 完整稿）</td><td>当前</td><td>8 天</td></tr>
+            <tr><td>SEC 申报</td><td>2026Q2 10-Q，2026-08-05</td><td>当前</td><td>8 天</td></tr>
+            <tr><td>买方／运营者</td><td>CEO 访谈 2026-06-03；独立历史机制材料至 2025-11</td><td>管理层当前；独立材料偏旧</td><td>约 2–9 个月</td></tr>
+            <tr><td>新闻／播客</td><td>新闻至 2026-08-07；Podwise 检索 2026-08-13</td><td>当前</td><td>0–6 天</td></tr>
+        </tbody></table>
+
+        <h2>3. Current Snapshot</h2>
+        <table class="snapshot-table"><thead><tr><th>项目</th><th>最新情况</th></tr></thead><tbody>
+            <tr><td>市场数据</td><td>收盘 75.36 美元；52 周 65.41–101.99 美元；市值 1,534 亿美元；企业价值约 1,633 亿美元。数据：FMP，2026-08-13。</td></tr>
+            <tr><td>经营与现金</td><td>2026Q2 收入 141.9 亿美元（+12% YoY）、总预订额 580.2 亿美元（+24% 报告口径／+22% 固定汇率）、Trips 38.67 亿次（+18%）、MAPCs 2.08 亿（+16%）；TTM FCF 约 101 亿美元。</td></tr>
+            <tr><td>技术面</td><td>过去 30 个交易日上涨约 3.7%；8 月 12 日收盘仍高于 EMA12／26／50，MACD 为正且高于信号线，RSI 55.9。财报后波动率扩张，趋势偏多但 78–79 美元附近出现回吐。</td></tr>
+            <tr><td>持仓结构</td><td>空头约占流通股 2.41%、short ratio 2.89；机构持股约 85.0%（yfinance，2026-08-13）。FMP 流通比例 99.47%。近期 Form 4 主要为 RSU 归属和代扣税，并非清晰的公开市场买入信号。</td></tr>
+        </tbody></table>
+        <table class="metric-table"><thead><tr><th>关键指标</th><th align="center">值</th><th>含义</th></tr></thead><tbody>
+            <tr><td>双产品用户占比</td><td align="center">20%</td><td>仅五分之一消费者同时使用 Rides 与 Eats，但该群体增长约为单产品用户的 1.5 倍；交叉渗透仍有空间。</td></tr>
+            <tr><td>AV 当前渗透</td><td align="center">&lt;0.5%</td><td>AV 每周数十万次 vs Uber 约 3 亿次；短期财务影响小，估值争议主要来自终局结构。</td></tr>
+            <tr><td>TTM FCF／收益率</td><td align="center">约 $10.1bn／6.6%</td><td>现金化已真实发生，但需扣看 SBC、保险准备金和未来 AV 资本承诺。</td></tr>
+            <tr><td>AV 城市／单车利用率</td><td align="center">7 → 15；约 25–30+ Trips/日</td><td>城市上线与单车每日行程是聚合器价值最直接的领先验证变量，均为管理层口径。</td></tr>
+        </tbody></table>
+
+        <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+        <h3>Pricing Anchor &amp; Embedded Expectations</h3>
+        <p>市场最可操作的锚是 <strong>P/FCF／EV-EBITDA</strong>，不是收入倍数。FMP 给出的 TTM P/FCF 为 15.2 倍、EV/EBITDA 为 20.4 倍；本报告的季度近似序列显示 P/FCF 从 2023 年末约 35 倍压至 2026Q2 约 14.5 倍，尽管 Trips 仍以高双位数增长。Goldman 用 19 倍 NTM+1 GAAP EBITDA 与 15 倍 NTM+4 EV/(FCF-SBC) 各占 50% 得出 110 美元；Bernstein 将 AV 风险写入更低终值倍数，以 18 倍 NTM P/FCF 与 DCF 为主得出 95 美元。市场并非否认当前现金流，而是在给 AV 终值与资本强度折价。</p>
+        <table class="peer-table"><thead><tr><th>公司</th><th align="right">市值</th><th align="right">EV/EBITDA</th><th align="right">P/FCF</th><th align="right">最新季度收入 YoY</th><th align="right">FCF/OCF</th></tr></thead><tbody>
+            <tr><td>UBER</td><td align="right">$153bn</td><td align="right">20.4x</td><td align="right">15.2x</td><td align="right">12.2%</td><td align="right">97.0%</td></tr>
+            <tr><td>DASH</td><td align="right">$93bn</td><td align="right">48.9x</td><td align="right">38.6x</td><td align="right">35.6%</td><td align="right">84.7%</td></tr>
+            <tr><td>ABNB</td><td align="right">$107bn</td><td align="right">32.8x</td><td align="right">22.0x</td><td align="right">16.5%</td><td align="right">100.1%</td></tr>
+            <tr><td>BKNG</td><td align="right">$164bn</td><td align="right">15.6x</td><td align="right">17.2x</td><td align="right">8.1%</td><td align="right">96.8%</td></tr>
+        </tbody></table>
+        <p><em>同业并不完美：DASH 是配送平台，ABNB／BKNG 是资产轻型旅行市场。表中 FMP 标准化 TTM 口径适合相对定位，不应替代业务分部与 SBC 调整后的精确估值。UBER 相对 DASH／ABNB 显著折价，但与成熟 BKNG 接近，说明市场把它更多看作成熟现金流平台而非仍在扩张的网络。</em></p>
+
+        <h3>Historical Context &amp; Charts</h3>
+        <img src="./assets/uber_price_action_narrative_eras.png" alt="Uber 三年股价与叙事阶段">
+        <img src="./assets/uber_historical_valuation_bands.png" alt="Uber 历史估值带">
+        <img src="./assets/uber_nsm_mismatch_jaws_chart.png" alt="Uber NSM 错配图">
+
+        <h3>North Star Metrics Framework</h3>
+        <table class="nsm-table"><thead><tr><th>视角</th><th>判断</th></tr></thead><tbody>
+            <tr><td>CEO NSM</td><td><strong>可靠完成的 Trips 与频次</strong>。最接近“产品创造了多少价值”的公开指标；Q2 Trips +18%，由 MAPC +16% 与每 MAPC 月均 Trips +2%共同驱动。</td></tr>
+            <tr><td>长期投资者 NSM</td><td><strong>增量贡献利润／FCF（扣 SBC）及其对网络密度的回报</strong>，辅以双产品 cohort 留存、单车利用率与广告利润。它衡量使用如何转化为定价权、组织依赖和现金。</td></tr>
+            <tr><td>市场共识 NSM</td><td><strong>P/FCF／EV-EBITDA，并用 AV 终值风险调整</strong>。卖方下调目标主要不是 Q2 需求崩坏，而是 AV 去中介与资本强度折价。</td></tr>
+            <tr><td>错配类别</td><td><strong>健康滞后，但尚未证实。</strong>Trips、跨平台渗透和 FCF 改善快于估值锚；然而 Uber 正用资产负债表推动 AV，若不能金融化，错配会迅速变成危险分歧。</td></tr>
+        </tbody></table>
+
+        <h3>Value Creation → Value Capture Chain</h3>
+        <p class="value-chain">更快、更可靠、更便宜的出行／配送 → 更高使用频次与首用转化 → Rides、Eats、杂货与 Uber One 交叉采用 → 供需密度、商家流量与 AV 单车利用率提升 → 更低接驾空驶／更高广告转化／更稳定留存 → 增量贡献利润、FCF 与回购能力</p>
+
+        <h3>Upside/Downside Asymmetry</h3>
+        <p>上行由两部分构成：现金流继续按高双位数增长，以及 AV 折价收窄。仅回到卖方 95–110 美元区间就对应约 26%–46% 上行；FMP 目标价共识 107.60 美元对应约 43%。下行不是普通的季度 miss，而是终值重写：独立 AV app 抽走高质量需求、Uber 被迫降低抽成并承担车队资本。由于最新 52 周低点 65.41 美元仅较现价低 13%，历史交易区间并未呈现对称的“安全垫”；因此需在验证前控制仓位假设。</p>
+
+        <h2>5. SitRep Judgment</h2>
+        <p><strong>Classification: 进入下一阶段研究（AV 错锚专项）。</strong></p>
+        <p><strong>Wrong anchor：</strong>成立的可信度中等偏高。市场用“AV 技术赢家去中介”解释终值，而 Uber 的实际竞争资产可能是多供应商商业化、混合运力调度与跨品类需求，不是数字司机本身。<strong>Material upside：</strong>成立；当前卖方框架给出 26%–46%上行，且若 FCF-SBC 持续增长，估值无需回到历史高位也能产生组合级回报。<strong>Clear validation path：</strong>成立；未来 2–4 季可观察 15 城上线、AV 每车每日 Trips、Uber 与独立 app 的城市份额、双产品用户增速、AV P&amp;L／现金流披露及第三方金融化比例。三项门槛均达到，但论点脆弱点清晰，因此应推进专项研究而非直接定性为“质量复利股”。</p>
+
+        <h2>6. What Would Confirm Or Break The Thesis</h2>
+        <h3>Confirming Datapoints</h3><ul>
+            <li>AV 按计划从 7 城扩至 15 城，接入 Uber 的车辆稳定达到约 25–30+ Trips／车／日，并相对独立车队保持明显利用率溢价。</li>
+            <li>San Francisco、L.A.、Phoenix 等已有独立 AV 服务的城市，Uber cohort 留存、首用用户和类别份额继续同比改善。</li>
+            <li>双产品消费者占比从 20% 上升，仍以约 1.5 倍单产品用户速度增长，同时 Delivery／Mobility 贡献利润和 FCF-SBC 同步扩张。</li>
+            <li>Uber 对车辆、地产和 AV 软件伙伴的承诺被第三方融资承接，实际净资本占用与 P&amp;L 拖累显著低于标题中的逾 100 亿美元。</li>
+        </ul>
+        <h3>Breaking Datapoints</h3><ul>
+            <li>Waymo／Tesla 等在核心城市通过自有 app 形成更低价格、更短 ETA 和持续份额提升，Uber 的 AV 利用率溢价消失。</li>
+            <li>AV 合作伙伴集中度上升或 120,000 辆承诺延期，迫使 Uber 用更高抽成让利、担保或资产负债表投资换取供给。</li>
+            <li>Trips 仍增长但每 MAPC 频次、双产品留存、净 take rate 或 FCF-SBC 连续恶化，证明使用并未转化为耐久经济性。</li>
+            <li>Delivery Hero 整合与 AV 投资共同压低回购、提高净债务，并使“约 50% FCF 用于回购”的资本配置框架失效。</li>
+        </ul>
+
+        <h2>7. Recommended Next Diligence</h2><ol>
+            <li><strong>城市级 AV cohort：</strong>对 Austin、Atlanta、Phoenix、SF、L.A. 做 Uber／Waymo／其他入口的 ETA、价格、可用率、份额和复购追踪，拆出有无独立 app 的差异。</li>
+            <li><strong>AV 资本瀑布：</strong>逐项建立逾 100 亿美元承诺、120,000 辆车辆、股权投资、车辆 offtake、地产／充电与第三方金融化的现金流模型，计算 Uber 实际 ROIC。</li>
+            <li><strong>跨平台 cohort：</strong>反推 Rides-only、Eats-only、双产品与 Uber One 的 12／24 月留存、频次、补贴和贡献利润；验证 1.5 倍用户增速是否带来更高 LTV。</li>
+            <li><strong>估值压力测试：</strong>以 15× FCF-SBC、13× Adj. EBITDA 和 DCF 三套尺子，分别施加 AV 抽成下降、资本开支上升与 Delivery Hero 协同延迟情景。</li>
+        </ol>
+
+        <h2>Sources Used</h2><ul>
+            <li><strong>Transcript:</strong> Uber Q2 2026 Earnings Call，2026-08-05，Financial Modeling Prep；并检索 2025Q2–2026Q2 五季完整稿。</li>
+            <li><strong>SEC:</strong> Uber 2026Q2 Form 10-Q，2026-08-05，Accession 0001543151-26-000032；2025 Form 10-K，2026-02-13。</li>
+            <li><strong>Sell-side:</strong> Goldman Sachs《Q2’26 Review》，2026-08-06；Bernstein《2Q26: Even a good car gets stuck in traffic》，2026-08-05；UBS GO-GET 2026，2026-04-30；Deutsche Bank Europe meetings，2026-05-21。</li>
+            <li><strong>Buy-side／operator:</strong> Invest Like the Best《Uber CEO on AI, Autonomous Vehicles, and the Future of Transportation》，2026-06-03；Stratechery《Robotaxis and Suburbia》，2025-11-18；Mobile Dev Memo《Unpacking Uber’s $1BN advertising business》，2024-10-16。</li>
+            <li><strong>News:</strong> CNBC，Uber Q2／Q3 outlook，2026-08-05；CNBC，Uber–Waymo exclusivity change，2026-07-24；CNBC，D.C. AV labor regulation，2026-08-01。</li>
+            <li><strong>Podcasts:</strong> Podwise 跨节目主题研究，含 Uber CEO／总裁访谈、The Investor’s Podcast Network 与反方 Tesla／Waymo 讨论，检索于 2026-08-13。</li>
+            <li><strong>Market data:</strong> FMP（报价、标准化财务、估值、卖方目标、持仓摘要），检索于 2026-08-13；yfinance（历史价格、技术指标与持仓字段），检索于 2026-08-13。</li>
+        </ul>
+        <p><em>限制：未来预测是市场预期而非事实。历史 P/FCF 图使用当前股数近似季度市值；买方独立材料的新鲜度弱于管理层／卖方；新闻本地源未保留原始 URL，但保存了全文与 entry_id。报告用于筛选是否值得深挖，不构成投资建议。</em></p>
+    </div>
+</body></html>
