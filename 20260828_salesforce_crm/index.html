@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salesforce SitRep</title>
+  <style>
+    :root{--paper:#f6f4ed;--ink:#15151a;--soft:#2a2a30;--muted:#6b6a64;--rule:#cdc9bc;--rule2:#e3dfd2;--red:#a64032;--green:#35624a;--serif:"Iowan Old Style","Source Han Serif SC","Songti SC",Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",Arial,sans-serif}
+    *{box-sizing:border-box} html,body{margin:0;background:var(--paper);color:var(--soft)} body{font-family:var(--sans);font-size:16px;line-height:1.72;-webkit-font-smoothing:antialiased}
+    .container{max-width:900px;margin:auto;padding:72px 42px 130px}.frontmatter{display:flex;flex-wrap:wrap;gap:12px 34px;padding:13px 0;margin-bottom:68px;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}.frontmatter p{margin:0;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}.frontmatter strong{color:var(--ink)}
+    h1{font:600 clamp(39px,6vw,60px)/1.05 var(--serif);letter-spacing:-.02em;color:var(--ink);margin:0 0 66px}h2{font-size:18px;color:var(--ink);margin:74px 0 24px}h3{font-size:16px;color:var(--ink);margin:34px 0 11px}p{margin:0 0 18px}.lead{font:500 23px/1.5 var(--serif);color:var(--ink);margin-bottom:25px}.callout{border-left:3px solid var(--ink);padding:2px 0 2px 22px;margin:26px 0}.good{color:var(--green)}.bad{color:var(--red)}
+    table{width:100%;border-collapse:collapse;margin:25px 0 34px;font-size:14px;line-height:1.5}th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 12px 10px 0}td{vertical-align:top;border-bottom:1px solid var(--rule2);padding:12px 12px 12px 0;color:var(--ink)}tr:last-child td{border-bottom:1px solid var(--ink)}td.num,th.num{text-align:right;white-space:nowrap}.wide td:first-child{width:25%}
+    .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:27px 0}.metric{background:var(--paper);padding:18px}.metric span{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.metric strong{display:block;font-size:22px;color:var(--ink);margin:5px 0}.metric small{color:var(--muted)}
+    ul,ol{padding-left:22px;margin:0 0 24px}li{margin:0 0 10px}img{width:100%;display:block;margin:23px 0 14px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}.caption{font-size:12px;color:var(--muted);margin:-5px 0 30px}.tag{display:inline-block;padding:2px 7px;border:1px solid var(--rule);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:5px}.source{font-size:11px;color:var(--muted);white-space:nowrap}.source a,a{color:inherit;text-decoration-color:var(--rule)}.footnotes{font-size:12px;color:var(--muted)}.footnotes li{margin-bottom:7px}.decision{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:22px 0;margin:25px 0}.decision strong{font:600 24px/1.3 var(--serif);color:var(--ink)}
+    @media(max-width:720px){.container{padding:46px 22px 90px}.metric-grid{grid-template-columns:repeat(2,1fr)}table{font-size:12px;display:block;overflow-x:auto}h1{margin-bottom:50px}}
+    @media print{.container{max-width:none;padding:30px}a{text-decoration:none}.metric-grid{break-inside:avoid}img{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="container">
+  <div class="frontmatter">
+    <p><strong>Ticker:</strong> CRM / NYSE</p>
+    <p><strong>Date:</strong> 2026-08-28</p>
+    <p><strong>Cut-off:</strong> 2026-08-28 14:50 CST</p>
+    <p><strong>Classification:</strong> 有条件进入下一阶段研究</p>
+  </div>
+
+  <h1>Salesforce Situation Report</h1>
+
+  <h2>1. Executive View</h2>
+  <p class="lead">结论：CRM 值得进入下一阶段研究，但不是追逐 22.6% 财报跳空，而是验证市场是否仍用“低个位数有机增长的成熟 SaaS”给它定价，忽略了数据、权限和工作流正在成为企业 AI 代理的执行底座。</p>
+  <div class="callout">
+    <p><strong>最重要的变化：</strong>FY27 Q2 Agentforce ARR 达 15 亿美元、同比 +240%；客户当季产生 32 亿次 Agent Work Units、环比 +97%；新增约 2,000 个付费生产客户、环比 +70%，50% 预订来自 Flex Credits 充值。它首次给出了“试点 → 生产 → 消耗 → 再购买”的闭环，而不只是订单叙事。<sup class="source"><a href="#s3">[3]</a></sup></p>
+    <p><strong>最重要的未证实点：</strong>管理层没有披露 Agentforce 对集团有机收入的净增量；FY27 指引上调中只有约 1 亿美元来自有机改善，约 2 亿美元来自待完成的 Contentful 与 Fin 收购。Bernstein 估算剔除并购后 Q3 有机固定汇率增长仍仅约 6–7%。<sup class="source"><a href="#s4">[4]</a><a href="#s5">[5]</a></sup></p>
+  </div>
+  <p>这是一种<strong>有条件的健康滞后</strong>：产品 NSM 和价值捕获 NSM 已出现方向一致的证据，但市场在财报后迅速重估，当前共识目标价 267 美元相对 252.05 美元只剩约 6% 上行。机会必须来自未来 2–3 年的估值框架切换，而不是卖方目标价的小幅追赶。<sup class="source"><a href="#s1">[1]</a></sup></p>
+
+  <h2>2. Source Freshness Check</h2>
+  <table class="wide">
+    <thead><tr><th>信息流</th><th>最新材料</th><th>新鲜度</th><th>主要限制</th></tr></thead>
+    <tbody>
+      <tr><td>卖方 / 高盛</td><td>2026-08-28 GS；2026-08-27 Bernstein</td><td>当前</td><td>目标价已反映财报后跳涨；估值口径分歧大</td></tr>
+      <tr><td>电话会</td><td>FY27 Q2，2026-08-26</td><td>当前</td><td>生产、消耗及 AOV 多为管理层定义，缺少持续队列</td></tr>
+      <tr><td>SEC</td><td>10-Q，2026-08-27</td><td>当前</td><td>Agentforce/数据业务未单独列报收入或利润</td></tr>
+      <tr><td>买方 / 渠道</td><td>2026-02 渠道检查；2025 年多篇专题</td><td>有用但偏旧</td><td>样本有限，主要来自 Fundaai；不可视为公司事实</td></tr>
+      <tr><td>播客 / 深度讨论</td><td>2026-08-28 检索</td><td>当前检索</td><td>15 期中管理层/生态叙事占多数，独立竞争视角不足</td></tr>
+      <tr><td>技术面</td><td>截至 2026-08-27 的 30 个交易日</td><td>当前</td><td>财报跳空使短期指标严重超买</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Current Snapshot</h2>
+  <div class="metric-grid">
+    <div class="metric"><span>股价</span><strong>$252.05</strong><small>8/27，单日 +22.6%</small></div>
+    <div class="metric"><span>市值 / 企业价值</span><strong>$206bn / $240bn</strong><small>FMP，8/27</small></div>
+    <div class="metric"><span>TTM EV / 销售</span><strong>5.46x</strong><small>FY19–FY26 中位数约 8.2x</small></div>
+    <div class="metric"><span>TTM EV / FCF</span><strong>15.83x</strong><small>FCF 收益率约 7.3%</small></div>
+  </div>
+  <table>
+    <thead><tr><th>指标</th><th class="num">当前值</th><th>为何重要</th></tr></thead>
+    <tbody>
+      <tr><td>FY27 Q2 收入</td><td class="num">$11.35bn / +11%</td><td>高于指引上限；仍需区分有机与并购贡献</td></tr>
+      <tr><td>cRPO</td><td class="num">$33.5bn / +14% cc</td><td>市场当前最可信的增长先行锚；Q3 指引仍为 +14%</td></tr>
+      <tr><td>Agentforce ARR</td><td class="num">$1.5bn / +240%</td><td>增长快但只约相当于 FY27 收入指引的 3%；不能单独证明集团再加速</td></tr>
+      <tr><td>AI + Data ARR</td><td class="num">约 $3.9bn / +210%</td><td>显示数据层与代理层共同扩张；需防止并购归因夸大有机趋势</td></tr>
+      <tr><td>Q2 GAAP / non-GAAP 经营利润率</td><td class="num">20.5% / 34.1%</td><td>价值捕获已显著改善；利润纪律是估值下限的重要支撑</td></tr>
+      <tr><td>FY26 FCF</td><td class="num">$14.40bn / 34.7%</td><td>较 FY24 的 27.3% 显著跃升；但 FY27 指引只增长约 4–5%</td></tr>
+      <tr><td>流通股变化</td><td class="num">819m 当前在外股</td><td>$25bn ASR 初始交付约 103m 股；回购价格有利，但以举债及现金支持，需看净债务</td></tr>
+    </tbody>
+  </table>
+  <p><span class="tag">技术面</span>财报后收盘价高于 EMA50 约 34%，RSI 约 80，成交量为此前 29 日均量的 4.4 倍，MACD 柱显著扩张。趋势确认很强，但短期追价的均值回归风险也很高。<sup class="source"><a href="#s10">[10]</a></sup></p>
+
+  <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+  <h3>Pricing Anchor &amp; Embedded Expectations</h3>
+  <p>市场现有锚并不统一：高盛用 SNTM GAAP 净利润的 24x P/E，目标价 271 美元；Bernstein 用 FY27 调整后 P/E 12x，目标价 195 美元。倍数差一倍，反映的不是小数点误差，而是对 Salesforce 经济制度的根本分歧——是有 AI 再加速可能、现金流强的复合增长平台，还是依赖并购维持中双位数 cRPO 的成熟软件资产。<sup class="source"><a href="#s4">[4]</a><a href="#s5">[5]</a></sup></p>
+  <p>当前 5.46x TTM EV/销售与 SAP 基本相同，高于 Adobe、显著低于 ServiceNow 和 Microsoft；15.83x TTM EV/FCF 则明显低于除 Adobe 外的比较组。市场已经给予现金流质量信用，却尚未给 Agentforce 类似 ServiceNow 的成长溢价。<sup class="source"><a href="#s1">[1]</a></sup></p>
+
+  <h3>Peer Benchmarking</h3>
+  <table>
+    <thead><tr><th>公司</th><th class="num">TTM EV/销售</th><th class="num">TTM EV/FCF</th><th class="num">FCF 收益率</th><th class="num">SBC/收入</th><th>解读</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Salesforce</strong></td><td class="num">5.46x</td><td class="num">15.83x</td><td class="num">7.34%</td><td class="num">8.34%</td><td>估值接近 SAP；现金流便宜，但增长身份未恢复</td></tr>
+      <tr><td>ServiceNow</td><td class="num">10.12x</td><td class="num">32.55x</td><td class="num">3.20%</td><td class="num">14.83%</td><td>更强增长与工作流平台溢价</td></tr>
+      <tr><td>SAP</td><td class="num">5.46x</td><td class="num">23.90x</td><td class="num">3.98%</td><td class="num">3.92%</td><td>成熟企业系统、云迁移与 AI 再定价参照</td></tr>
+      <tr><td>Microsoft</td><td class="num">11.63x</td><td class="num">57.60x</td><td class="num">1.79%</td><td class="num">3.74%</td><td>企业入口与 AI 分发优势；高资本开支压低当前 FCF</td></tr>
+      <tr><td>Adobe</td><td class="num">4.65x</td><td class="num">11.02x</td><td class="num">9.25%</td><td class="num">8.05%</td><td>AI 替代担忧下的低估值反例</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Historical Context &amp; Charts</h3>
+  <img src="./assets/crm_price_action_narrative_eras.png" alt="Salesforce price action and narrative eras chart">
+  <p class="caption">价格数据：Yahoo Finance；事件日期来自公司披露与新闻材料。8/27 跳涨已经提前消化一部分“AI 不会杀死应用软件”的反叙事。</p>
+  <img src="./assets/crm_historical_valuation_bands.png" alt="Salesforce historical valuation bands chart">
+  <p class="caption">FMP 历史年度关键指标与当前 TTM。年度倍数受期末股价影响，只用于制度切换的粗框架，不是精确目标价。</p>
+  <img src="./assets/crm_nsm_mismatch_jaws_chart.png" alt="Salesforce NSM mismatch jaws chart">
+  <p class="caption">收入增速来自 SEC/FMP；FCF 率为经营现金流减资本开支后除以收入。FY27 点混合使用 Q2 收入同比与 TTM FCF 率，仅用于展示市场旧锚与价值捕获的方向差。</p>
+
+  <h3>North Star Metrics Framework</h3>
+  <table class="wide">
+    <thead><tr><th>层级</th><th>核心指标</th></tr></thead>
+    <tbody>
+      <tr><td>CEO NSM</td><td><strong>受权限约束、端到端成功完成的代理工作量</strong>：生产账户数、稳定消耗的 Agents、AWUs、自动解决率及人工交接质量。32 亿 AWUs 与 64% 内部客服自主解决率是初步代理。</td></tr>
+      <tr><td>长期投资者 NSM</td><td><strong>代理驱动的净新增 AOV / 客户扩张及其单位经济</strong>：Data 360 接入 → 生产 → 充值/高级版升级 → 续约扩张 → FCF。关键是净增量，而非把旧席位收入重新贴上 AI 标签。</td></tr>
+      <tr><td>市场共识 NSM</td><td><strong>cRPO 与剔除并购后的有机订阅增速</strong>，辅以 Agentforce ARR。市场要看到 AI 指标最终进入集团收入，而不只看高速的小基数 ARR。</td></tr>
+      <tr><td>错配类型</td><td><strong>有条件的健康滞后。</strong>产品使用与价值捕获链开始贯通，市场仍要求有机加速证明；若 Q3/Q4 只靠并购，错配将转为叙事陷阱。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Value Creation → Value Capture Chain</h3>
+  <p><strong>可信客户数据与权限 → 代理在销售/服务工作流完成任务 → 跨团队与跨云依赖 → 高级套装或 Flex Credits 消耗 → 充值与更高 AOV → 低流失、利润率及每股 FCF。</strong></p>
+  <p>链条的薄弱环节位于“生产使用 → 集团净新增收入”：渠道材料既有教材出版商分流 40–45%、大银行 ACV 扩张等正例，也有部署周期长、账单透明度不足、旧席位迁移压低经常性收入的反例。IGB 样本有限，必须由未来公司队列和客户核查确认。<sup class="source"><a href="#s7">[7]</a></sup></p>
+
+  <h3>Upside/Downside Asymmetry</h3>
+  <p>以下是研究框架，不是目标价。以 FMP FY28 收入共识约 506.96 亿美元、当前企业价值与市值差额约 334 亿美元作为净债务/其他调整代理、在外股 8.19 亿股估算：</p>
+  <table>
+    <thead><tr><th>情景</th><th class="num">FY28 EV/销售</th><th class="num">隐含股价</th><th class="num">相对 $252.05</th><th>必须发生什么</th></tr></thead>
+    <tbody>
+      <tr><td>熊</td><td class="num">4.0x</td><td class="num">约 $207</td><td class="num bad">-18%</td><td>有机增长停留 6–8%，Agentforce 主要替代旧席位；并购与债务压低回报</td></tr>
+      <tr><td>基准</td><td class="num">5.5x</td><td class="num">约 $300</td><td class="num good">+19%</td><td>cRPO 维持约 14%，利润率稳定，AI 只提供渐进式附加销售</td></tr>
+      <tr><td>牛</td><td class="num">6.5x</td><td class="num">约 $362</td><td class="num good">+43%</td><td>FY28 有机增长进入低双位数、Agentforce 扩张可见，市场认可工作流平台而非成熟 SaaS 锚</td></tr>
+    </tbody>
+  </table>
+  <p class="caption">敏感性很高：收购完成、债务、回购最终交付与 FY28 共识变化都会改变每股价值。高盛 271 美元和 Bernstein 195 美元的现行目标价都低于上述基准/牛案，说明上行必须来自结构性重估。</p>
+
+  <h2>5. SitRep Judgment</h2>
+  <div class="decision"><strong>Classification: 有条件进入下一阶段研究。</strong></div>
+  <p><strong>1 — Wrong anchor：通过但未完全证明。</strong>市场仍用有机 cRPO/订阅增速判断 CRM，而产品经济正在转向数据、权限、代理用量与结果定价。Agentforce 的生产、消耗、充值和高级版升级数据使“市场锚错了”成为可信假设；但当前尚未披露足够的净新增收入与毛利。</p>
+  <p><strong>2 — Material upside：在牛案下通过。</strong>财报后共识目标价只剩个位数上行，基准案约 19% 不足以单独构成结构性错价；若 AI 将有机增长拉回低双位数并支持 6.5x FY28 EV/销售，约 43% 上行才足以影响组合决策。相反，4.0x 成熟软件锚对应约 18% 下行。</p>
+  <p><strong>3 — Clear validation path：通过。</strong>未来两个季度可观察 cRPO、有机收入、付费生产账户、AWU/充值、Agentforce 高级版升级、Data 360 独立消耗、流失率与 FY28 框架；验证窗口集中且可证伪。</p>
+  <p>因此，下一阶段研究应以<strong>拆解 AI 的净新增单位经济</strong>为唯一核心问题。若无法把 Agentforce ARR 与集团有机增长连接起来，应降级为“高质量现金流/回购型成熟软件”，而非 AI 结构性错价。</p>
+
+  <h2>6. What Would Confirm Or Break The Thesis</h2>
+  <h3>Confirming Datapoints</h3>
+  <ul>
+    <li>Q3/Q4 剔除 Informatica、Contentful、Fin 后的有机订阅增速明显超过 8%，cRPO 在固定汇率下维持或超过 14%。</li>
+    <li>生产账户与“持续消耗 Agents”继续环比扩张，Flex Credits 充值占比不低于 Q2 的 50%，AWUs 增长最终进入净新增 AOV。</li>
+    <li>Data 360 独立消耗/净扩张与 Agentforce 同步改善，证明数据层不是会计归因，而是工作流依赖。</li>
+    <li>高级 Agentforce 套装渗透率从高盛所称约 5% 向上，实际 ACV uplift 接近 60–80%，同时流失率保持低位。</li>
+    <li>FY28 框架显示有机低双位数增长、稳定或扩张的 non-GAAP 利润率以及持续每股 FCF 增长。</li>
+  </ul>
+  <h3>Breaking Datapoints</h3>
+  <ul>
+    <li>Agentforce ARR 继续高速增长，但核心 CRM 有机增速停留 6–8%，说明 AI 主要是重分类或席位迁移。</li>
+    <li>生产账户增长不再转化为充值，AWU 单位毛利恶化，或结果定价迫使 Salesforce 承担过多推理成本。</li>
+    <li>Data 360 独立增长继续落后，第三方模型/入口控制客户体验，Salesforce 被压缩为低议价的数据记录层。</li>
+    <li>许可、集成和分析波动扩大；Fin/Contentful/Informatica 整合导致运营费用、净债务或客户复杂度上升。</li>
+    <li>高额回购之后每股 FCF 不增长，SBC 仍约占收入 8%，资本回报更多是财务工程而非经济改善。</li>
+  </ul>
+
+  <h2>7. Recommended Next Diligence</h2>
+  <ol>
+    <li><strong>建立有机增长桥：</strong>从 FY26 到 FY28 按核心 Salesforce、Informatica、Fin、Contentful 拆分收入、cRPO 与利润贡献；复现 Bernstein 的 6–7% 有机 Q3 估算。</li>
+    <li><strong>做 Agentforce cohort 模型：</strong>试点 → 付费生产 → 稳定消耗 → 充值/高级版升级，估算 AWU、Flex Credits、结果定价三种模式的收入与毛利。</li>
+    <li><strong>客户核查：</strong>至少覆盖 Service、Sales、Slack 和 Data 360 各 3–5 个客户，询问上线周期、解决率、人工回退、旧席位迁移、隐含推理成本与预算来源。</li>
+    <li><strong>入口风险地图：</strong>验证 Claudeforce/headless 模式中谁控制用户界面、语义层、权限与计费；比较 Microsoft Copilot、ServiceNow、Anthropic 直连方案。</li>
+    <li><strong>资本配置模型：</strong>纳入 $25bn ASR、$6bn 新债、Informatica/Fin/Contentful 交易与 SBC，使用每股 FCF 而非总 FCF 判断回购创造价值。</li>
+  </ol>
+
+  <h2>Sources Used</h2>
+  <ol class="footnotes">
+    <li id="s1"><strong>FMP：</strong>CRM 实时报价、公司资料、市值、在外股、分析师共识、财务报表、关键指标与同业指标；检索日 2026-08-28。FMP 为标准化数据源，部分 TTM/EV 字段口径需在下一阶段与原始申报勾稽。</li>
+    <li id="s2"><strong>SEC / EdgarTools：</strong><a href="https://www.sec.gov/Archives/edgar/data/1108524/0001108524-26-000190-index.html">FY27 Q2 Form 10-Q，2026-08-27</a>；<a href="https://www.sec.gov/Archives/edgar/data/1108524/0001108524-26-000060-index.html">FY26 Form 10-K，2026-03-02</a>。本地提取：<a href="../collected_resources/edgartools/2026-08-27_crm_fy2027_q2_10q.md">10-Q</a>、<a href="../collected_resources/edgartools/2026-03-02_crm_fy2026_10k.md">10-K</a>、<a href="../collected_resources/edgartools/crm_edgartools_financial_snapshot.md">财务快照</a>。</li>
+    <li id="s3"><strong>电话会：</strong><a href="../collected_resources/fmp/2026-08-26_crm_fy2027_q2_transcript.md">Salesforce FY27 Q2 earnings call transcript</a>，FMP search-transcripts，2026-08-26。</li>
+    <li id="s4"><strong>Goldman Sachs：</strong><a href="../collected_resources/sell-side-reports/2026-08-28_Goldman_Sachs_CRM_2QFY27.md">Salesforce 2QFY27 report</a>，Buy，目标价 271 美元，2026-08-28；Marquee 核验并下载 <a href="../collected_resources/gs-marquee/2026-08-27_goldman-sachs_CRM_analyst-published-model.xlsx">分析师模型</a> 与 <a href="../collected_resources/gs-marquee/2026-08-28_goldman-sachs_CRM_quantum-standard-financials.xlsx">Quantum 标准财务</a>。Marquee PDF 控件未生成下载，网页事实与跨行存档 Markdown 相互核验。</li>
+    <li id="s5"><strong>Bernstein：</strong><a href="../collected_resources/sell-side-reports/2026-08-27_Bernstein_CRM_2Q27.md">Salesforce 2Q27 report</a>，Underperform，目标价 195 美元，2026-08-27。</li>
+    <li id="s6"><strong>Deutsche Bank：</strong><a href="../collected_resources/sell-side-reports/2026-06-26_Deutsche_Bank_CRM_outcome_pricing.md">Salesforce outcome-pricing note</a>，Buy，2026-06-26。</li>
+    <li id="s7"><strong>IGB 买方/渠道：</strong><a href="../collected_resources/igb-content/">6 篇全文材料</a>，主要为 Fundaai 2025–2026 渠道检查、Clouded Judgement 与 Stratechery；精确证据日志位于 temp/igb-content。</li>
+    <li id="s8"><strong>Podwise：</strong><a href="../collected_resources/podwise/topic-research-salesforce-agentforce-data-cloud-2026-08-28.md">Salesforce Agentforce / Data Cloud 跨播客研究</a>，15 期节目，检索日 2026-08-28。</li>
+    <li id="s9"><strong>FreshRSS 新闻：</strong><a href="../collected_resources/freshrss-news/2026-08-27_cnbc_q2_earnings.md">CNBC FY27 Q2</a>、<a href="../collected_resources/freshrss-news/2026-08-26_cnbc_anthropic_partnership.md">Claudeforce 合作</a>、<a href="../collected_resources/freshrss-news/2026-08-05_cnbc_leadership.md">管理层调整</a>，全文均已核验。</li>
+    <li id="s10"><strong>技术面：</strong>yfinance 30 个交易日价格与成交量，MACD/RSI/EMA/布林带；数据截至 2026-08-27，本地文件 temp/crm_technical_30d.csv。</li>
+  </ol>
+  <p class="caption">证据置信度：高（公司财务、SEC、电话会、当前市场数据）；中等（卖方估值与共识）；中低（渠道与播客独立性）。承销状态：Preliminary initiation underwrite。主要未决冲突：Agentforce 高速指标与集团有机增速之间的桥接；并购对 cRPO、净债务和利润率的真实贡献。</p>
+</main>
+</body>
+</html>

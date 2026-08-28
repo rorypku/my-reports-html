@@ -1,5 +1,13 @@
 [
   {
+    "id": "20260828_salesforce_crm",
+    "title": "Salesforce Situation Report",
+    "date": "2026-08-28",
+    "url": "./20260828_salesforce_crm/",
+    "path": "20260828_salesforce_crm/",
+    "sortKey": "20260828"
+  },
+  {
     "id": "20260825_pdd",
     "title": "PDD Holdings Situation Report",
     "date": "2026-08-25",
