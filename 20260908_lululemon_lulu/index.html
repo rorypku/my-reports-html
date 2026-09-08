@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lululemon athletica inc. SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 0;
+            border: none;
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            letter-spacing: 0;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h3 + p,
+        h3 + table,
+        h3 + ul,
+        h3 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+
+        .decision { margin: 22px 0 34px; padding: 20px 22px; border: 1px solid var(--rule-strong); background: var(--paper-edge); }
+        .decision p { margin-bottom: 8px; }
+        .decision p:last-child { margin-bottom: 0; }
+        .eyebrow { font-size: 11px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+        .note { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+        .tag { display: inline-block; margin: 0 8px 6px 0; padding: 3px 8px; border: 1px solid var(--rule); border-radius: 999px; font-size: 11px; color: var(--muted); }
+        a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+        .scenario-table tbody td:first-child { font-weight: 600; }
+        .sources li { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
+
+
+        .decision { margin: 22px 0 34px; padding: 20px 22px; border: 1px solid var(--rule-strong); background: var(--paper-edge); }
+        .decision p { margin-bottom: 8px; }
+        .decision p:last-child { margin-bottom: 0; }
+        .eyebrow { font-size: 11px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+        .note { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+        .tag { display: inline-block; margin: 0 8px 6px 0; padding: 3px 8px; border: 1px solid var(--rule); border-radius: 999px; font-size: 11px; color: var(--muted); }
+        a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+        .scenario-table tbody td:first-child { font-weight: 600; }
+        .sources li { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> LULU</p>
+            <p><strong>Date:</strong> 2026-09-08</p>
+            <p><strong>Classification:</strong> 进入下一阶段研究 · 高波动反转候选</p>
+        </div>
+
+        <h1>lululemon：市场已经判了衰退，但尚未证明是永久衰退</h1>
+
+        <h2>1. Executive View</h2>
+        <div class="decision">
+            <div class="eyebrow">PM readout</div>
+            <p><strong>结论：进入下一阶段研究，但当前不具备建仓准备度。</strong> 9 月 4 日收盘价 100.61 美元，相当于约 10.9 倍供应商远期 EPS，已低于大多数品牌运动服饰同行；市场正在把 2026 年收入下降 5%–7%、剔除一次性退税后约 8.62–8.87 美元的公司 EPS 指引外推成长期品牌衰退。<a href="#s1">[1]</a><a href="#s6">[6]</a></p>
+            <p><strong>值得继续研究的不是“便宜”，而是全球化损伤是否被过度外推。</strong> Q2 美洲可比销售 -12%，中国大陆按固定汇率 -8%，女装紧身裤约 -20%；这已经不是单一宏观噪音。然而 Rest of World 固定汇率收入仍增 6%，公司仍有 13.90 亿美元现金、无传统有息借款，且股数快速下降。若中国事件性流量冲击消退、女裤新品接替紧身裤、全价销售在 2027 年转正，当前倍数并未支付任何修复价值。<a href="#s2">[2]</a><a href="#s4">[4]</a></p>
+            <p><strong>核心风险：</strong>这也可能是价值陷阱。最新高盛模型把 FY27/FY28 EPS 降至 8.38/8.43 美元，目标价 95 美元；大摩更悲观，FY28 EPS 8.11 美元、目标价 83 美元。若中国转弱代表品牌老化向全球扩散，10 倍并不便宜。<a href="#s4">[4]</a><a href="#s5">[5]</a></p>
+        </div>
+        <p><span class="tag">证据置信度：中高</span><span class="tag">承保状态：等待验证</span><span class="tag">数据截止：2026-09-04 收盘 / 2026Q2</span></p>
+
+        <h2>2. Source Freshness Check</h2>
+        <table class="source-freshness-table">
+            <thead><tr><th>来源类别</th><th>最新来源日期</th><th>新鲜度</th><th>距报告日</th></tr></thead>
+            <tbody>
+                <tr><td>卖方研报 / 模型</td><td>2026-09-04</td><td>当前</td><td>4 天；高盛、大摩均已反映 Q2</td></tr>
+                <tr><td>电话会</td><td>2026Q2 · 09-03</td><td>当前</td><td>5 天；另留存前三次电话会</td></tr>
+                <tr><td>SEC 原始文件</td><td>10-Q · 09-03</td><td>当前</td><td>5 天；FY2025 10-K 为 03-17</td></tr>
+                <tr><td>新闻 / 市场反应</td><td>2026-09-04</td><td>当前</td><td>4 天；FreshRSS 的 2025 历史覆盖较薄</td></tr>
+                <tr><td>买方 / 运营者观点</td><td>无有效 IGB 命中</td><td>缺口</td><td>已执行 8 组检索；空结果不作证据</td></tr>
+                <tr><td>播客 / 深度讨论</td><td>2025-08-17</td><td>有用但已过时</td><td>约 13 个月；仅作旧牛论据基线</td></tr>
+            </tbody>
+        </table>
+
+        <h2>3. Current Snapshot</h2>
+        <table class="snapshot-table">
+            <thead><tr><th>项目</th><th>最新情况</th></tr></thead>
+            <tbody>
+                <tr><td>市场数据</td><td>100.61 美元；52 周 97.99–225.98 美元；市值约 111–114 亿美元，含经营租赁口径的供应商 EV 约 119–122 亿美元。9 月 4 日单日下跌 17.4%。<a href="#s6">[6]</a></td></tr>
+                <tr><td>经营结果</td><td>Q2 收入 24.16 亿美元，同比 -4.3%；全球可比销售 -9%，固定汇率 -10%；美洲 / 中国大陆 / Rest of World 收入 -8% / +4% / +5%，固定汇率后中国 -2%、RoW +6%。<a href="#s1">[1]</a><a href="#s2">[2]</a></td></tr>
+                <tr><td>利润质量</td><td>报告毛利率 60.5%，但包含 1.345 亿美元退税、贡献 560bp；机械剔除后约 54.9%。报告 EPS 2.92 美元，剔除 0.86 美元退税及利息影响约 2.06 美元，同比约 -34%。<a href="#s1">[1]</a><a href="#s2">[2]</a></td></tr>
+                <tr><td>资产负债 / 回购</td><td>现金 13.90 亿美元；存货 17.11 亿美元，同比 -1%、单位数 -7%；经营租赁负债约 21.41 亿美元，无传统有息借款。Q2 回购 270 万股、耗资 3.30 亿美元，平均约 122 美元，略高于当前价。<a href="#s1">[1]</a><a href="#s2">[2]</a></td></tr>
+                <tr><td>技术 / 仓位</td><td>9 月 4 日价格跌破 EMA50 119.92 美元及布林下轨，RSI 31.8、MACD 柱 -1.15，波动扩张且无正背离。供应商显示机构持股约 81%，空头约占流通盘 10.0%（截至 8 月中旬，聚合口径）。<a href="#s6">[6]</a><a href="#s10">[10]</a></td></tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead><tr><th>关键指标</th><th align="center">值</th><th>投资含义</th></tr></thead>
+            <tbody>
+                <tr><td>FY2025 美洲收入</td><td align="center">78.47 亿 / -1%</td><td>仍占 71%，国际增长尚无法抵消核心市场停滞。</td></tr>
+                <tr><td>FY2025 中国收入</td><td align="center">17.55 亿 / +29%</td><td>过去增长引擎很强，Q2 固定汇率转负使“全球损伤”成为新风险。</td></tr>
+                <tr><td>FY2025 经营利润率</td><td align="center">19.9%</td><td>从 FY2024 的 23.7% 下滑；固定成本、促销和关税决定 EPS 修复弹性。</td></tr>
+                <tr><td>FY2025 FCF</td><td align="center">约 9.22 亿美元</td><td>按当前市值约 8.3% 历史 FCF 收益率，但 2026 盈利下滑意味着不可直接年化。</td></tr>
+            </tbody>
+        </table>
+        <p class="note">以上 FY2025 数字均为已报告事实；FCF＝经营现金流 16.02 亿 − 资本开支 6.81 亿。市场数据为供应商聚合值，租赁负债与 EV 口径需避免和“无有息债”混淆。<a href="#s3">[3]</a><a href="#s6">[6]</a></p>
+
+        <h2>4. Valuation Framing &amp; Peer Benchmarking</h2>
+        <h3>定价锚与隐含预期</h3>
+        <p><strong>市场主锚是远期 P/E，卖方的备选锚是 Q5–Q8 EV/EBITDA。</strong>当前约 10.9 倍供应商远期 P/E；高盛最新用 4.5 倍 Q5–Q8 EV/EBITDA 得出 95 美元目标价，大摩以约 10 倍 FY27E P/E 得出 83 美元。两者共同假设的不是短暂波动，而是 2027–2028 EPS 仍停留约 8 美元。<a href="#s4">[4]</a><a href="#s5">[5]</a><a href="#s6">[6]</a></p>
+        <p>公司 FY2026 指引 EPS 9.48–9.73 美元包含 0.86 美元一次性退税，基础约 8.62–8.87 美元；因此当前价约为 11.3–11.7 倍公司基础指引。市场已经大幅放弃过去的高成长复利锚，但还没有给出“中国问题是暂时舆情 / 渠道事件还是品牌衰退”的答案。<a href="#s1">[1]</a></p>
+
+        <h3>同行对比</h3>
+        <table class="peer-table">
+            <thead><tr><th>公司</th><th align="right">市值</th><th align="right">远期 P/E</th><th align="right">EV/收入</th><th align="right">最新收入增速</th><th align="right">TTM FCF率</th></tr></thead>
+            <tbody>
+                <tr><td>LULU</td><td align="right">$11.1bn</td><td align="right">10.9x</td><td align="right">1.07x</td><td align="right">-4.3%</td><td align="right">10.4%</td></tr>
+                <tr><td>NKE</td><td align="right">$57.0bn</td><td align="right">16.8x</td><td align="right">1.27x</td><td align="right">-1.1%</td><td align="right">4.1%</td></tr>
+                <tr><td>DECK</td><td align="right">$11.7bn</td><td align="right">10.3x</td><td align="right">1.91x</td><td align="right">+5.7%</td><td align="right">15.8%</td></tr>
+                <tr><td>ONON</td><td align="right">$9.4bn</td><td align="right">13.5x</td><td align="right">2.70x</td><td align="right">+13.5%</td><td align="right">9.0%</td></tr>
+                <tr><td>ADDYY</td><td align="right">$30.3bn</td><td align="right">13.8x</td><td align="right">1.35x</td><td align="right">+13.3%</td><td align="right">3.7%</td></tr>
+            </tbody>
+        </table>
+        <p class="note">来源：yfinance 聚合数据，2026-09-08 获取，价格以最近完整交易日为准。收入增速与利润期点并不完全一致；ONON/ADDYY 的币种、ADR 与会计口径也不同。表格只显示市场如何给增长定价，不把供应商指标当作审计财务。<a href="#s6">[6]</a></p>
+
+        <h3>历史定价与叙事</h3>
+        <img src="./assets/lulu_price_action_narrative_eras.png" alt="LULU 近三年股价与市场叙事">
+        <img src="./assets/lulu_historical_valuation_bands.png" alt="LULU 近三年报告口径市盈率区间">
+        <img src="./assets/lulu_nsm_mismatch_jaws_chart.png" alt="LULU 需求代理与估值倍数错位">
+        <p class="note">图二的 GAAP TTM P/E 曾被 Mirror 相关减值扭曲，当前又受一次性退税抬高 EPS，因此历史均值不是合理价值；它只显示市场如何从“高成长”切换到“永久衰退”。图三用季度收入增速作为连续可复算的需求代理，真正更优的 CEO NSM——全价售罄、核心客复购和新品转化——没有连续公开时间序列。</p>
+
+        <h3>North Star Metrics Framework</h3>
+        <table class="nsm-table">
+            <thead><tr><th>视角</th><th>判断</th></tr></thead>
+            <tbody>
+                <tr><td>CEO NSM</td><td><strong>全价销售健康度 / 新品与核心客响应。</strong>管理层把目标明确为恢复 full-price sales growth；可观察代理包括美洲可比销售、女裤新品接替率、折扣渗透和高价值客流量。<a href="#s7">[7]</a></td></tr>
+                <tr><td>长期投资者 NSM</td><td><strong>同店全价增长转化为单位门店现金回报。</strong>核心是可比销售、毛利率和经营利润率共同改善，而不是靠开店维持收入。管理层曾披露 2025 新店 ROI 超 100%、门店回收期不足一年，但该公司主张需要用门店 cohort 再核验。<a href="#s7">[7]</a></td></tr>
+                <tr><td>市场共识 NSM</td><td><strong>美洲可比销售与 FY27–28 EPS。</strong>市场不再奖励国际门店数，而在惩罚核心市场负 comps、降价 / 固定成本去杠杆和低于 9 美元的中期 EPS。<a href="#s4">[4]</a><a href="#s5">[5]</a></td></tr>
+                <tr><td>错位类型</td><td><strong>危险分化，伴随潜在叙事陷阱。</strong>社区参与和新品“绿芽”没有转成全价收入；但市场可能把 2026 的产品 / 舆情冲击错误当作永久全球衰退。当前只存在可研究的错价假说，不存在已证实的健康滞后。</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Value Creation → Value Capture Chain</h3>
+        <p class="value-chain">面料与版型解决运动 / 日常穿着痛点 → 新品被核心客全价购买并复购 → 社区和门店提升获客与频次 → 可比销售与单位店产出增长 → 少打折、毛利稳定 → 门店现金回收与自由现金流 → 回购减少股数、放大每股价值</p>
+
+        <h3>上行 / 下行不对称</h3>
+        <table class="scenario-table">
+            <thead><tr><th>情景</th><th>2–3 年盈利 / 倍数</th><th>价值区间</th><th>相对 $100.61</th></tr></thead>
+            <tbody>
+                <tr><td>熊：全球品牌衰退</td><td>EPS $8.0–8.5；9–10x</td><td>$72–85</td><td>-28% 至 -16%</td></tr>
+                <tr><td>基准：止跌、低增长</td><td>EPS $9.5–10.5；12–14x</td><td>$114–147</td><td>+13% 至 +46%</td></tr>
+                <tr><td>牛：新品 / 中国修复</td><td>EPS $12–13；16–18x</td><td>$192–234</td><td>+91% 至 +133%</td></tr>
+            </tbody>
+        </table>
+        <p class="note">情景为 PM 判断，不是目标价。熊案与最新高盛 / 大摩盈利路径相近；牛案要求利润率和品牌倍数同时修复，不能用历史高倍数自动外推。未做完整三表与租赁现金流归一化，因此区间只用于判定后续研究的潜在材料性。<a href="#s4">[4]</a><a href="#s5">[5]</a></p>
+
+        <h2>5. SitRep Judgment</h2>
+        <p><strong>Classification: 进入下一阶段研究 · 高波动反转候选。</strong></p>
+        <p><strong>Wrong anchor：</strong>成立为可信假说，但尚未证实。当前 10–11 倍锚把 2026 基础 EPS 当成接近永久水平；如果国际 / 中国恢复且美洲 comps 只需回到零附近，这个锚会同时低估 EPS 与合理倍数。反过来，Q2 中国也转负使“只是美国周期”这条旧牛论据失效。</p>
+        <p><strong>Material upside：</strong>满足。牛案需要的不是回到历史 30–40 倍，只需 EPS 回到 12–13 美元且倍数回到 16–18 倍，2–3 年价值即可接近当前价的两倍；熊案约 20%–30% 下行，赔率足够大但路径高度分叉。</p>
+        <p><strong>Clear validation path：</strong>满足。未来 2–4 个季度的美洲 / 中国 comps、紧身裤与宽松女裤组合、全价销售与 markdown、毛利（剔除退税）、存货单位、门店计划和新 CEO 2027 框架都可直接验证。故应推进门店 cohort、消费者 / 社媒与 SKU 级别研究，而不是仅因低 P/E 买入。</p>
+
+        <h2>6. What Would Confirm Or Break The Thesis</h2>
+        <h3>确认错价</h3>
+        <ul>
+            <li>未来两个季度美洲可比销售由 -12% 连续改善，且 Q1/Q2 2027 接近零；改善由转化率和全价销售贡献，而非折扣或单纯开店。</li>
+            <li>中国固定汇率 comps 在 1–2 个季度内转正，且恢复同时出现在门店与数字渠道，证明长城事件 / Tmall 618 基数不是品牌永久损伤。</li>
+            <li>女装紧身裤降幅从约 -20% 明显收窄，Groove / Define / away-from-body 新品净增能够覆盖核心款流失，markdown 渗透不再上升。</li>
+            <li>剔除退税后的毛利率从约 54.9% 回升，库存单位继续下降；2027 EPS 预期从约 8–9 美元上修而非依赖回购。</li>
+        </ul>
+
+        <h3>打破错价</h3>
+        <ul>
+            <li>中国大陆固定汇率 comps 连续两季为负、RoW 也转负，说明问题从美国产品周期扩散为全球品牌衰退。</li>
+            <li>美洲流量、转化率、客单价三者继续同步下降；营销投入增加却无法改善全价销售，证明品牌热度与经济捕获脱节。</li>
+            <li>存货金额重新双位数增长、折扣 / 退货上升，且基础毛利率仍低于 55%，迫使 FY27–28 EPS 下探约 8 美元。</li>
+            <li>新 CEO 以大规模降价、批发渠道或低回报开店换增长，或公司回购持续超过 FCF、削弱现金缓冲。</li>
+        </ul>
+
+        <h2>7. Recommended Next Diligence</h2>
+        <ol>
+            <li><strong>建立地区 × 渠道 × 门店 cohort 模型。</strong>把美洲、中国、RoW 的同店、净开店、面积增长和分部利润拆开，验证“新店 ROI &gt;100%”及国际扩张的真实增量回报。</li>
+            <li><strong>做 SKU / 客群证伪。</strong>跟踪核心紧身裤、away-from-body 女裤、男装、鞋履的价格、折扣、上新速度、社媒互动和搜索 / 转化，区分剪裁周期与品牌流失。</li>
+            <li><strong>重建基础毛利桥。</strong>剔除 IEEPA 退税，分开关税、markdown、产品成本、占用 / 折旧与汇率，形成 FY27–28 EPS 8 / 10 / 13 美元三套可复算模型。</li>
+            <li><strong>补独立观点。</strong>IGB 本地库无覆盖，应通过渠道访谈、消费者面板或可验证的卡数据补齐；同时追踪 Heidi O’Neill 上任后首个完整经营框架。</li>
+        </ol>
+
+        <h2>Sources Used</h2>
+        <ul class="sources">
+            <li id="s1"><strong>公司业绩：</strong><a href="https://corporate.lululemon.com/newsroom/press-releases/2026/09-03-2026-210528733">lululemon FY2026 Q2 Results，2026-09-03</a>。</li>
+            <li id="s2"><strong>SEC：</strong><a href="https://www.sec.gov/Archives/edgar/data/1397187/000139718726000127/lulu-20260802.htm">Form 10-Q，季度截至 2026-08-02，提交 2026-09-03</a>；FMP SEC 检索与 EdgarTools 原文核验。</li>
+            <li id="s3"><strong>SEC：</strong><a href="https://www.sec.gov/Archives/edgar/data/1397187/000139718726000020/lulu-20260201.htm">FY2025 Form 10-K，提交 2026-03-17</a>；EdgarTools 财务、分部、存货、租赁与风险因子提取。</li>
+            <li id="s4"><strong>Goldman Sachs：</strong>“F2Q26 Review: Broad-based deterioration in trends”，Brooke Roach，2026-09-04；Marquee PDF 与分析师模型。</li>
+            <li id="s5"><strong>Morgan Stanley：</strong>《2Q26财报：风险更多的预期重置》，2026-09-04；另参《为何收缩以求增长是 LULU 的下一章》，2026-07-21。</li>
+            <li id="s6"><strong>市场数据：</strong><a href="https://financialmodelingprep.com/developer/docs">FMP</a> 报价、估值、预测及持股数据；yfinance 三年价格、同行与技术数据，均于 2026-09-08 获取。</li>
+            <li id="s7"><strong>电话会：</strong>LULU FY2026 Q2 / Q1、FY2025 Q4 / Q3 全文，FMP earningsTranscript / search-transcripts；重点使用 2026-09-03 Q2 电话会。</li>
+            <li id="s8"><strong>新闻：</strong>CNBC “Lululemon shares sink 20% after retailer cuts guidance again”，2026-09-04；CNBC 中国消费品牌背景，2026-08-21；均由 FreshRSS 原文核验。</li>
+            <li id="s9"><strong>播客：</strong><a href="https://www.youtube.com/watch?v=7DmuTHBlcM4">The Intrinsic Value Podcast, “Still the King of Athleisure?”</a>，2025-08-17；人工英文字幕，只作投资者观点。</li>
+            <li id="s10"><strong>技术指标：</strong>yfinance 30 个交易日日线，2026-07-27 至 09-04；technical-indicator 计算 RSI、MACD、EMA 与布林带。</li>
+        </ul>
+        <p class="note"><strong>来源与限制：</strong>全部九个规定工作流均已尝试。IGB 买方 / 运营者索引没有有效 LULU 覆盖；高盛公司页未提供 Quantum standard financials；FreshRSS 的 2025 历史新闻较薄。FMP 预测期标签存在非直观排序，未用作精确目标价。报告把已报实际、公司指引、卖方预测和 PM 情景明确分开。本文为研究筛选，不是个性化投资建议。</p>
+    </div>
+
+</body>
+</html>
