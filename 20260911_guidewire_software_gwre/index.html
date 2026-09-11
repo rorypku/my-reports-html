@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guidewire Software, Inc. SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 0;
+            border: none;
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            letter-spacing: 0;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h3 + p,
+        h3 + table,
+        h3 + ul,
+        h3 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> GWRE</p>
+            <p><strong>Date:</strong> 2026-09-11</p>
+            <p><strong>Classification:</strong> 推进下一阶段研究（估值重置后的验证型机会）</p>
+        </div>
+
+        <h1>Guidewire Software：合同价值在前，收入兑现滞后</h1>
+
+        <h2>1. 核心判断：值得推进，但不是已经完成的买入结论</h2>
+        <p><strong>结论：推进下一阶段研究。</strong> 2026 年 9 月 3 日业绩后，市场因 FY27 第一季度收入指引 3.72–3.78 亿美元低于 LSEG 共识 3.87 亿美元而迅速重估，次日盘中最大跌幅约 21%；但公司同期披露 FY26 ARR 12.42 亿美元、同比增长 19%，fully-ramped ARR 增长 22%，且 FY27 净新增 ARR 指引中超过一半已签约并约定 ramp 日期。[S1][S2][S6] 这构成一个可信但尚未证实的“错锚”：市场在用下一季度会计收入和 EV/Sales 定价，而真正决定 2–3 年现金创造的可能是已签约 fully-ramped ARR 如何转化为订阅收入、毛利和自由现金流。</p>
+        <p>价格重置使问题变得可研究。以 9 月 10 日收盘价 140.09 美元计，保守口径企业价值约 120 亿美元，约为 FY27 FMP 收入共识的 7.0 倍、TTM 收入的 8.1 倍；三年估值代理均值为 12.2 倍，当前约低 1.3 个标准差。[S3][S11] 但低于历史均值不等于便宜：保守三年终值情景的基准现值仅约 152 美元，只有当 FY29 收入接近当前共识、FCF margin 达 30%、且退出 EV/FCF 达 35 倍时，现值才约 214 美元（较现价约 +53%）。因此上行足够大，但依赖高质量兑现，而非单纯均值回归。</p>
+        <p>证据置信度为<strong>中等偏高</strong>：最新电话会、公司 IR、8-K、FY26 Q3 10-Q、FY25 10-K 和 FMP 市场数据已覆盖；FY26 10-K 尚未提交/取得，最新多家卖方更新不足，Goldman Marquee 认证会话不可用。承销状态仍是<strong>初步验证</strong>，不应把“高留存 + 云迁移”直接等同于无风险的 SaaS 复利。</p>
+
+        <h2>2. 来源新鲜度：经营数据新，卖方与买方覆盖偏旧</h2>
+        <table class="source-freshness-table">
+            <thead>
+                <tr>
+                    <th>Source Category</th>
+                    <th>Latest Source Date</th>
+                    <th>Freshness Status</th>
+                    <th>Age vs. Report Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sell-side reports</td>
+                    <td>GS，2025-10-30</td>
+                    <td>陈旧</td>
+                    <td>约 10.5 个月；早于 FY26 Q4</td>
+                </tr>
+                <tr>
+                    <td>Earnings call transcript</td>
+                    <td>FY26 Q4，2026-09-03</td>
+                    <td>当前</td>
+                    <td>8 天</td>
+                </tr>
+                <tr>
+                    <td>SEC filings</td>
+                    <td>8-K 2026-09-03；10-Q 2026-06-05</td>
+                    <td>事件当前；年报待更新</td>
+                    <td>FY26 10-K 未取得</td>
+                </tr>
+                <tr>
+                    <td>Buy-side reports</td>
+                    <td>GWRE 专文 2025-10-20；行业 AI 2026-01-30</td>
+                    <td>有用但偏旧/间接</td>
+                    <td>直接公司观点约 10.7 个月</td>
+                </tr>
+                <tr>
+                    <td>News / market reaction</td>
+                    <td>2026-09-04</td>
+                    <td>当前</td>
+                    <td>7 天</td>
+                </tr>
+                <tr>
+                    <td>Market / technical data</td>
+                    <td>2026-09-10</td>
+                    <td>当前</td>
+                    <td>最近交易日</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. 当前快照：增长与利润同时兑现，价格动量尚未企稳</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Latest Situation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Market Data &amp; Positioning</td>
+                    <td>9 月 10 日收盘 140.09 美元；52 周区间 102.30–255.91 美元；市值 116.6 亿美元。保守 EV 约 119.9 亿美元（仅扣现金、不扣短期投资）；若同时扣短期投资，EV 约 116.1 亿美元。[S3]</td>
+                </tr>
+                <tr>
+                    <td>Key Financial Metrics</td>
+                    <td>FY26 收入 14.75 亿美元、+23%；ARR 12.42 亿美元、+19% CC；订阅收入 9.16 亿美元、+37%；公司口径 OCF 3.90 亿美元、+30%。[S1][S2]</td>
+                </tr>
+                <tr>
+                    <td>Price Action &amp; Technicals</td>
+                    <td>近 5 日跌 27.3%，收盘低于 EMA50 约 15.1%；MACD 死叉且跌破零轴，RSI 33.6，布林带显著扩张且无看涨背离。下跌尚未形成技术性底部。[S10]</td>
+                </tr>
+                <tr>
+                    <td>Positioning</td>
+                    <td>流通股约 7,505 万股、总股本约 8,326 万股。FY26 公司回购 4.1 百万股、均价 148.41 美元；本次来源未取得更新的机构持仓、空头比例或借券数据，不能判断拥挤度。[S2][S3]</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr>
+                    <th>Key Metric</th>
+                    <th align="center">Value</th>
+                    <th>Implication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fully-ramped ARR 增长</td>
+                    <td align="center">22%</td>
+                    <td>连续第 4 年快于已实现 ARR；反映已签合同未来 ramp 的积累，但不等于当期收入或已上线使用。[S2]</td>
+                </tr>
+                <tr>
+                    <td>Cloud ARR / 总 ARR</td>
+                    <td align="center">84%</td>
+                    <td>管理层定义包括已在云上及已签约迁云客户；迁移可见度高，但该口径仍可能领先真正 go-live。[S2]</td>
+                </tr>
+                <tr>
+                    <td>核心系统 gross ARR attrition</td>
+                    <td align="center">&lt;1%</td>
+                    <td>任务关键型系统记录的粘性极强；同时需警惕大型保险客户议价和实施风险。[S2][S5]</td>
+                </tr>
+                <tr>
+                    <td>订阅与支持毛利率</td>
+                    <td align="center">74.5%</td>
+                    <td>FY26 非 GAAP、同比 +4ppt，接近此前 FY28 目标；FY27 指引 75–76%。这是现金捕获能否兑现的核心桥梁。[S2]</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. 估值与同业：低于历史，但只有高质量兑现才有大幅上行</h2>
+        <h3>市场锚与隐含预期</h3>
+        <p>GWRE 仍处在 license / maintenance 向订阅迁移的混合阶段，GAAP EPS 受到收入分类、SBC 和非 GAAP 调整影响；市场最常用的锚应是 <strong>EV/NTM revenue</strong>，现金流作为第二道验证。当前约 7.0 倍 FY27 收入共识，FMP 共识为 FY27 收入 17.19 亿美元（+16.5%）、FY28 收入 19.89 亿美元；公司 FY27 收入指引为 17.07–17.27 亿美元，ARR 指引中值约 +18%。[S1][S3][S4]</p>
+        <p>当前价格隐含“高十几位数增长可持续，但不再为 2025 年的极高终值付费”。三年 EV/TTM revenue 代理从 2025 年高位约 17.6 倍降至 8.1 倍。历史 GS 报告曾以 16.0 倍 Q5–Q8 EV/Sales 给出 305 美元目标价，并隐含约 61 倍 EV/uFCF；该框架在最新 FY26 Q4 和价格重置后已经陈旧，只能说明过去市场锚有多激进，不能作为当前目标价。[S7][S11]</p>
+
+        <h3>同业参照</h3>
+        <p>没有理想的上市纯保险核心系统同业；Duck Creek 已私有化。下表使用任务关键型垂直/工作流软件作估值情景参照，而不是宣称业务完全可比。EV 统一采用“市值 + 债务 − 现金”，故未扣短期投资；利润率为 FMP TTM 标准化口径，GWRE FCF margin 另以公司 FY26 定义列示。[S11]</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">EV / NTM Rev.</th>
+                    <th align="right">NTM Rev. Growth</th>
+                    <th align="right">TTM Op. Margin</th>
+                    <th align="right">FCF Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GWRE</td>
+                    <td align="right">$11.7bn</td>
+                    <td align="right">7.0x</td>
+                    <td align="right">16.5%</td>
+                    <td align="right">10.2%</td>
+                    <td align="right">24.3%*</td>
+                </tr>
+                <tr>
+                    <td>VEEV</td>
+                    <td align="right">$42.4bn</td>
+                    <td align="right">11.0x</td>
+                    <td align="right">6.7%</td>
+                    <td align="right">29.9%</td>
+                    <td align="right">47.5%</td>
+                </tr>
+                <tr>
+                    <td>TYL</td>
+                    <td align="right">$13.7bn</td>
+                    <td align="right">5.6x</td>
+                    <td align="right">5.2%</td>
+                    <td align="right">15.1%</td>
+                    <td align="right">29.4%</td>
+                </tr>
+                <tr>
+                    <td>PCOR</td>
+                    <td align="right">$8.0bn</td>
+                    <td align="right">5.0x</td>
+                    <td align="right">6.4%</td>
+                    <td align="right">-4.0%</td>
+                    <td align="right">20.6%</td>
+                </tr>
+                <tr>
+                    <td>MANH</td>
+                    <td align="right">$12.0bn</td>
+                    <td align="right">10.1x</td>
+                    <td align="right">3.4%</td>
+                    <td align="right">24.3%</td>
+                    <td align="right">35.4%</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><em>* GWRE FCF margin 使用公司定义 FY26 FCF 约 3.59 亿美元 / 收入 14.75 亿美元；其他同业为 FMP 标准化 TTM 口径，比较仅作方向性参照。四家同业 EV/NTM revenue 中位数约 7.9 倍，GWRE 低约 11%，但其 TTM 营业利润率也显著低于高质量同业。</em></p>
+
+        <h3>历史价格、估值与“剪刀差”</h3>
+        <p>三年累计回报：GWRE +50.8%，落后 SPY（+75.4%），高于 IGV（+38.0%）。估值图为可复现的月末代理，并非真正 point-in-time 共识倍数；NSM 图把 ARR 与估值倍数都标准化为 2023 年 10 月 = 100，以比较斜率。ARR 是公司连续披露、最接近合同价值积累的代理，不是产品使用量，也不能证明迁移已经上线。[S11]</p>
+        <img src="./assets/gwre_price_action_narrative_eras.png" alt="Guidewire Software, Inc. price action and narrative eras chart">
+        <img src="./assets/gwre_historical_valuation_bands.png" alt="Guidewire Software, Inc. historical valuation bands chart">
+        <img src="./assets/gwre_nsm_mismatch_jaws_chart.png" alt="Guidewire Software, Inc. NSM mismatch jaws chart">
+
+        <h3>North Star Metrics 框架</h3>
+
+        <table class="nsm-table">
+            <thead>
+                <tr>
+                    <th>Lens</th>
+                    <th>Assessment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO</td>
+                    <td><strong>成功的核心系统云迁移与 time-to-value。</strong> 公开代理是 FY26 的 62 个 core cloud deals、105 个 fully-ramped ARR 超过 500 万美元的客户，以及核心系统 gross ARR attrition 低于 1%。这衡量客户是否愿意把任务关键型 Policy/Claims/Billing 工作流长期交给平台。[S2]</td>
+                </tr>
+                <tr>
+                    <td>Long-term investor</td>
+                    <td><strong>Fully-ramped ARR 增长 × FCF 转化。</strong> FY26 fully-ramped ARR +22%，已实现 ARR +19%；订阅与支持毛利率 74.5%，公司口径 OCF 3.90 亿美元。合同 ramp 只有持续转成 75%+ 订阅毛利与现金流，才构成股东价值。[S1][S2]</td>
+                </tr>
+                <tr>
+                    <td>Market-consensus</td>
+                    <td><strong>下一季度收入/指引与 EV/NTM revenue。</strong> FY27 Q1 收入指引低于共识触发约 21% 盘中跌幅，即使全年收入指引略高于共识，说明市场优先惩罚近期兑现斜率。[S6]</td>
+                </tr>
+                <tr>
+                    <td>Mismatch category</td>
+                    <td><strong>Healthy lag，带 narrative-trap 风险。</strong> 合同 ARR 与留存领先会计收入，市场可能把迁移造成的 license 下滑和 ramp 时点当成需求恶化；反面是 cloud ARR 口径包含“已签约迁移”而不等于上线，若 ramp 持续后移，市场锚其实是正确的。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>价值创造 → 价值捕获</h3>
+        <p class="value-chain">保险公司需要更快产品迭代、理赔与定价效率 → 成功实施 PolicyCenter / ClaimCenter / BillingCenter → 核心保单、理赔、计费数据和工作流沉淀 → 组织依赖与迁移风险提高 → 按 DWP 定价的多年订阅、PricingCenter / ProNavigator 等模块附加 → fully-ramped ARR 按合同逐年爬坡 → 订阅毛利率提升、服务复杂度下降 → 自由现金流与回购能力</p>
+        <p>访谈证据支持实施生态是关键中间环节：Guidewire/AWS 访谈强调 SaaS 不是简单 lift-and-shift，预制集成和认证伙伴降低迁移摩擦；另一场生态访谈称 Marketplace 集成通常预制 70–90%，剩余定制仍会产生服务负担。[S9] IGB 买方文章提出相同机制，但同时提醒云费可达本地 license + maintenance 的 2–3 倍、合同 ramp 最长数年，价值兑现与客户 go-live 之间存在真实时滞。[S8]</p>
+
+        <h3>上行 / 下行非对称</h3>
+        <table class="metric-table">
+            <thead><tr><th>三年终值情景</th><th align="center">核心假设</th><th align="right">现值 / 股</th><th align="right">较现价</th></tr></thead>
+            <tbody>
+                <tr><td>Bear</td><td align="center">FY29 收入共识 × 20% FCF margin × 25x EV/FCF</td><td align="right">$100</td><td align="right">-29%</td></tr>
+                <tr><td>Base</td><td align="center">FY29 收入共识 × 25% FCF margin × 30x EV/FCF</td><td align="right">$152</td><td align="right">+9%</td></tr>
+                <tr><td>Bull / 错锚成立</td><td align="center">FY29 收入共识 × 30% FCF margin × 35x EV/FCF</td><td align="right">$214</td><td align="right">+53%</td></tr>
+            </tbody>
+        </table>
+        <p>情景使用 FY29 FMP 收入共识 22.95 亿美元、10% 折现率、8,287 万股和保守净债务 3.30 亿美元；它是终值反推而非 DCF 或目标价。[S4][S11] 分布并不天然有利：基准情景几乎没有足够回报，只有 fully-ramped ARR 兑现、FCF margin 持续扩张且终值仍获高倍数时，错锚才产生有意义上行。下行机制是增长降至中低双位数、实施负担吞噬毛利、AI 仅是叙事、或市场把终值倍数压至 25 倍 FCF。</p>
+
+        <h2>5. SitRep 判定</h2>
+        <p><strong>Classification: 推进下一阶段研究（估值重置后的验证型机会）。</strong></p>
+        <p><strong>Wrong anchor：通过，置信度中等。</strong> FY27 license 收入预计因迁云减少约 4,600 万美元，已签合同的 ARR 又按多年 ramp；用单季收入斜率判断需求容易把会计迁移与商业弱化混在一起。新闻中的价格反应、fully-ramped ARR 与已实现 ARR 的差异，以及 84% cloud ARR/低流失率共同支持“近期收入锚可能过窄”。但 cloud ARR 包含已签约迁移客户，若项目延期或 go-live 失败，这一锚并没有错。[S2][S5][S6]</p>
+        <p><strong>Material upside：有条件通过。</strong> 现价相对三年估值均值已显著重置，且较方向性同业中位数略有折价；错锚成立的 bull 情景约 214 美元、上行约 53%。然而 base 仅约 152 美元，意味着不能只赌估值均值回归，必须验证 30% FCF margin 附近的长期现金能力。[S11]</p>
+        <p><strong>Clear validation path：通过。</strong> FY27 Q1 收入/ARR、FY27 全年 ARR 与 OCF、季度订阅毛利、fully-ramped ARR 年度更新、Nationwide/Sompo 等大型迁移里程碑，以及 2026 年 10 月 27 日 Analyst Day，都会在未来数季明确支持或推翻合同价值兑现假设。[S1][S2]</p>
+
+        <h2>6. 可验证与可证伪节点</h2>
+        <h3>确认信号</h3>
+        <ul>
+            <li>FY27 Q1 ARR 达到 12.53–12.59 亿美元、订阅与支持收入达到 2.79–2.83 亿美元，且收入短差明确来自 license/ramp 时点而非新签放缓。</li>
+            <li>FY27 ARR 达到 14.50–14.60 亿美元，订阅与支持毛利率保持 75–76%，公司口径 OCF 达到 4.45–4.65 亿美元；对应 FCF margin 能维持在中高 20% 区间。</li>
+            <li>2026 年 10 月 27 日 Analyst Day 披露的 backlog/ramp 桥能解释 fully-ramped ARR +22% 如何转成未来 8–12 个季度 ARR，并给出可追踪的上线节点。</li>
+            <li>Nationwide、Sompo 等 Tier-1 项目按计划进入实施/上线；AI 项目工具使实施周期或固定价风险下降，并由第三方 SI/客户证据验证。</li>
+            <li>PricingCenter、ProNavigator 的付费 attach 与续约被单独披露，而非仅以赢单数或“AI 兴趣”表述。</li>
+        </ul>
+
+        <h3>破坏信号</h3>
+        <ul>
+            <li>FY27 ARR 增长低于约 17%，fully-ramped ARR 增长降至已实现 ARR 以下，或 management 反复把 ramp 推向更远年份。</li>
+            <li>核心系统 gross ARR attrition 升至 2% 以上，或大型客户迁移延迟、缩减、取消，证明合同可见度并非行为可见度。</li>
+            <li>订阅与支持毛利率低于 75%、服务毛利重回负值，或云基础设施/固定价实施成本阻止总毛利与现金流达到指引。</li>
+            <li>FY27 OCF 低于 4.45 亿美元，且差额不是可解释的账单季节性；SBC 高于收入约 14% 或摊薄股数重新上升。</li>
+            <li>AI 原生层绕过核心系统数据与工作流，Guidewire 只能提供低附加值记录层；ProNavigator/PricingCenter 无独立付费使用证据。[S8]</li>
+        </ul>
+
+        <h2>7. 下一阶段研究</h2>
+        <ol>
+            <li><strong>建立合同 cohort / ramp 模型。</strong> 按 FY23–FY26 签约年度、Tier-1/2、migration vs new logo、DWP 和预计 go-live 拆分 fully-ramped ARR，重建未来 ARR、订阅收入、递延收入/RPO 和 FCF。</li>
+            <li><strong>做实施渠道核验。</strong> 访谈 Accenture、Capgemini、Cognizant 等 SI 与 3–5 家近期迁移客户，核验周期、固定价损失、定制比例、Guidewire AI 项目工具是否真实缩短工期。</li>
+            <li><strong>刷新卖方与共识。</strong> 在 FY26 Q4 后取得至少三家银行的新报告与模型；恢复 Goldman Marquee 认证 Chrome 控制后重跑，区分最新共识、个别分析师和公司指引。</li>
+            <li><strong>建立现金转化与摊薄桥。</strong> 从 ARR → subscription revenue → gross profit → GAAP/non-GAAP OI → OCF/FCF，单列 SBC、合同获取成本、账单季节性、回购和短期投资。</li>
+            <li><strong>Analyst Day 后复核。</strong> 以 10 月 27 日披露为硬节点，若公司不给 backlog/ramp、AI 付费 attach 或实施效率的量化证据，下调错锚置信度并转为普通观察名单。</li>
+        </ol>
+
+        <h2>核心来源</h2>
+        <ul>
+            <li><strong>[S1] Company IR：</strong>《Guidewire Announces Fourth Quarter and Fiscal Year 2026 Financial Results》，2026-09-03；另含 FY24–FY26 季度一手数据整理。</li>
+            <li><strong>[S2] Transcript：</strong>Guidewire FY2026 Q4 Earnings Call，Mike Rosenbaum、John Mullen、Jeff Cooper，2026-09-03，FMP transcript。</li>
+            <li><strong>[S3] Market data：</strong>FMP GWRE quote、company profile、market cap、shares float、balance sheet，检索日 2026-09-11，价格截至 2026-09-10。</li>
+            <li><strong>[S4] Consensus：</strong>FMP annual financial estimates、price-target consensus、ratings snapshot，检索日 2026-09-11；预测不构成事实。</li>
+            <li><strong>[S5] SEC：</strong>GWRE FY2025 10-K（2025-09-11）、FY2026 Q3 10-Q（2026-06-05）及 earnings 8-K，EdgarTools 原始申报。</li>
+            <li><strong>[S6] News：</strong>CNBC，Guidewire FY26 Q4 后市场反应与 FY27 Q1 指引对比，2026-09-03/04。</li>
+            <li><strong>[S7] Sell-side：</strong>Goldman Sachs, “Guidewire Software: Connections 2025: A New Chapter…”, Adam Hotchkiss et al., 2025-10-30。</li>
+            <li><strong>[S8] Buy-side：</strong>Scuttleblurb, “[scuttlebit] Guidewire scales”, 2025-10-20；另参考 Clouded Judgement 2026 年系统记录软件/AI 行业反证。</li>
+            <li><strong>[S9] In-depth discussions：</strong>theCUBE，Guidewire VP Will Murphy / AWS Maria DeGrandis，2024-11-07；Risk &amp; Insurance Education Alliance，Guidewire Shannon Spies，2025-07-07。</li>
+            <li><strong>[S10] Technical：</strong>yfinance 30 个交易日 RSI、MACD、EMA、Bollinger 序列，最后交易日 2026-09-10。</li>
+            <li><strong>[S11] Valuation / charts：</strong>FMP 历史股价、企业价值、季度收入与同业数据；月度 EV/TTM revenue、相对回报及终值情景为分析师计算，检索日 2026-09-11。</li>
+        </ul>
+    </div>
+</body>
+</html>
