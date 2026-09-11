@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler Technologies, Inc. SitRep</title>
+    <style>
+        :root {
+            --paper: #f6f4ed;
+            --paper-edge: #efece2;
+            --ink: #15151a;
+            --ink-soft: #2a2a30;
+            --muted: #6b6a64;
+            --rule-strong: #15151a;
+            --rule: #cdc9bc;
+            --rule-soft: #e3dfd2;
+            --serif: "Iowan Old Style", "Charter", "Source Serif Pro", "Source Serif 4", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, system-ui, sans-serif;
+            --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Noto Sans Mono CJK SC", monospace;
+            --body-font: var(--sans);
+            --body-font-features: "kern", "liga", "calt", "ss01";
+            --paragraph-font-features: "kern", "liga", "calt", "tnum";
+            --numeric-font-features: "tnum", "lnum", "kern";
+            --mono-font-features: "calt" 0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: 16.5px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: var(--body-font-features);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 88px 32px 144px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .frontmatter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 40px;
+            margin: 0 0 80px;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule);
+            border-radius: 0;
+        }
+        .frontmatter p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.4;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-feature-settings: var(--numeric-font-features);
+        }
+        .frontmatter p strong {
+            color: var(--ink);
+            font-weight: 600;
+            margin-right: 8px;
+            letter-spacing: 0.09em;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: clamp(40px, 5.6vw, 60px);
+            line-height: 1.04;
+            letter-spacing: -0.018em;
+            color: var(--ink);
+            margin: 0 0 88px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.35;
+            letter-spacing: -0.003em;
+            color: var(--ink);
+            margin: 80px 0 28px;
+            padding: 0;
+            border: none;
+        }
+        h2 + p,
+        h2 + table,
+        h2 + ul,
+        h2 + ol {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.35;
+            letter-spacing: 0;
+            color: var(--ink);
+            margin: 36px 0 12px;
+            padding: 0;
+            border: none;
+            text-wrap: balance;
+        }
+
+        h3 + p,
+        h3 + table,
+        h3 + ul,
+        h3 + ol {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0 0 18px;
+            font-size: 16.5px;
+            line-height: 1.72;
+            color: var(--ink-soft);
+            font-feature-settings: var(--paragraph-font-features);
+        }
+        strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0 36px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: var(--numeric-font-features);
+        }
+        thead th {
+            background: transparent;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            vertical-align: bottom;
+            padding: 14px 18px 12px 0;
+            border: none;
+            border-top: 1px solid var(--rule-strong);
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        thead th:last-child { padding-right: 0; }
+        thead th[align="right"] {
+            text-align: right;
+            padding: 14px 0 12px 18px;
+        }
+        thead th[align="center"] {
+            text-align: center;
+            padding: 14px 12px 12px;
+        }
+        tbody td {
+            padding: 14px 18px 14px 0;
+            border: none;
+            border-bottom: 1px solid var(--rule-soft);
+            text-align: left;
+            vertical-align: top;
+            color: var(--ink);
+        }
+        tbody td:last-child { padding-right: 0; }
+        tbody td[align="right"] {
+            text-align: right;
+            padding: 14px 0 14px 18px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+        tbody td[align="center"] {
+            text-align: center;
+            padding: 14px 12px;
+            font-variant-numeric: tabular-nums lining-nums;
+            white-space: normal;
+            color: var(--ink);
+        }
+        tbody tr:last-child td {
+            border-bottom: 1px solid var(--rule-strong);
+        }
+        tr:nth-child(even) { background: transparent; }
+
+        .snapshot-table,
+        .nsm-table,
+        .source-freshness-table {
+            table-layout: auto;
+        }
+        .source-freshness-table thead th:nth-child(1),
+        .source-freshness-table tbody td:nth-child(1) {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 24px;
+        }
+        .source-freshness-table thead th:nth-child(2),
+        .source-freshness-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 112px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(3),
+        .source-freshness-table tbody td:nth-child(3) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        .source-freshness-table thead th:nth-child(4),
+        .source-freshness-table tbody td:nth-child(4) {
+            width: 26%;
+            min-width: 104px;
+            padding-right: 0;
+        }
+        .snapshot-table thead th:first-child,
+        .snapshot-table tbody td:first-child,
+        .nsm-table thead th:first-child,
+        .nsm-table tbody td:first-child {
+            width: 28%;
+            min-width: 124px;
+            padding-right: 28px;
+        }
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child {
+            text-align: left;
+            padding-left: 0;
+            white-space: normal;
+        }
+        .metric-table {
+            table-layout: auto;
+            font-size: 14.5px;
+            line-height: 1.48;
+        }
+        table.metric-table thead th:nth-child(1),
+        table.metric-table tbody td:nth-child(1) {
+            width: 22%;
+            min-width: 96px;
+            padding-right: 18px;
+        }
+        table.metric-table thead th:nth-child(2),
+        table.metric-table tbody td:nth-child(2) {
+            width: 24%;
+            min-width: 88px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        table.metric-table thead th:nth-child(3),
+        table.metric-table tbody td:nth-child(3) {
+            width: auto;
+            min-width: 180px;
+            padding-left: 18px;
+            padding-right: 0;
+        }
+        .peer-table {
+            table-layout: fixed;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+        .peer-table thead th {
+            font-size: 10px;
+            letter-spacing: 0.06em;
+        }
+        ul, ol {
+            margin: 0 0 24px;
+            padding: 0;
+            list-style: none;
+        }
+        ol { counter-reset: olist; }
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin: 0 0 12px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--ink-soft);
+        }
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0.78em;
+            width: 8px;
+            height: 1px;
+            background: var(--ink);
+        }
+        ol li {
+            counter-increment: olist;
+        }
+        ol li::before {
+            content: counter(olist) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            text-align: left;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 0.85em;
+            color: var(--ink);
+            background: rgba(21, 21, 26, 0.06);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: none;
+            font-feature-settings: var(--mono-font-features);
+            white-space: nowrap;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 24px 0;
+            border: none;
+            border-radius: 0;
+            background: var(--paper-edge);
+        }
+        img + img { margin-top: 14px; }
+
+        .value-chain {
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
+            letter-spacing: 0.015em;
+            background: linear-gradient(90deg, rgba(21, 21, 26, 0.07), rgba(21, 21, 26, 0.025));
+            padding: 12px 14px;
+            border-left: 2px solid var(--rule-strong);
+            border-radius: 3px;
+        }
+
+        .snapshot-table thead th:last-child,
+        .snapshot-table tbody td:last-child,
+        .nsm-table thead th:last-child,
+        .nsm-table tbody td:last-child,
+        .source-freshness-table thead th,
+        .source-freshness-table tbody td,
+        .peer-table thead th,
+        .peer-table tbody td,
+        .value-chain {
+            overflow-wrap: anywhere;
+        }
+
+        ::selection {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 720px) {
+            .container { padding: 48px 22px 96px; }
+            h1 { font-size: 38px; margin-bottom: 56px; }
+            h2 { margin-top: 64px; }
+            .frontmatter { gap: 8px 24px; margin-bottom: 56px; }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                font-size: 13.5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table.peer-table,
+            table.metric-table {
+                table-layout: auto;
+            }
+            thead th, tbody td { padding-right: 12px; }
+            thead th[align="right"], tbody td[align="right"] { padding-left: 12px; }
+            .peer-table thead th,
+            .peer-table tbody td {
+                min-width: 92px;
+            }
+            .peer-table thead th:first-child,
+            .peer-table tbody td:first-child {
+                min-width: 112px;
+            }
+            .value-chain {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #14140f;
+                --paper-edge: #1c1c17;
+                --ink: #f3efe4;
+                --ink-soft: #d8d4c8;
+                --muted: #8c8a82;
+                --rule-strong: #f3efe4;
+                --rule: #36352f;
+                --rule-soft: #26251f;
+            }
+            code { background: rgba(243, 239, 228, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frontmatter">
+            <p><strong>Ticker:</strong> TYL</p>
+            <p><strong>Date:</strong> 2026-09-11</p>
+            <p><strong>Classification:</strong> 观察名单——等待证据</p>
+            <p><strong>Evidence confidence:</strong> 经营事实中高；市场共识与估值中等</p>
+            <p><strong>Underwriting status:</strong> 初步筛选，尚不足以进入优先深度研究</p>
+        </div>
+
+        <h1>Tyler Technologies（TYL）投资情报简报</h1>
+
+        <h2>1. 核心判断：估值已重置，但“错误锚点”尚未被证明</h2>
+        <p><strong>结论：</strong>Tyler 是一家具备真实系统黏性、云迁移跑道和现金流能力的优质政府软件公司，但现阶段应列入<strong>观察名单</strong>，不应直接晋级优先深度研究。股价从 2025 年高点显著回落，跟踪口径 TTM P/FCF 已由约 55x 压缩至约 20x；与此同时，SaaS 收入增速仍保持在 21%–23% 左右，构成值得跟踪的“健康滞后”迹象。可是，市场并非看不到云迁移：最新卖方争议恰恰围绕订阅收入低于预期、预订加速尚未进入收入指引、以及 AI 何时增量贡献。换言之，已知事实与潜在错价之间仍缺一座桥。<a href="#S3">[S3]</a><a href="#S5">[S5]</a></p>
+        <p><strong>为什么现在值得看：</strong>截至 2026 年 9 月 10 日，TYL 报 $335.48，较 52 周高点低约 39%；公司上半年回购约 5.6% 的流通股并新增 $15 亿授权，管理层明确把当前估值视为有吸引力。Q2 SaaS 收入增 21.7%、预订创新高、经常性收入占比 86.7%，但 ARR 仅增 8.2%、交易收入仅增 3.5%。这使下一步验证非常清楚：如果新签/迁移 ACV 能推动 ARR 重回双位数，且 FCF/股持续增长，当前倍数可能过低；如果 SaaS 的高增速长期只是在维护收入流失与低增交易收入之间搬家，则估值重置是合理的。<a href="#S1">[S1]</a><a href="#S3">[S3]</a></p>
+
+        <h2>2. 来源新鲜度审计</h2>
+        <p>经营和市场数据足够新，能够支持“观察名单”判断；对市场共识的独立交叉验证偏弱。Goldman Marquee 的规定认证入口不可用、FreshRSS 没有检索到 Tyler 文章，且 IGB 只有 2018 年历史材料，因此不能把当前市场心理或买方观点写得比证据更确定。</p>
+        <table class="source-freshness-table">
+            <thead>
+                <tr>
+                    <th>Source Category</th>
+                    <th>Latest Source Date</th>
+                    <th>Freshness Status</th>
+                    <th>Age vs. Report Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>卖方报告</td>
+                    <td>2026-08-02（Goldman Sachs 2Q26）</td>
+                    <td>基本当前；仅一家银行</td>
+                    <td>约 40 天</td>
+                </tr>
+                <tr>
+                    <td>财报电话会</td>
+                    <td>2026Q2，2026-07-30</td>
+                    <td>当前</td>
+                    <td>约 43 天</td>
+                </tr>
+                <tr>
+                    <td>SEC 文件</td>
+                    <td>2026Q2 10-Q，2026-07-29</td>
+                    <td>当前</td>
+                    <td>约 44 天</td>
+                </tr>
+                <tr>
+                    <td>买方/投资者观点</td>
+                    <td>2018-11-27（Scuttleblurb）</td>
+                    <td>仅作机制参考，已过时</td>
+                    <td>约 7.8 年</td>
+                </tr>
+                <tr>
+                    <td>播客/深度讨论</td>
+                    <td>2025-07-22（Tyler 产品经理）</td>
+                    <td>机制仍相关；非当前财务证据</td>
+                    <td>约 14 个月</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. 当前快照</h2>
+        <table class="snapshot-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Latest Situation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>市场数据</td>
+                    <td><strong>$335.48</strong>（2026-09-10 收盘）；52 周区间 $270.71–$553.19；市值约 $137 亿；FMP TTM 企业价值约 $143 亿。最新流通股数据为 40.95m，Q2 加权稀释股数 41.85m。<a href="#S1">[S1]</a><a href="#S2">[S2]</a></td>
+                </tr>
+                <tr>
+                    <td>最新经营表现</td>
+                    <td>Q2 收入 $645.1m、同比 +8.2%；SaaS $230.6m、+21.7%；经常性收入 $559.5m，占比 86.7%；ARR $2.24bn、+8.2%；FCF $118.5m、+34.7%，但约 $30m 的现金税下降帮助了同比。<a href="#S3">[S3]</a><a href="#S4">[S4]</a></td>
+                </tr>
+                <tr>
+                    <td>价格与技术面</td>
+                    <td>30 个交易日累计约 +3.8%，但从 9 月初 $379.27 快速回撤。最新价低于 EMA12（$354.34）和 EMA26（$346.18），贴近 EMA50（$335.06）；RSI 44.9、MACD 柱转负，说明反弹动能衰减，尚无技术性确认。<a href="#S7">[S7]</a></td>
+                </tr>
+                <tr>
+                    <td>持仓与资本配置</td>
+                    <td>自由流通比例约 93.5%。FMP 的 2026Q2 13F 汇总股数超过公司已发行股数，口径不可用于精确机构持仓结论；可靠空头比例序列亦未取得。公司层面更有信息量：上半年回购约 5.6% 股份，并新增 $1.5bn 授权。<a href="#S1">[S1]</a><a href="#S8">[S8]</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="metric-table">
+            <thead>
+                <tr>
+                    <th>Key Metric</th>
+                    <th align="center">Value</th>
+                    <th>Implication</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SaaS 收入增速</td>
+                    <td align="center">21.7%</td>
+                    <td>连续 22 个季度保持 20% 以上，是云迁移速度最直接的公开代理；但收购、提价和迁移混合在内。</td>
+                </tr>
+                <tr>
+                    <td>ARR / 增速</td>
+                    <td align="center">$2.24bn / 8.2%</td>
+                    <td>比单独 SaaS 更接近公司整体经常性价值捕获；个位数增速是当前争议的核心。</td>
+                </tr>
+                <tr>
+                    <td>2026 指引</td>
+                    <td align="center">收入 $2.535–2.575bn；FCF 利润率 26%–28%</td>
+                    <td>收入中点与 FMP 共识几乎一致，市场需要预订向收入和 FCF 的兑现，而非更多远期叙事。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>4. 估值框架与同业比较</h2>
+        <h3>定价锚点：EV/FCF + 订阅/ARR 兑现</h3>
+        <p>Goldman 明确用 Q5–Q8 EV/FCF 估值，并因“AI 何时增量贡献”的可见度有限，把目标倍数从 23x 下调到 20x、目标价从 $435 下调至 $395。按 FMP 当前数据，TYL 约为 5.9x TTM EV/Sales、20.0x TTM EV/FCF、25.6x FY26 共识 EPS 和 21.8x FY27 共识 EPS。FMP FY27 共识收入 $2.807bn、同比约 +9.9%，EPS $15.37；这意味着市场并没有要求恢复历史 50x+ 现金流倍数，但仍要求低双位数附近的收入增长与持续利润/现金流扩张。<a href="#S1">[S1]</a><a href="#S5">[S5]</a></p>
+        <p><strong>已计价：</strong>政府数字化、云迁移和低流失的优质属性仍获一定溢价；<strong>可能未充分计价：</strong>云端单一版本带来的支持成本下降、AI 工作流触及劳动预算、交易计费绕开政府拨款限制，以及大额回购对每股 FCF 的放大；<strong>市场正确担心：</strong>预订转收入的实施周期、维护收入迁移抵消、交易业务量价/商户费、AI 仍未成为迁移主因，以及可转债和回购的资本配置效率。<a href="#S4">[S4]</a><a href="#S5">[S5]</a></p>
+
+        <h3>同业比较：现金流估值已不贵，但增长更慢</h3>
+        <p>BSY、GWRE、APPF 是纵向软件经济性的参考，并非政府软件的完美同业；TYL 的政府采购周期、交易收入与维护转 SaaS 使直接可比性有限。以下为 FMP 同日口径，FY27 增速基于共识均值计算。</p>
+
+        <table class="peer-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th align="right">Market Cap</th>
+                    <th align="right">TTM EV/Sales</th>
+                    <th align="right">TTM EV/FCF</th>
+                    <th align="right">FY27E 收入增速</th>
+                    <th align="right">TTM FCF 收益率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TYL</td>
+                    <td align="right">$13.7bn</td>
+                    <td align="right">5.9x</td>
+                    <td align="right">20.0x</td>
+                    <td align="right">9.9%</td>
+                    <td align="right">5.2%</td>
+                </tr>
+                <tr>
+                    <td>BSY</td>
+                    <td align="right">$9.1bn</td>
+                    <td align="right">6.4x</td>
+                    <td align="right">20.4x</td>
+                    <td align="right">10.4%</td>
+                    <td align="right">5.5%</td>
+                </tr>
+                <tr>
+                    <td>GWRE</td>
+                    <td align="right">$11.7bn</td>
+                    <td align="right">8.1x</td>
+                    <td align="right">41.3x</td>
+                    <td align="right">17.2%</td>
+                    <td align="right">2.5%</td>
+                </tr>
+                <tr>
+                    <td>APPF</td>
+                    <td align="right">$7.4bn</td>
+                    <td align="right">6.9x</td>
+                    <td align="right">26.6x</td>
+                    <td align="right">17.5%</td>
+                    <td align="right">3.7%</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><small>来源：FMP，2026-09-10/11。FMP 聚合字段可能与公司/卖方调整口径不同；同业表用于框架比较，不用于机械套倍数。<a href="#S1">[S1]</a></small></p>
+
+        <h3>历史价格、估值带与 NSM 剪刀差</h3>
+        <p>三张图使用 FMP 价格/财务数据与 SEC 披露构建。估值图为<strong>跟踪口径 TTM P/FCF</strong>，与 Goldman 的前瞻 Q5–Q8 EV/FCF 不完全相同；NSM 图以公开可得的 SaaS 收入增速代理 CEO NSM，不把未披露的客户产出指标伪装成精确数据。</p>
+        <img src="./assets/tyl_price_action_narrative_eras.png" alt="Tyler Technologies, Inc. price action and narrative eras chart">
+        <img src="./assets/tyl_historical_valuation_bands.png" alt="Tyler Technologies, Inc. historical valuation bands chart">
+        <img src="./assets/tyl_nsm_mismatch_jaws_chart.png" alt="Tyler Technologies, Inc. NSM mismatch jaws chart">
+
+        <h3>North Star Metrics 框架</h3>
+
+        <table class="nsm-table">
+            <thead>
+                <tr>
+                    <th>Lens</th>
+                    <th>Assessment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CEO：云/SaaS 采用与工作流深度</td>
+                    <td>公开代理为 SaaS 收入增速、新签及本地部署迁移 ACV。真正产品价值是政府员工更快、更安全地完成关键工作，并让居民交易/服务数字化；管理层希望由每客户 2–3 个产品扩展至 8–10 个。<a href="#S4">[S4]</a></td>
+                </tr>
+                <tr>
+                    <td>长期投资者：每股可持续 FCF</td>
+                    <td>以 ARR 质量、经常性收入占比、客户流失、云端毛利/支持效率和交易利润率作桥梁。每股口径可把回购收益与可转债/股权激励成本同时纳入。</td>
+                </tr>
+                <tr>
+                    <td>市场共识：订阅/ARR 斜率 × EV/FCF</td>
+                    <td>Q2 订阅收入 +12%，低于 Street +14%；市场要求预订加速转为收入上调，并用前瞻 EV/FCF 为兑现时点定价。<a href="#S5">[S5]</a></td>
+                </tr>
+                <tr>
+                    <td>错配类别：健康滞后，尚未证明为叙事陷阱</td>
+                    <td>SaaS 增速稳定而 P/FCF 剧烈下压，说明市场可能低估迁移的累积效应；但 ARR 与交易收入疲弱、AI 贡献仍早，亦可能说明旧估值过高而非新估值错误。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>价值创造 → 价值捕获链</h3>
+        <p class="value-chain">政府人员短缺、网络安全与数字服务需求 → 关键 ERP、法院、公共安全和居民服务迁云 → 数据与跨部门流程集中在 Tyler 系统中 → 云端独占功能、连续发布、AI 自动化与交叉销售 → 更高 SaaS ARR、按交易收费和低流失 → 版本/支持整合与每客户产品数上升 → FCF/股增长</p>
+        <p>这条链有实证起点：2025 年客户流失约 2%，Q2 SaaS 增 21.7%，法院旧版本客户比例三年由管理层所称 89% 降至 7%；但终点仍需验证。云托管成本和商户费正在增长，AI 还不是显著迁移驱动，且 Q2 FCF 同比受现金税时点帮助。<a href="#S2">[S2]</a><a href="#S4">[S4]</a></p>
+
+        <h3>上行/下行不对称：只有牛市情景足够“材料性”</h3>
+        <table class="peer-table">
+            <thead><tr><th>情景</th><th align="right">FCF 假设</th><th align="right">EV/FCF</th><th align="right">隐含价值/股</th><th>关键含义</th></tr></thead>
+            <tbody>
+                <tr><td>熊</td><td align="right">2027E $700m</td><td align="right">17x</td><td align="right">约 $271</td><td>ARR 维持个位数、交易/实施拖累，较现价约 -19%。</td></tr>
+                <tr><td>基准</td><td align="right">2027E $829m</td><td align="right">20x</td><td align="right">约 $383</td><td>接近 Goldman 的 $395；较现价约 +14%，不足以单独证明重大错价。</td></tr>
+                <tr><td>牛</td><td align="right">2028E $950m</td><td align="right">22x</td><td align="right">约 $486</td><td>云/AI/交易兑现且倍数部分修复，较现价约 +45%。</td></tr>
+            </tbody>
+        </table>
+        <p><small>本报告情景采用当前净债务约 $560m、Q2 稀释股数 41.85m；FCF 基准/牛市参考 Goldman 2027E/2028E $829m/$950m，未假设其预测净现金全部实现，因此偏保守。公司 $1.44bn 2031 可转债的 capped-call 初始有效转换价为 $655.77，当前价下暂无直接稀释，但债务和资本配置仍需完整桥接。情景为分析判断，不是目标价。<a href="#S2">[S2]</a><a href="#S3">[S3]</a><a href="#S5">[S5]</a></small></p>
+
+        <h2>5. SitRep 判断：观察名单——等待证据</h2>
+        <p><strong>错误锚点：未通过。</strong>市场可能过度依赖短期订阅/ARR 斜率，而低估云端单一版本、交易计费和 AI 对每客户价值的累积效应；但当前卖方已经明确采用这些长期逻辑，争议是兑现时间而非框架盲点。缺少多银行和当前买方材料，无法证明市场锚点“错”而不仅是更谨慎。</p>
+        <p><strong>若判断正确的材料性上行：部分通过。</strong>FMP 目标价共识 $414.38、Goldman $395，分别约有 23.5% 和 17.7% 上行；真正有组合意义的是约 $486 的牛市情景，但它需要 2028 FCF 接近 $950m 且倍数回到 22x。基准情景仅约 14% 上行，风险回报并不压倒性。<a href="#S1">[S1]</a><a href="#S5">[S5]</a></p>
+        <p><strong>清晰验证路径：通过。</strong>未来 2–4 个季度可直接观察 SaaS 新签/迁移 ACV、ARR 是否回到双位数、剔除已终止州合同后的交易收入、FCF 税收正常化、云端毛利/支持效率、以及 AI 客户从试点到新增 ARR 的转化。因此公司值得监控，但在“错误锚点”与基准回报尚未达标前，不应晋级。</p>
+
+        <h2>6. 哪些数据会确认或推翻论点</h2>
+        <h3>确认</h3>
+        <ul>
+            <li>未来两个季度 SaaS 收入继续 ≥20%，且新签与本地部署迁移 ACV 在更高基数上维持强劲，不依赖单笔大单。</li>
+            <li>ARR 增速由 8.2% 回升至双位数；剔除已终止州支付合同后，交易收入仍约双位数增长并保持单位经济性。</li>
+            <li>2026 FCF 利润率兑现 26%–28%，2027 年在现金税正常化后仍增长；云优化、版本整合和较低支持成本清晰进入毛利/经营利润。</li>
+            <li>AI 文档自动化、居民助手或 AP 自动化由早期采用转为可披露新增 ARR；AI 不只充当迁云“胡萝卜”，还扩大劳动预算 TAM。</li>
+        </ul>
+
+        <h3>推翻</h3>
+        <ul>
+            <li>SaaS 高增长持续由维护收入下降抵消，ARR 长期停在个位数，说明迁移更多是收入重分类而非价值捕获扩大。</li>
+            <li>预订创新高仍不能在 3–4 个季度内形成收入/指引上调，或实施周期、客户预算和大型项目滑动成为结构性问题。</li>
+            <li>交易收入在合同退出后仍低增长，商户/交换费上涨压缩利润，或公司无法提价、提高支付渗透率。</li>
+            <li>AI 商业化推迟至 2028 年以后、客户数据治理阻碍采用，或竞争者削弱 ERP/公共安全赢单率；同时 20x 左右 FCF 仍无法形成下行保护。</li>
+        </ul>
+
+        <h2>7. 建议的下一步尽调</h2>
+        <ol>
+            <li><strong>建迁移队列模型：</strong>用 2023 维护收入为基数，按产品（ERP、法院、公共安全）估算每年转云客户数、ACV uplift、托管成本、维护流失和单一版本支持节省，检验“85% 于 2030 年转云”的每股 FCF 贡献。</li>
+            <li><strong>拆分交易业务：</strong>区分支付、数字政府、电子归档和交易计费软件，重建剔除 Texas/州合同退出后的有机量、价格、净/总额确认与商户费率敏感性。</li>
+            <li><strong>做客户/实施渠道核查：</strong>访谈州/地方政府 CIO、系统集成商及离职实施人员，验证 RFP 活跃度、采购周期、预算稳定性、迁云 ROI、Tyler 赢单率与 AI 数据治理阻力。</li>
+            <li><strong>完成资本与估值桥：</strong>将 2031 可转债、capped call、回购价格、SBC 与潜在净现金纳入完全稀释股数/EV，并以 17x–23x EV/FCF 和 FY27–FY29 FCF 情景测试预期回报。</li>
+        </ol>
+
+        <h2>核心来源与缺口</h2>
+        <ul>
+            <li id="S1"><strong>[S1] 市场数据与共识：</strong>Financial Modeling Prep，TYL 价格、估值、财务估计、目标价共识及同业快照，检索于 2026-09-11；价格截至 2026-09-10。FMP 为聚合/标准化提供商，前瞻值为分析师共识而非事实。</li>
+            <li id="S2"><strong>[S2] SEC 原始文件：</strong>Tyler Technologies 2026Q2 Form 10-Q（期末 2026-06-30，提交 2026-07-29）；2025 Form 10-K（提交 2026-02-18）；另用 2023–2024 10-K 验证 SaaS 历史。由 EdgarTools 获取并保留 SEC provenance。</li>
+            <li id="S3"><strong>[S3] 公司业绩发布：</strong>Tyler Technologies，《Reports Earnings for Second Quarter 2026 and Announces New $1.5 Billion Share Repurchase Program》，2026-07-29，SEC Exhibit 99.1。</li>
+            <li id="S4"><strong>[S4] 财报电话会：</strong>Tyler Technologies 2026Q2 earnings call，2026-07-30，FMP transcript；管理层表述属于 company claim，转录存在轻微识别错误。</li>
+            <li id="S5"><strong>[S5] 卖方：</strong>Goldman Sachs，Gabriela Borges 等，《2Q26: Cloud trendline likely continues to move higher, with AI contributing in next 2 years》，2026-08-02，Buy，目标价 $395。仅一家银行，未实现多银行交叉验证。</li>
+            <li id="S6"><strong>[S6] 历史买方/投资者观点：</strong>Scuttleblurb，《TYL – Tyler Technologies: Finding Common Ground in Government (Systems)》，2018-11-27。仅用于政府软件黏性、交易计费与采购周期机制，不用于当前数据。</li>
+            <li id="S7"><strong>[S7] 技术指标：</strong>yfinance 30 个交易日日线与 MACD/RSI/EMA/Bollinger 计算，截至 2026-09-10。</li>
+            <li id="S8"><strong>[S8] 深度讨论：</strong>Tyler Tech Podcast Episode 124，《From Cloud to AI: Embracing Emerging Tech in the Public Sector》，Mike Teeters，2025-07-22；YouTube 自动英文字幕，未作精确引语。</li>
+        </ul>
+        <p><strong>未取得：</strong>FreshRSS 没有检索到 Tyler 相关文章；规定的 Goldman Marquee 认证 Chrome 控制面不可用；研究档案未提供第二家当前银行报告；IGB 无 2018 年后的 Tyler 专门观点；可靠空头比例和可比机构持仓序列未取得。以上缺口降低市场共识与持仓判断置信度，但不改变“观察名单、等待证据”的结论。</p>
+    </div>
+</body>
+</html>
